@@ -276,6 +276,7 @@ export default function OverviewMode() {
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedMainAreaId(isSelected ? null : area.id); // Tıklanan alan zaten açıksa kapat
+                    setSelectedChildId(null); // Ana alan değişince veya kapanınca alttaki yavru panelini kapat
                   }}
                   
                   fill={isSelected ? "transparent" : "rgba(0,0,0,0)"}
