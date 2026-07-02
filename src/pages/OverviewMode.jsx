@@ -138,7 +138,7 @@ export default function OverviewMode() {
         </div>
 
         {/* MOBİL SAYFA GEÇİŞ KONTROLLERİ (Sadece mobilde resmin üzerinde yüzer) */}
-        {isMobile && !selectedMainAreaId && (
+        {isMobile && !selectedChildId && (
           <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 15px', borderRadius: '8px', border: '1px solid #c7a15b', gap: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)' }}>
             <button onClick={() => navigate(`/overview/${Math.max(1, activePageId - 1)}`)} style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px'}}>&lt;</button>
             <span style={{ color: '#fff', fontWeight: 'bold', fontSize: '16px', whiteSpace: 'nowrap' }}>Sayfa {activePageId} / 110</span>
