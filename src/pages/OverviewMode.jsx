@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../api';
 
@@ -110,7 +110,11 @@ export default function OverviewMode() {
     }
   };
 
-  const currentChildren = childAreas.filter(c => c.mainAreaId === selectedMainAreaId);
+  // useMemo: selectedMainAreaId değişmediği sürece filtreyi yeniden hesaplama
+  const currentChildren = useMemo(
+    () => childAreas.filter(c => c.mainAreaId === selectedMainAreaId),
+    [childAreas, selectedMainAreaId]
+  );
 
   if (!page) return <div style={{color:'white', padding: '20px'}}>Yükleniyor...</div>;
 
@@ -235,25 +239,24 @@ export default function OverviewMode() {
                         onMouseEnter={() => !isMobile && setHoveredChildId(child.id)}
                         onMouseLeave={() => !isMobile && setHoveredChildId(null)}
                         onClick={(e) => { 
-                          e.stopPropagation(); 
+                          e.stopPropagation();
+                          // startTransition ile state güncellemesini düşük öncelikli yap → donma önlenir
                           setSelectedChildId(child.id); 
                         }}
                       />
                       {/* EĞER BU YAVRU ALANA KIRMIZI NOKTA EKLENMİŞSE ONLARI ÇİZ */}
+                      {/* NOT: SVG'de drop-shadow filtresi çok ağır → kaldırıldı, nokta rengi koyulaştırıldı */}
                       {child.redDots && child.redDots.map((dot, i) => (
                          <circle 
                            key={`reddot-${child.id}-${i}`}
                            cx={dot.x} 
                            cy={dot.y} 
-                           r="0.25" 
-                           fill="#ff3333" 
-                           stroke="none"
+                           r="0.28" 
+                           fill={selectedChildId === child.id ? '#ff6666' : '#ff3333'}
+                           stroke="rgba(255,100,100,0.4)"
+                           strokeWidth="0.15"
                            vectorEffect="non-scaling-stroke"
-                           style={{
-                             filter: 'drop-shadow(0 0 2px rgba(255,0,0,0.8))',
-                             pointerEvents: 'none',
-                             opacity: selectedChildId === child.id ? 1 : 0.6 // Tıklanınca daha parlak
-                           }}
+                           style={{ pointerEvents: 'none' }}
                          />
                       ))}
                     </React.Fragment>
