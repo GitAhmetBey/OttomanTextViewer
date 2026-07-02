@@ -391,9 +391,33 @@ export default function MapperMode() {
           ) : (
             mainAreas.length === 0 ? <span style={{color: '#888'}}>Henüz ana alan yok. Resimden çizin.</span> :
             mainAreas.map(m => (
-              <div key={m.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px', borderBottom: '1px solid #333' }}>
-                <span>{m.name}</span>
-                <button onClick={() => deleteMainArea(m.id)} style={{color:'red', background:'none', border:'none', cursor:'pointer'}}>Sil</button>
+              <div key={m.id} style={{ borderBottom: '1px solid #333', paddingBottom: '12px', marginBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ color: '#c7a15b', fontWeight: 'bold', fontSize: '13px' }}>{m.name}</span>
+                  <button onClick={() => deleteMainArea(m.id)} style={{color:'red', background:'none', border:'none', cursor:'pointer', fontSize: '12px'}}>Sil</button>
+                </div>
+                <textarea
+                  placeholder="Bu ana alana ait paragraf metnini buraya yazın..."
+                  defaultValue={m.paragraph || ''}
+                  onBlur={async (e) => {
+                    const text = e.target.value;
+                    try {
+                      await api.updateMainArea(m.id, { paragraph: text });
+                      setMainAreas(prev => prev.map(a => a.id === m.id ? { ...a, paragraph: text } : a));
+                    } catch(err) { console.error('Paragraf kaydedilemedi', err); }
+                  }}
+                  style={{
+                    width: '100%', boxSizing: 'border-box',
+                    minHeight: '90px', padding: '8px',
+                    borderRadius: '6px', border: '1px solid #555',
+                    backgroundColor: '#111', color: '#e6e6e6',
+                    fontSize: '13px', lineHeight: '1.6', resize: 'vertical',
+                    fontFamily: 'inherit'
+                  }}
+                />
+                <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
+                  💾 Alandan çıkınca otomatik kaydedilir
+                </div>
               </div>
             ))
           )}

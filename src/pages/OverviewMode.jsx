@@ -506,14 +506,25 @@ export default function OverviewMode() {
               Ana Alan Tam Metni
             </h2>
             <div style={{ color: '#e6e6e6', fontSize: '18px', lineHeight: '2', whiteSpace: 'pre-wrap', textAlign: 'justify', textIndent: '20px' }}>
-              {childAreas
-                .filter(c => c.mainAreaId === fullTextModalAreaId)
-                .map(c => c.latinText)
-                .filter(text => text)
-                .join(' ')}
-              {childAreas.filter(c => c.mainAreaId === fullTextModalAreaId && c.latinText).length === 0 && (
-                <span style={{ color: '#888', fontStyle: 'italic' }}>Bu alanda henüz hiçbir kelimenin Latince okunuşu girilmemiş.</span>
-              )}
+              {(() => {
+                const area = mainAreas.find(a => a.id === fullTextModalAreaId);
+                // Elle girilmiş paragraf varsa onu göster
+                if (area?.paragraph && area.paragraph.trim()) {
+                  return area.paragraph;
+                }
+                // Yoksa yavru alanların latinText'lerini otomatik birleştir
+                const autoText = childAreas
+                  .filter(c => c.mainAreaId === fullTextModalAreaId)
+                  .map(c => c.latinText)
+                  .filter(t => t)
+                  .join(' ');
+                if (autoText) return autoText;
+                return (
+                  <span style={{ color: '#888', fontStyle: 'italic' }}>
+                    Bu alana henüz metin girilmemiş. Haritalama modundan paragraf ekleyebilirsiniz.
+                  </span>
+                );
+              })()}
             </div>
           </div>
         </div>

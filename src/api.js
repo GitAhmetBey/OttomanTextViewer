@@ -36,6 +36,13 @@ export const api = {
     await deleteDoc(doc(db, 'mainAreas', id.toString()));
     return { success: true };
   },
+
+  updateMainArea: async (id, data) => {
+    const ref = doc(db, 'mainAreas', id.toString());
+    await updateDoc(ref, data);
+    const snap = await getDoc(ref);
+    return snap.data();
+  },
   
   getChildAreas: async (mainAreaId) => {
     const q = query(collection(db, 'childAreas'), where('mainAreaId', '==', mainAreaId));
