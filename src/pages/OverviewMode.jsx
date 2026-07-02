@@ -20,6 +20,88 @@ export default function OverviewMode() {
   const [zoomLevel, setZoomLevel] = useState(window.innerWidth <= 1024 ? 0.7 : 1);
   const scrollContainerRef = useRef(null);
 
+  const effectiveSequence = useMemo(() => {
+    if (!page || !mainAreas || !childAreas) return [];
+    
+    let currentSeq = page.readingSequence ? [...page.readingSequence] : [];
+    
+    mainAreas.forEach(m => {
+      if (!currentSeq.find(s => s.type === 'main' && s.id === m.id)) {
+        currentSeq.push({ id: m.id, type: 'main' });
+      }
+    });
+    
+    childAreas.forEach(c => {
+      if (!currentSeq.find(s => s.type === 'child' && s.id === c.id)) {
+        currentSeq.push({ id: c.id, type: 'child' });
+      }
+    });
+    
+    currentSeq = currentSeq.filter(s => {
+      if (s.type === 'main') return mainAreas.find(m => m.id === s.id);
+      if (s.type === 'child') return childAreas.find(c => c.id === s.id);
+      return false;
+    });
+    
+    if (!page.readingSequence || page.readingSequence.length === 0) {
+      const defaultSeq = [];
+      mainAreas.forEach(m => {
+        defaultSeq.push({ id: m.id, type: 'main' });
+        childAreas.filter(c => c.mainAreaId === m.id).forEach(c => {
+          defaultSeq.push({ id: c.id, type: 'child' });
+        });
+      });
+      return defaultSeq;
+    }
+    
+    return currentSeq;
+  }, [page, mainAreas, childAreas]);
+
+  const currentSequenceIndex = useMemo(() => {
+    if (fullScreenChildId) {
+      return effectiveSequence.findIndex(s => s.type === 'child' && s.id === fullScreenChildId);
+    }
+    if (fullTextModalAreaId) {
+      return effectiveSequence.findIndex(s => s.type === 'main' && s.id === fullTextModalAreaId);
+    }
+    return -1;
+  }, [fullScreenChildId, fullTextModalAreaId, effectiveSequence]);
+
+  const goToSequenceIndex = useCallback((index) => {
+    if (index < 0 || index >= effectiveSequence.length) return;
+    const item = effectiveSequence[index];
+    if (item.type === 'main') {
+      setFullScreenChildId(null);
+      setFullTextModalAreaId(item.id);
+      setSelectedMainAreaId(item.id);
+      setSelectedChildId(null);
+    } else {
+      setFullTextModalAreaId(null);
+      setFullScreenChildId(item.id);
+      // Auto-select parent if child is selected for background visuals
+      const c = childAreas.find(child => child.id === item.id);
+      if (c) {
+        setSelectedMainAreaId(c.mainAreaId);
+        setSelectedChildId(c.id);
+      }
+    }
+  }, [effectiveSequence, childAreas]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (currentSequenceIndex !== -1) {
+        if (e.key === 'ArrowRight') {
+          goToSequenceIndex(currentSequenceIndex + 1);
+        } else if (e.key === 'ArrowLeft') {
+          goToSequenceIndex(currentSequenceIndex - 1);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentSequenceIndex, goToSequenceIndex]);
+
+
   const handleZoom = (delta) => {
     setZoomLevel(prevZoom => {
       let newZoom = prevZoom + delta;
@@ -538,6 +620,21 @@ export default function OverviewMode() {
             maxHeight: '80vh', overflowY: 'auto', position: 'relative',
             boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
           }} onClick={e => e.stopPropagation()}>
+            
+            {currentSequenceIndex > 0 && (
+              <button 
+                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex - 1); }}
+                style={styles.slideshowNavBtnLeft}
+              >❮</button>
+            )}
+            
+            {currentSequenceIndex < effectiveSequence.length - 1 && currentSequenceIndex !== -1 && (
+              <button 
+                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex + 1); }}
+                style={styles.slideshowNavBtnRight}
+              >❯</button>
+            )}
+            
             <button 
               style={{ 
                 position: 'absolute', top: '15px', right: '15px', background: 'none', 
@@ -609,6 +706,20 @@ export default function OverviewMode() {
             
             <button style={{ position: 'absolute', top: '15px', right: '15px', fontSize: '40px', color: '#fff', background: 'none', border: 'none', zIndex: 1000000, cursor: 'pointer' }}>&times;</button>
             
+            {currentSequenceIndex > 0 && (
+              <button 
+                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex - 1); }}
+                style={styles.slideshowNavBtnLeft}
+              >❮</button>
+            )}
+            
+            {currentSequenceIndex < effectiveSequence.length - 1 && currentSequenceIndex !== -1 && (
+              <button 
+                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex + 1); }}
+                style={styles.slideshowNavBtnRight}
+              >❯</button>
+            )}
+
             {/* ÜST KISIM: Arapça Kırpılmış Resim */}
             <div style={{ position: 'relative', width: '100%', height: '55vh', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
@@ -737,5 +848,43 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     transition: 'background-color 0.2s'
+  },
+  slideshowNavBtnLeft: {
+    position: 'absolute',
+    top: '50%',
+    left: '10px',
+    transform: 'translateY(-50%)',
+    background: 'rgba(0,0,0,0.5)',
+    color: 'white',
+    border: '2px solid rgba(255,255,255,0.2)',
+    borderRadius: '50%',
+    width: '40px',
+    height: '40px',
+    fontSize: '20px',
+    cursor: 'pointer',
+    zIndex: 1000001,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transition: 'all 0.2s'
+  },
+  slideshowNavBtnRight: {
+    position: 'absolute',
+    top: '50%',
+    right: '10px',
+    transform: 'translateY(-50%)',
+    background: 'rgba(0,0,0,0.5)',
+    color: 'white',
+    border: '2px solid rgba(255,255,255,0.2)',
+    borderRadius: '50%',
+    width: '40px',
+    height: '40px',
+    fontSize: '20px',
+    cursor: 'pointer',
+    zIndex: 1000001,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transition: 'all 0.2s'
   }
 };

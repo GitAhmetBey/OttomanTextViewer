@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import MapperMode from './pages/MapperMode';
 import OverviewMode from './pages/OverviewMode';
+import SortMode from './pages/SortMode';
 
 function Navigation() {
   const location = useLocation();
@@ -16,6 +17,8 @@ function Navigation() {
   if (isMobile) return null;
 
   const isOverview = location.pathname.startsWith('/overview') || location.pathname === '/';
+  const isMapper = location.pathname.startsWith('/mapper');
+  const isSort = location.pathname.startsWith('/sort');
   
   return (
     <nav style={styles.nav}>
@@ -25,13 +28,19 @@ function Navigation() {
           to="/overview/1" 
           style={{ ...styles.link, borderBottom: isOverview ? '2px solid #c7a15b' : 'none', color: isOverview ? '#c7a15b' : '#aaa' }}
         >
-          👁️ Okuyucu (Overview)
+          📖 Okuyucu
         </Link>
         <Link 
           to="/mapper/1" 
-          style={{ ...styles.link, borderBottom: !isOverview ? '2px solid #00ccff' : 'none', color: !isOverview ? '#00ccff' : '#aaa' }}
+          style={{ ...styles.link, borderBottom: isMapper ? '2px solid #00ccff' : 'none', color: isMapper ? '#00ccff' : '#aaa' }}
         >
-          ✍️ Haritalama (Create/Edit)
+          ✏️ Haritalama
+        </Link>
+        <Link 
+          to="/sort/1" 
+          style={{ ...styles.link, borderBottom: isSort ? '2px solid #ffaa00' : 'none', color: isSort ? '#ffaa00' : '#aaa' }}
+        >
+          🔄 Sıralama
         </Link>
       </div>
     </nav>
@@ -48,6 +57,7 @@ export default function App() {
             <Route path="/" element={<OverviewMode />} />
             <Route path="/overview/:pageId" element={<OverviewMode />} />
             <Route path="/mapper/:pageId" element={<MapperMode />} />
+            <Route path="/sort/:pageId" element={<SortMode />} />
           </Routes>
         </div>
       </div>

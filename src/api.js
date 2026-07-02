@@ -14,6 +14,12 @@ export const api = {
     return snap.exists() ? snap.data() : null;
   },
   
+  updatePageSequence: async (pageId, sequence) => {
+    const ref = doc(db, 'pages', pageId.toString());
+    await updateDoc(ref, { readingSequence: sequence });
+    return { success: true };
+  },
+  
   getMainAreas: async (pageId) => {
     // pageId can be string or number in db.json, let's query both
     const q1 = query(collection(db, 'mainAreas'), where('pageId', '==', Number(pageId)));
