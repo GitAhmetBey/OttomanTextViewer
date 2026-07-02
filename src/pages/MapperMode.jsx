@@ -213,10 +213,11 @@ export default function MapperMode() {
                   points={pointsStr}
                   onClick={(e) => { 
                     if (!isSelected) {
-                      e.stopPropagation(); 
+                      e.stopPropagation();
                       setSelectedMainAreaId(area.id);
                       setCurrentMainPoint(null);
                       setCurrentPolygon([]);
+                      setDotModeChildId(null);
                     }
                   }}
                   fill={isSelected ? "rgba(255, 255, 255, 0.05)" : "rgba(0,0,0,0)"}
@@ -332,6 +333,7 @@ export default function MapperMode() {
               setSelectedMainAreaId(matchedArea ? matchedArea.id : null);
               setCurrentMainPoint(null);
               setCurrentPolygon([]);
+              setDotModeChildId(null);
             }}
             style={styles.dropdown}
           >
