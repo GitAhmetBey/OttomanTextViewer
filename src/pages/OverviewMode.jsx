@@ -238,6 +238,22 @@ export default function OverviewMode() {
           </div>
         )}
 
+        {/* MOBİL SLAYT BAŞLATMA BUTONU */}
+        {isMobile && !selectedChildId && !selectedMainAreaId && effectiveSequence.length > 0 && (
+          <div 
+             onClick={() => goToSequenceIndex(0)}
+             style={{ 
+               position: 'absolute', bottom: '20px', right: '20px', zIndex: 9999, 
+               backgroundColor: '#c7a15b', color: '#000', width: '50px', height: '50px', 
+               borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', 
+               fontSize: '20px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)', cursor: 'pointer',
+               border: '2px solid #fff'
+             }}
+          >
+            ▶️
+          </div>
+        )}
+
         {/* SCROLL EDİLEBİLİR ALAN */}
         <div ref={scrollContainerRef} style={{ width: '100%', flex: 1, overflow: 'auto', display: 'flex', position: 'relative' }}>
           <div style={{ ...styles.imageContainer, margin: 'auto' }} onClick={handleBackgroundClick}>
@@ -528,6 +544,17 @@ export default function OverviewMode() {
             <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId} / 110</span>
             <button onClick={() => navigate(`/overview/${Math.min(110, activePageId + 1)}`)} style={styles.pageBtn}>&gt;</button>
           </div>
+
+          {effectiveSequence.length > 0 && !selectedMainAreaId && (
+            <button 
+               onClick={() => goToSequenceIndex(0)}
+               style={{ width: '100%', padding: '15px', backgroundColor: '#c7a15b', color: '#000', fontWeight: 'bold', fontSize: '16px', border: 'none', borderRadius: '8px', cursor: 'pointer', marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', transition: 'transform 0.2s' }}
+               onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
+               onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              ▶️ Slaytı (Okumayı) Başlat
+            </button>
+          )}
 
           {selectedMainAreaId ? (() => {
             const selectedArea = mainAreas.find(a => a.id === selectedMainAreaId);
