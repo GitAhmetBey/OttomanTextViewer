@@ -551,20 +551,13 @@ export default function OverviewMode() {
             <div style={{ color: '#e6e6e6', fontSize: '18px', lineHeight: '2', whiteSpace: 'pre-wrap', textAlign: 'justify', textIndent: '20px' }}>
               {(() => {
                 const area = mainAreas.find(a => a.id === fullTextModalAreaId);
-                // Elle girilmiş paragraf varsa onu göster
+                // Sadece elle girilmiş paragrafı göster, yavru kelimeleri birleştirme
                 if (area?.paragraph && area.paragraph.trim()) {
                   return area.paragraph;
                 }
-                // Yoksa yavru alanların latinText'lerini otomatik birleştir
-                const autoText = childAreas
-                  .filter(c => c.mainAreaId === fullTextModalAreaId)
-                  .map(c => c.latinText)
-                  .filter(t => t)
-                  .join(' ');
-                if (autoText) return autoText;
                 return (
                   <span style={{ color: '#888', fontStyle: 'italic' }}>
-                    Bu alana henüz metin girilmemiş. Haritalama modundan paragraf ekleyebilirsiniz.
+                    Bu alana henüz metin girilmemiş. Haritalama modundan veya sağ menüden paragraf ekleyebilirsiniz.
                   </span>
                 );
               })()}
