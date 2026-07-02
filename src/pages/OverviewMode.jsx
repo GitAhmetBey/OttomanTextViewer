@@ -437,26 +437,73 @@ export default function OverviewMode() {
             <button onClick={() => navigate(`/overview/${Math.min(110, activePageId + 1)}`)} style={styles.pageBtn}>&gt;</button>
           </div>
 
-          {selectedMainAreaId ? (
-            <div style={styles.detailsCard}>
-              <h2 style={{ color: '#c7a15b', marginTop: 0, borderBottom: '1px solid #333', paddingBottom: '15px' }}>
-                {mainAreas.find(a => a.id === selectedMainAreaId)?.name}
-              </h2>
-              <p style={{ color: '#e6e6e6', lineHeight: '1.6', fontSize: '14px' }}>
-                Bu alanda {currentChildren.length} adet yavru kelime haritalanmış.
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '20px' }}>
-                {currentChildren.map((c, i) => (
-                  <div key={c.id} style={{ padding: '10px', backgroundColor: '#2a2a2a', borderRadius: '6px', fontSize: '13px', color: '#00ffff', cursor: 'pointer', transition: 'background-color 0.2s' }} 
-                       onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#3a3a3a'}
-                       onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a2a2a'}
-                       onClick={() => setSelectedChildId(c.id)}>
-                    Kelime {i + 1}: {c.latinText ? c.latinText.substring(0, 15) + "..." : "Tanımsız"}
+          {selectedMainAreaId ? (() => {
+            const selectedArea = mainAreas.find(a => a.id === selectedMainAreaId);
+            return (
+              <div style={styles.detailsCard}>
+                <h2 style={{ color: '#c7a15b', marginTop: 0, borderBottom: '1px solid #333', paddingBottom: '15px', fontSize: '16px' }}>
+                  ✍️ {selectedArea?.name}
+                </h2>
+
+                {/* PARAGRAF GİRİŞ ALANI */}
+                <div style={{ marginBottom: '16px' }}>
+                  <div style={{ color: '#aaa', fontSize: '12px', marginBottom: '8px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    Paragraf Metni
                   </div>
-                ))}
+                  <textarea
+                    key={selectedMainAreaId} // alan değişince içeriği sıfırla
+                    defaultValue={selectedArea?.paragraph || ''}
+                    placeholder="Bu ana alana ait paragrafı buraya yazın..."
+                    onBlur={async (e) => {
+                      const text = e.target.value;
+                      try {
+                        await api.updateMainArea(selectedMainAreaId, { paragraph: text });
+                        // onSnapshot zaten mainAreas'ı güncelleyecek, ekstra setState gerek yok
+                      } catch (err) { console.error('Paragraf kaydedilemedi', err); }
+                    }}
+                    style={{
+                      width: '100%', boxSizing: 'border-box',
+                      minHeight: '160px', padding: '12px',
+                      borderRadius: '8px',
+                      border: '1px solid #c7a15b44',
+                      backgroundColor: '#111',
+                      color: '#e6e6e6',
+                      fontSize: '14px', lineHeight: '1.8',
+                      resize: 'vertical', fontFamily: 'inherit',
+                      outline: 'none',
+                      transition: 'border-color 0.2s'
+                    }}
+                    onFocus={e => e.target.style.borderColor = '#c7a15b'}
+                    onBlurCapture={e => e.target.style.borderColor = '#c7a15b44'}
+                  />
+                  <div style={{ fontSize: '11px', color: '#555', marginTop: '5px' }}>
+                    💾 Kutunun dışına tıklayınca otomatik kaydedilir
+                  </div>
+                </div>
+
+                {/* YAVRU KELİMELER LİSTESİ */}
+                <div style={{ borderTop: '1px solid #2a2a2a', paddingTop: '14px' }}>
+                  <div style={{ color: '#aaa', fontSize: '12px', marginBottom: '8px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    Yavru Kelimeler ({currentChildren.length})
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    {currentChildren.map((c, i) => (
+                      <div key={c.id}
+                        style={{ padding: '8px 10px', backgroundColor: '#1e1e1e', borderRadius: '6px', fontSize: '13px', color: '#00ffff', cursor: 'pointer', borderLeft: '2px solid transparent', transition: 'all 0.2s' }}
+                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#2a2a2a'; e.currentTarget.style.borderLeftColor = '#00ffff'; }}
+                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1e1e1e'; e.currentTarget.style.borderLeftColor = 'transparent'; }}
+                        onClick={() => setSelectedChildId(c.id)}>
+                        {i + 1}. {c.latinText ? c.latinText.substring(0, 20) + (c.latinText.length > 20 ? '…' : '') : <span style={{color:'#555', fontStyle:'italic'}}>boş</span>}
+                      </div>
+                    ))}
+                    {currentChildren.length === 0 && (
+                      <span style={{ color: '#444', fontSize: '13px' }}>Bu alana henüz yavru eklenmemiş.</span>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ) : (
+            );
+          })() : (
             <div style={styles.emptyCard}>
               <div style={{ fontSize: '48px', marginBottom: '20px', opacity: 0.5 }}>📖</div>
               <h3 style={{ color: '#888', margin: 0 }}>Bir Alan Seçin</h3>
