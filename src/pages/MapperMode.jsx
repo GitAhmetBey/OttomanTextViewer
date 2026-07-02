@@ -347,6 +347,40 @@ export default function MapperMode() {
           <button onClick={finishPolygon} disabled={currentPolygon.length < 3} style={{...styles.btn, backgroundColor: '#00cc66'}}>Kapat ve Kaydet</button>
         </div>
 
+        {/* PARAGRAF GİRİŞ KUTUSU - sadece ana alan seçiliyken göster */}
+        {selectedMainAreaId && (
+          <div style={{ backgroundColor: '#0d1a0d', border: '1px solid #c7a15b88', borderRadius: '8px', padding: '12px', marginBottom: '14px' }}>
+            <div style={{ color: '#c7a15b', fontWeight: 'bold', fontSize: '13px', marginBottom: '8px' }}>
+              📝 Ana Alana Ait Paragraf
+            </div>
+            <textarea
+              key={`para-${selectedMainAreaId}`}
+              defaultValue={mainAreas.find(a => a.id === selectedMainAreaId)?.paragraph || ''}
+              placeholder="Bu ana alana ait paragrafı buraya yazın..."
+              onBlur={async (e) => {
+                const text = e.target.value;
+                try {
+                  await api.updateMainArea(selectedMainAreaId, { paragraph: text });
+                  setMainAreas(prev => prev.map(a => a.id === selectedMainAreaId ? { ...a, paragraph: text } : a));
+                } catch(err) { console.error('Paragraf kaydedilemedi', err); }
+              }}
+              style={{
+                width: '100%', boxSizing: 'border-box',
+                minHeight: '110px', padding: '10px',
+                borderRadius: '6px', border: '1px solid #555',
+                backgroundColor: '#111', color: '#e6e6e6',
+                fontSize: '13px', lineHeight: '1.8', resize: 'vertical',
+                fontFamily: 'inherit', outline: 'none'
+              }}
+              onFocus={e => e.target.style.borderColor = '#c7a15b'}
+              onBlurCapture={e => e.target.style.borderColor = '#555'}
+            />
+            <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
+              💾 Kutunun dışına tıklayınca kaydedilir · Firebase'e anında yansır
+            </div>
+          </div>
+        )}
+
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
           <h3 style={{ margin: 0, fontSize: '14px', color: '#fff' }}>
             {selectedMainAreaId ? `Yavrular (${currentChildren.length})` : `Ana Alanlar (${mainAreas.length})`}
@@ -356,43 +390,6 @@ export default function MapperMode() {
         <div style={styles.codeOutput}>
           {selectedMainAreaId ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-
-              {/* PARAGRAF GİRİŞ KUTUSU */}
-              <div style={{ backgroundColor: '#0d1a0d', border: '1px solid #c7a15b55', borderRadius: '8px', padding: '12px' }}>
-                <div style={{ color: '#c7a15b', fontWeight: 'bold', fontSize: '13px', marginBottom: '8px' }}>
-                  📝 Paragraf Metni
-                </div>
-                <textarea
-                  key={`para-${selectedMainAreaId}`}
-                  defaultValue={mainAreas.find(a => a.id === selectedMainAreaId)?.paragraph || ''}
-                  placeholder="Bu ana alana ait paragrafı buraya yazın..."
-                  onBlur={async (e) => {
-                    const text = e.target.value;
-                    try {
-                      await api.updateMainArea(selectedMainAreaId, { paragraph: text });
-                      setMainAreas(prev => prev.map(a => a.id === selectedMainAreaId ? { ...a, paragraph: text } : a));
-                    } catch(err) { console.error('Paragraf kaydedilemedi', err); }
-                  }}
-                  style={{
-                    width: '100%', boxSizing: 'border-box',
-                    minHeight: '100px', padding: '8px',
-                    borderRadius: '6px', border: '1px solid #444',
-                    backgroundColor: '#111', color: '#e6e6e6',
-                    fontSize: '13px', lineHeight: '1.7', resize: 'vertical',
-                    fontFamily: 'inherit', outline: 'none'
-                  }}
-                  onFocus={e => e.target.style.borderColor = '#c7a15b'}
-                  onBlurCapture={e => e.target.style.borderColor = '#444'}
-                />
-                <div style={{ fontSize: '11px', color: '#555', marginTop: '4px' }}>
-                  💾 Kutunun dışına tıklayınca otomatik kaydedilir · Firebase'e anında yansır
-                </div>
-              </div>
-
-              {/* YAVRU ALANLAR */}
-              <div style={{ color: '#aaa', fontSize: '12px', paddingTop: '4px' }}>
-                Yavrular ({currentChildren.length})
-              </div>
               {currentChildren.length === 0
                 ? <span style={{color: '#888'}}>Bu alana yavru eklenmedi.</span>
                 :
