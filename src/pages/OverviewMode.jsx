@@ -58,27 +58,22 @@ export default function OverviewMode() {
   }, [page, mainAreas, childAreas]);
 
   const currentSequenceIndex = useMemo(() => {
-    if (fullScreenChildId) {
-      return effectiveSequence.findIndex(s => s.type === 'child' && s.id === fullScreenChildId);
+    if (selectedChildId) {
+      return effectiveSequence.findIndex(s => s.type === 'child' && s.id === selectedChildId);
     }
-    if (fullTextModalAreaId) {
-      return effectiveSequence.findIndex(s => s.type === 'main' && s.id === fullTextModalAreaId);
+    if (selectedMainAreaId) {
+      return effectiveSequence.findIndex(s => s.type === 'main' && s.id === selectedMainAreaId);
     }
     return -1;
-  }, [fullScreenChildId, fullTextModalAreaId, effectiveSequence]);
+  }, [selectedChildId, selectedMainAreaId, effectiveSequence]);
 
   const goToSequenceIndex = useCallback((index) => {
     if (index < 0 || index >= effectiveSequence.length) return;
     const item = effectiveSequence[index];
     if (item.type === 'main') {
-      setFullScreenChildId(null);
-      setFullTextModalAreaId(item.id);
       setSelectedMainAreaId(item.id);
       setSelectedChildId(null);
     } else {
-      setFullTextModalAreaId(null);
-      setFullScreenChildId(item.id);
-      // Auto-select parent if child is selected for background visuals
       const c = childAreas.find(child => child.id === item.id);
       if (c) {
         setSelectedMainAreaId(c.mainAreaId);
@@ -407,6 +402,21 @@ export default function OverviewMode() {
         </div>
         </div>
 
+        {/* Slayt Modu İçin Ana Ekranda Gezinme Butonları (Sağ-Sol) */}
+        {currentSequenceIndex > 0 && (
+          <button 
+            onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex - 1); }}
+            style={styles.slideshowNavBtnLeft}
+          >❮</button>
+        )}
+        
+        {currentSequenceIndex !== -1 && currentSequenceIndex < effectiveSequence.length - 1 && (
+          <button 
+            onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex + 1); }}
+            style={styles.slideshowNavBtnRight}
+          >❯</button>
+        )}
+
         {/* ELEGANT TAM METİN BUTONU (Sadece Ana Alan Seçiliyken ve Yavru Seçili Değilken Görünür) */}
         {selectedMainAreaId && !selectedChildId && (
           <div 
@@ -648,20 +658,6 @@ export default function OverviewMode() {
             boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
           }} onClick={e => e.stopPropagation()}>
             
-            {currentSequenceIndex > 0 && (
-              <button 
-                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex - 1); }}
-                style={styles.slideshowNavBtnLeft}
-              >❮</button>
-            )}
-            
-            {currentSequenceIndex < effectiveSequence.length - 1 && currentSequenceIndex !== -1 && (
-              <button 
-                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex + 1); }}
-                style={styles.slideshowNavBtnRight}
-              >❯</button>
-            )}
-            
             <button 
               style={{ 
                 position: 'absolute', top: '15px', right: '15px', background: 'none', 
@@ -733,20 +729,6 @@ export default function OverviewMode() {
             
             <button style={{ position: 'absolute', top: '15px', right: '15px', fontSize: '40px', color: '#fff', background: 'none', border: 'none', zIndex: 1000000, cursor: 'pointer' }}>&times;</button>
             
-            {currentSequenceIndex > 0 && (
-              <button 
-                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex - 1); }}
-                style={styles.slideshowNavBtnLeft}
-              >❮</button>
-            )}
-            
-            {currentSequenceIndex < effectiveSequence.length - 1 && currentSequenceIndex !== -1 && (
-              <button 
-                onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex + 1); }}
-                style={styles.slideshowNavBtnRight}
-              >❯</button>
-            )}
-
             {/* ÜST KISIM: Arapça Kırpılmış Resim */}
             <div style={{ position: 'relative', width: '100%', height: '55vh', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
