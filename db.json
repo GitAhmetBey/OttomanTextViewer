@@ -1,0 +1,3088 @@
+{
+  "pages": [
+    {
+      "id": "1",
+      "name": "Sayfa 1",
+      "imageUrl": "/sayfalar/1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Sayfa 2",
+      "imageUrl": "/sayfalar/2.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Sayfa 3",
+      "imageUrl": "/sayfalar/3.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Sayfa 4",
+      "imageUrl": "/sayfalar/4.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Sayfa 5",
+      "imageUrl": "/sayfalar/5.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Sayfa 6",
+      "imageUrl": "/sayfalar/6.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Sayfa 7",
+      "imageUrl": "/sayfalar/7.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Sayfa 8",
+      "imageUrl": "/sayfalar/8.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Sayfa 9",
+      "imageUrl": "/sayfalar/9.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Sayfa 10",
+      "imageUrl": "/sayfalar/10.jpg"
+    },
+    {
+      "id": "11",
+      "name": "Sayfa 11",
+      "imageUrl": "/sayfalar/11.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Sayfa 12",
+      "imageUrl": "/sayfalar/12.jpg"
+    },
+    {
+      "id": "13",
+      "name": "Sayfa 13",
+      "imageUrl": "/sayfalar/13.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Sayfa 14",
+      "imageUrl": "/sayfalar/14.jpg"
+    },
+    {
+      "id": "15",
+      "name": "Sayfa 15",
+      "imageUrl": "/sayfalar/15.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Sayfa 16",
+      "imageUrl": "/sayfalar/16.jpg"
+    },
+    {
+      "id": "17",
+      "name": "Sayfa 17",
+      "imageUrl": "/sayfalar/17.jpg"
+    },
+    {
+      "id": "18",
+      "name": "Sayfa 18",
+      "imageUrl": "/sayfalar/18.jpg"
+    },
+    {
+      "id": "19",
+      "name": "Sayfa 19",
+      "imageUrl": "/sayfalar/19.jpg"
+    },
+    {
+      "id": "20",
+      "name": "Sayfa 20",
+      "imageUrl": "/sayfalar/20.jpg"
+    },
+    {
+      "id": "21",
+      "name": "Sayfa 21",
+      "imageUrl": "/sayfalar/21.jpg"
+    },
+    {
+      "id": "22",
+      "name": "Sayfa 22",
+      "imageUrl": "/sayfalar/22.jpg"
+    },
+    {
+      "id": "23",
+      "name": "Sayfa 23",
+      "imageUrl": "/sayfalar/23.jpg"
+    },
+    {
+      "id": "24",
+      "name": "Sayfa 24",
+      "imageUrl": "/sayfalar/24.jpg"
+    },
+    {
+      "id": "25",
+      "name": "Sayfa 25",
+      "imageUrl": "/sayfalar/25.jpg"
+    },
+    {
+      "id": "26",
+      "name": "Sayfa 26",
+      "imageUrl": "/sayfalar/26.jpg"
+    },
+    {
+      "id": "27",
+      "name": "Sayfa 27",
+      "imageUrl": "/sayfalar/27.jpg"
+    },
+    {
+      "id": "28",
+      "name": "Sayfa 28",
+      "imageUrl": "/sayfalar/28.jpg"
+    },
+    {
+      "id": "29",
+      "name": "Sayfa 29",
+      "imageUrl": "/sayfalar/29.jpg"
+    },
+    {
+      "id": "30",
+      "name": "Sayfa 30",
+      "imageUrl": "/sayfalar/30.jpg"
+    },
+    {
+      "id": "31",
+      "name": "Sayfa 31",
+      "imageUrl": "/sayfalar/31.jpg"
+    },
+    {
+      "id": "32",
+      "name": "Sayfa 32",
+      "imageUrl": "/sayfalar/32.jpg"
+    },
+    {
+      "id": "33",
+      "name": "Sayfa 33",
+      "imageUrl": "/sayfalar/33.jpg"
+    },
+    {
+      "id": "34",
+      "name": "Sayfa 34",
+      "imageUrl": "/sayfalar/34.jpg"
+    },
+    {
+      "id": "35",
+      "name": "Sayfa 35",
+      "imageUrl": "/sayfalar/35.jpg"
+    },
+    {
+      "id": "36",
+      "name": "Sayfa 36",
+      "imageUrl": "/sayfalar/36.jpg"
+    },
+    {
+      "id": "37",
+      "name": "Sayfa 37",
+      "imageUrl": "/sayfalar/37.jpg"
+    },
+    {
+      "id": "38",
+      "name": "Sayfa 38",
+      "imageUrl": "/sayfalar/38.jpg"
+    },
+    {
+      "id": "39",
+      "name": "Sayfa 39",
+      "imageUrl": "/sayfalar/39.jpg"
+    },
+    {
+      "id": "40",
+      "name": "Sayfa 40",
+      "imageUrl": "/sayfalar/40.jpg"
+    },
+    {
+      "id": "41",
+      "name": "Sayfa 41",
+      "imageUrl": "/sayfalar/41.jpg"
+    },
+    {
+      "id": "42",
+      "name": "Sayfa 42",
+      "imageUrl": "/sayfalar/42.jpg"
+    },
+    {
+      "id": "43",
+      "name": "Sayfa 43",
+      "imageUrl": "/sayfalar/43.jpg"
+    },
+    {
+      "id": "44",
+      "name": "Sayfa 44",
+      "imageUrl": "/sayfalar/44.jpg"
+    },
+    {
+      "id": "45",
+      "name": "Sayfa 45",
+      "imageUrl": "/sayfalar/45.jpg"
+    },
+    {
+      "id": "46",
+      "name": "Sayfa 46",
+      "imageUrl": "/sayfalar/46.jpg"
+    },
+    {
+      "id": "47",
+      "name": "Sayfa 47",
+      "imageUrl": "/sayfalar/47.jpg"
+    },
+    {
+      "id": "48",
+      "name": "Sayfa 48",
+      "imageUrl": "/sayfalar/48.jpg"
+    },
+    {
+      "id": "49",
+      "name": "Sayfa 49",
+      "imageUrl": "/sayfalar/49.jpg"
+    },
+    {
+      "id": "50",
+      "name": "Sayfa 50",
+      "imageUrl": "/sayfalar/50.jpg"
+    },
+    {
+      "id": "51",
+      "name": "Sayfa 51",
+      "imageUrl": "/sayfalar/51.jpg"
+    },
+    {
+      "id": "52",
+      "name": "Sayfa 52",
+      "imageUrl": "/sayfalar/52.jpg"
+    },
+    {
+      "id": "53",
+      "name": "Sayfa 53",
+      "imageUrl": "/sayfalar/53.jpg"
+    },
+    {
+      "id": "54",
+      "name": "Sayfa 54",
+      "imageUrl": "/sayfalar/54.jpg"
+    },
+    {
+      "id": "55",
+      "name": "Sayfa 55",
+      "imageUrl": "/sayfalar/55.jpg"
+    },
+    {
+      "id": "56",
+      "name": "Sayfa 56",
+      "imageUrl": "/sayfalar/56.jpg"
+    },
+    {
+      "id": "57",
+      "name": "Sayfa 57",
+      "imageUrl": "/sayfalar/57.jpg"
+    },
+    {
+      "id": "58",
+      "name": "Sayfa 58",
+      "imageUrl": "/sayfalar/58.jpg"
+    },
+    {
+      "id": "59",
+      "name": "Sayfa 59",
+      "imageUrl": "/sayfalar/59.jpg"
+    },
+    {
+      "id": "60",
+      "name": "Sayfa 60",
+      "imageUrl": "/sayfalar/60.jpg"
+    },
+    {
+      "id": "61",
+      "name": "Sayfa 61",
+      "imageUrl": "/sayfalar/61.jpg"
+    },
+    {
+      "id": "62",
+      "name": "Sayfa 62",
+      "imageUrl": "/sayfalar/62.jpg"
+    },
+    {
+      "id": "63",
+      "name": "Sayfa 63",
+      "imageUrl": "/sayfalar/63.jpg"
+    },
+    {
+      "id": "64",
+      "name": "Sayfa 64",
+      "imageUrl": "/sayfalar/64.jpg"
+    },
+    {
+      "id": "65",
+      "name": "Sayfa 65",
+      "imageUrl": "/sayfalar/65.jpg"
+    },
+    {
+      "id": "66",
+      "name": "Sayfa 66",
+      "imageUrl": "/sayfalar/66.jpg"
+    },
+    {
+      "id": "67",
+      "name": "Sayfa 67",
+      "imageUrl": "/sayfalar/67.jpg"
+    },
+    {
+      "id": "68",
+      "name": "Sayfa 68",
+      "imageUrl": "/sayfalar/68.jpg"
+    },
+    {
+      "id": "69",
+      "name": "Sayfa 69",
+      "imageUrl": "/sayfalar/69.jpg"
+    },
+    {
+      "id": "70",
+      "name": "Sayfa 70",
+      "imageUrl": "/sayfalar/70.jpg"
+    },
+    {
+      "id": "71",
+      "name": "Sayfa 71",
+      "imageUrl": "/sayfalar/71.jpg"
+    },
+    {
+      "id": "72",
+      "name": "Sayfa 72",
+      "imageUrl": "/sayfalar/72.jpg"
+    },
+    {
+      "id": "73",
+      "name": "Sayfa 73",
+      "imageUrl": "/sayfalar/73.jpg"
+    },
+    {
+      "id": "74",
+      "name": "Sayfa 74",
+      "imageUrl": "/sayfalar/74.jpg"
+    },
+    {
+      "id": "75",
+      "name": "Sayfa 75",
+      "imageUrl": "/sayfalar/75.jpg"
+    },
+    {
+      "id": "76",
+      "name": "Sayfa 76",
+      "imageUrl": "/sayfalar/76.jpg"
+    },
+    {
+      "id": "77",
+      "name": "Sayfa 77",
+      "imageUrl": "/sayfalar/77.jpg"
+    },
+    {
+      "id": "78",
+      "name": "Sayfa 78",
+      "imageUrl": "/sayfalar/78.jpg"
+    },
+    {
+      "id": "79",
+      "name": "Sayfa 79",
+      "imageUrl": "/sayfalar/79.jpg"
+    },
+    {
+      "id": "80",
+      "name": "Sayfa 80",
+      "imageUrl": "/sayfalar/80.jpg"
+    },
+    {
+      "id": "81",
+      "name": "Sayfa 81",
+      "imageUrl": "/sayfalar/81.jpg"
+    },
+    {
+      "id": "82",
+      "name": "Sayfa 82",
+      "imageUrl": "/sayfalar/82.jpg"
+    },
+    {
+      "id": "83",
+      "name": "Sayfa 83",
+      "imageUrl": "/sayfalar/83.jpg"
+    },
+    {
+      "id": "84",
+      "name": "Sayfa 84",
+      "imageUrl": "/sayfalar/84.jpg"
+    },
+    {
+      "id": "85",
+      "name": "Sayfa 85",
+      "imageUrl": "/sayfalar/85.jpg"
+    },
+    {
+      "id": "86",
+      "name": "Sayfa 86",
+      "imageUrl": "/sayfalar/86.jpg"
+    },
+    {
+      "id": "87",
+      "name": "Sayfa 87",
+      "imageUrl": "/sayfalar/87.jpg"
+    },
+    {
+      "id": "88",
+      "name": "Sayfa 88",
+      "imageUrl": "/sayfalar/88.jpg"
+    },
+    {
+      "id": "89",
+      "name": "Sayfa 89",
+      "imageUrl": "/sayfalar/89.jpg"
+    },
+    {
+      "id": "90",
+      "name": "Sayfa 90",
+      "imageUrl": "/sayfalar/90.jpg"
+    },
+    {
+      "id": "91",
+      "name": "Sayfa 91",
+      "imageUrl": "/sayfalar/91.jpg"
+    },
+    {
+      "id": "92",
+      "name": "Sayfa 92",
+      "imageUrl": "/sayfalar/92.jpg"
+    },
+    {
+      "id": "93",
+      "name": "Sayfa 93",
+      "imageUrl": "/sayfalar/93.jpg"
+    },
+    {
+      "id": "94",
+      "name": "Sayfa 94",
+      "imageUrl": "/sayfalar/94.jpg"
+    },
+    {
+      "id": "95",
+      "name": "Sayfa 95",
+      "imageUrl": "/sayfalar/95.jpg"
+    },
+    {
+      "id": "96",
+      "name": "Sayfa 96",
+      "imageUrl": "/sayfalar/96.jpg"
+    },
+    {
+      "id": "97",
+      "name": "Sayfa 97",
+      "imageUrl": "/sayfalar/97.jpg"
+    },
+    {
+      "id": "98",
+      "name": "Sayfa 98",
+      "imageUrl": "/sayfalar/98.jpg"
+    },
+    {
+      "id": "99",
+      "name": "Sayfa 99",
+      "imageUrl": "/sayfalar/99.jpg"
+    },
+    {
+      "id": "100",
+      "name": "Sayfa 100",
+      "imageUrl": "/sayfalar/100.jpg"
+    },
+    {
+      "id": "101",
+      "name": "Sayfa 101",
+      "imageUrl": "/sayfalar/101.jpg"
+    },
+    {
+      "id": "102",
+      "name": "Sayfa 102",
+      "imageUrl": "/sayfalar/102.jpg"
+    },
+    {
+      "id": "103",
+      "name": "Sayfa 103",
+      "imageUrl": "/sayfalar/103.jpg"
+    },
+    {
+      "id": "104",
+      "name": "Sayfa 104",
+      "imageUrl": "/sayfalar/104.jpg"
+    },
+    {
+      "id": "105",
+      "name": "Sayfa 105",
+      "imageUrl": "/sayfalar/105.jpg"
+    },
+    {
+      "id": "106",
+      "name": "Sayfa 106",
+      "imageUrl": "/sayfalar/106.jpg"
+    },
+    {
+      "id": "107",
+      "name": "Sayfa 107",
+      "imageUrl": "/sayfalar/107.jpg"
+    },
+    {
+      "id": "108",
+      "name": "Sayfa 108",
+      "imageUrl": "/sayfalar/108.jpg"
+    },
+    {
+      "id": "109",
+      "name": "Sayfa 109",
+      "imageUrl": "/sayfalar/109.jpg"
+    },
+    {
+      "id": "110",
+      "name": "Sayfa 110",
+      "imageUrl": "/sayfalar/110.jpg"
+    }
+  ],
+  "mainAreas": [
+    {
+      "pageId": 1,
+      "name": "3-aa",
+      "mainPoint": {
+        "x": 60.83634269363949,
+        "y": 48.00720716151975,
+        "top": "48.01",
+        "right": "39.16"
+      },
+      "points": [
+        {
+          "x": 90.01111148420733,
+          "y": 14.316608323474386,
+          "top": "14.32",
+          "right": "9.99"
+        },
+        {
+          "x": 27.6604627546509,
+          "y": 14.544247504812532,
+          "top": "14.54",
+          "right": "72.34"
+        },
+        {
+          "x": 27.6604627546509,
+          "y": 85.34003290097543,
+          "top": "85.34",
+          "right": "72.34"
+        },
+        {
+          "x": 89.84439851968982,
+          "y": 85.11239371963728,
+          "top": "85.11",
+          "right": "10.16"
+        }
+      ],
+      "id": "Eu5EzGAqfl8"
+    },
+    {
+      "pageId": 1,
+      "name": "3-ab",
+      "mainPoint": {
+        "x": 20.49180528039708,
+        "y": 9.650005106042428,
+        "top": "9.65",
+        "right": "79.51"
+      },
+      "points": [
+        {
+          "x": 86.67685219385673,
+          "y": 13.519871188790884,
+          "top": "13.52",
+          "right": "13.32"
+        },
+        {
+          "x": 72.3395372453491,
+          "y": 1.4549945778692313,
+          "top": "1.45",
+          "right": "27.66"
+        },
+        {
+          "x": 4.1539347576790835,
+          "y": 1.1135358058620146,
+          "top": "1.11",
+          "right": "95.85"
+        },
+        {
+          "x": 4.654073651231676,
+          "y": 38.674000726655834,
+          "top": "38.67",
+          "right": "95.35"
+        },
+        {
+          "x": 26.826897932063247,
+          "y": 48.91776388687233,
+          "top": "48.92",
+          "right": "73.17"
+        },
+        {
+          "x": 27.160323861098306,
+          "y": 13.519871188790884,
+          "top": "13.52",
+          "right": "72.84"
+        }
+      ],
+      "id": "j4hUdHZJ8oQ"
+    },
+    {
+      "pageId": 1,
+      "name": "3-ac",
+      "mainPoint": {
+        "x": 21.325370102984735,
+        "y": 89.89281652773832,
+        "top": "89.89",
+        "right": "78.67"
+      },
+      "points": [
+        {
+          "x": 26.826897932063247,
+          "y": 49.25922265887955,
+          "top": "49.26",
+          "right": "73.17"
+        },
+        {
+          "x": 3.8205088286440225,
+          "y": 60.52736213511769,
+          "top": "60.53",
+          "right": "96.18"
+        },
+        {
+          "x": 4.820786615749206,
+          "y": 97.74636828390429,
+          "top": "97.75",
+          "right": "95.18"
+        },
+        {
+          "x": 69.33870388403355,
+          "y": 98.08782705591152,
+          "top": "98.09",
+          "right": "30.66"
+        },
+        {
+          "x": 87.01027812289179,
+          "y": 85.68149167298265,
+          "top": "85.68",
+          "right": "12.99"
+        },
+        {
+          "x": 26.993610896580776,
+          "y": 85.34003290097543,
+          "top": "85.34",
+          "right": "73.01"
+        }
+      ],
+      "id": "neSxWDE8nrA"
+    },
+    {
+      "pageId": 2,
+      "name": "A1",
+      "mainPoint": {
+        "x": 37.21549204301187,
+        "y": 56.544504536372465,
+        "top": "56.54",
+        "right": "62.78"
+      },
+      "points": [
+        {
+          "x": 0.9885429429366935,
+          "y": 14.545869178579036,
+          "top": "14.55",
+          "right": "99.01"
+        },
+        {
+          "x": 68.6476978798418,
+          "y": 12.155702938704612,
+          "top": "12.16",
+          "right": "31.35"
+        },
+        {
+          "x": 73.79760731073485,
+          "y": 86.02322149482369,
+          "top": "86.02",
+          "right": "26.20"
+        },
+        {
+          "x": 3.82987228411906,
+          "y": 87.95811797472203,
+          "top": "87.96",
+          "right": "96.17"
+        },
+        {
+          "x": 0.9885429429366935,
+          "y": 14.659686618573057,
+          "top": "14.66",
+          "right": "99.01"
+        }
+      ],
+      "id": "0C7fWP9W8Kk"
+    },
+    {
+      "pageId": 2,
+      "name": "A2",
+      "mainPoint": {
+        "x": 51.78599154588708,
+        "y": 5.972328406129996,
+        "top": "5.97",
+        "right": "48.21"
+      },
+      "points": [
+        {
+          "x": 2.554746324478007,
+          "y": 13.835894140867824,
+          "top": "13.84",
+          "right": "97.45"
+        },
+        {
+          "x": 20.56996539603464,
+          "y": 1.5926209083013323,
+          "top": "1.59",
+          "right": "79.43"
+        },
+        {
+          "x": 69.95651423012954,
+          "y": 0.19907761353766654,
+          "top": "0.20",
+          "right": "30.04"
+        },
+        {
+          "x": 91.3884127807745,
+          "y": 0.19907761353766654,
+          "top": "0.20",
+          "right": "8.61"
+        },
+        {
+          "x": 91.07780555540283,
+          "y": 5.872789599361163,
+          "top": "5.87",
+          "right": "8.92"
+        },
+        {
+          "x": 69.33529977938622,
+          "y": 14.234049367943157,
+          "top": "14.23",
+          "right": "30.66"
+        },
+        {
+          "x": 0.06988852150467816,
+          "y": 17.618368798083488,
+          "top": "17.62",
+          "right": "99.93"
+        },
+        {
+          "x": 2.3994427117921737,
+          "y": 13.835894140867824,
+          "top": "13.84",
+          "right": "97.60"
+        }
+      ],
+      "id": "0PWjwkl7bww"
+    },
+    {
+      "pageId": 2,
+      "name": "A3",
+      "mainPoint": {
+        "x": 80.41843172054709,
+        "y": 28.496672939946276,
+        "top": "28.50",
+        "right": "19.58"
+      },
+      "points": [
+        {
+          "x": 93.73017031128052,
+          "y": 3.7540527226276534,
+          "top": "3.75",
+          "right": "6.27"
+        },
+        {
+          "x": 67.77228005935034,
+          "y": 14.845572130391178,
+          "top": "14.85",
+          "right": "32.23"
+        },
+        {
+          "x": 70.83397993521902,
+          "y": 51.53290555607052,
+          "top": "51.53",
+          "right": "29.17"
+        },
+        {
+          "x": 97.59057450259321,
+          "y": 39.75883110782924,
+          "top": "39.76",
+          "right": "2.41"
+        },
+        {
+          "x": 93.73017031128052,
+          "y": 3.5834139625082146,
+          "top": "3.58",
+          "right": "6.27"
+        }
+      ],
+      "id": "jYGsj_oBpjc"
+    },
+    {
+      "pageId": 2,
+      "name": "A4",
+      "mainPoint": {
+        "x": 80.90093066369076,
+        "y": 90.1206493346084,
+        "top": "90.12",
+        "right": "19.10"
+      },
+      "points": [
+        {
+          "x": 7.381533960597018,
+          "y": 87.95811797472203,
+          "top": "87.96",
+          "right": "92.62"
+        },
+        {
+          "x": 27.270839348873587,
+          "y": 99.68131429410609,
+          "top": "99.68",
+          "right": "72.73"
+        },
+        {
+          "x": 98.83682212990446,
+          "y": 98.65695733415993,
+          "top": "98.66",
+          "right": "1.16"
+        },
+        {
+          "x": 95.46274353725039,
+          "y": 58.137948696288746,
+          "top": "58.14",
+          "right": "4.54"
+        },
+        {
+          "x": 71.66661030484806,
+          "y": 49.374005816749204,
+          "top": "49.37",
+          "right": "28.33"
+        },
+        {
+          "x": 72.73210880779146,
+          "y": 86.1370389348177,
+          "top": "86.14",
+          "right": "27.27"
+        },
+        {
+          "x": 7.381533960597018,
+          "y": 87.844300534728,
+          "top": "87.84",
+          "right": "92.62"
+        }
+      ],
+      "id": "QwVMOkCnNYc"
+    }
+  ],
+  "childAreas": [
+    {
+      "mainAreaId": "j4hUdHZJ8oQ",
+      "mainPoint": {
+        "x": 64.83745384206023,
+        "y": 2.4793708938908807,
+        "top": "2.48",
+        "right": "35.16"
+      },
+      "points": [
+        {
+          "x": 61.66990751622714,
+          "y": 10.788201012733149,
+          "top": "10.79",
+          "right": "38.33"
+        },
+        {
+          "x": 64.83745384206023,
+          "y": 13.292232007452737,
+          "top": "13.29",
+          "right": "35.16"
+        },
+        {
+          "x": 85.3431484777165,
+          "y": 13.292232007452737,
+          "top": "13.29",
+          "right": "14.66"
+        },
+        {
+          "x": 72.17282428083158,
+          "y": 1.5688141685383035,
+          "top": "1.57",
+          "right": "27.83"
+        },
+        {
+          "x": 52.33398150324543,
+          "y": 1.9102729405455199,
+          "top": "1.91",
+          "right": "47.67"
+        },
+        {
+          "x": 63.670463090437515,
+          "y": 9.422365924704284,
+          "top": "9.42",
+          "right": "36.33"
+        },
+        {
+          "x": 61.66990751622714,
+          "y": 10.674381422064078,
+          "top": "10.67",
+          "right": "38.33"
+        }
+      ],
+      "id": "UnVu-N3ORkw",
+      "latinText": "... ve noksan sıfatlardan berî ve münezzehdir ve hîç bir nesneye benzemez."
+    },
+    {
+      "mainAreaId": "j4hUdHZJ8oQ",
+      "latinText": "Ziyâde ve noksanı yokdur. Cihetden ve zamandan ve mekândan ve cemî' eşyadan münezzehdir.",
+      "mainPoint": {
+        "x": 53.00083336131555,
+        "y": 7.0321545206537674,
+        "top": "7.03",
+        "right": "47.00"
+      },
+      "points": [
+        {
+          "x": 50.833564822587654,
+          "y": 2.137912121883664,
+          "top": "2.14",
+          "right": "49.17"
+        },
+        {
+          "x": 33.82884244179954,
+          "y": 1.9102729405455199,
+          "top": "1.91",
+          "right": "66.17"
+        },
+        {
+          "x": 41.49763880960594,
+          "y": 7.1459741113228405,
+          "top": "7.15",
+          "right": "58.50"
+        },
+        {
+          "x": 38.66351841280792,
+          "y": 8.511809199351706,
+          "top": "8.51",
+          "right": "61.34"
+        },
+        {
+          "x": 39.83050916443063,
+          "y": 10.674381422064078,
+          "top": "10.67",
+          "right": "60.17"
+        },
+        {
+          "x": 46.499027745131855,
+          "y": 13.40605159812181,
+          "top": "13.41",
+          "right": "53.50"
+        },
+        {
+          "x": 63.50375012591998,
+          "y": 13.292232007452737,
+          "top": "13.29",
+          "right": "36.50"
+        },
+        {
+          "x": 61.66990751622714,
+          "y": 10.788201012733149,
+          "top": "10.79",
+          "right": "38.33"
+        },
+        {
+          "x": 63.33703716140244,
+          "y": 9.422365924704284,
+          "top": "9.42",
+          "right": "36.66"
+        },
+        {
+          "x": 51.00027778710518,
+          "y": 2.024092531214592,
+          "top": "2.02",
+          "right": "49.00"
+        }
+      ],
+      "id": "VD3rRY2qZXg"
+    },
+    {
+      "mainAreaId": "j4hUdHZJ8oQ",
+      "latinText": "Eğer sorsalar: \"Hak Teâlâ'nın birliğine delilin nedir?\" Eyit: \"Kul hüvallâhu ehad.",
+      "mainPoint": {
+        "x": 27.953210004348882,
+        "y": 7.739585919593369,
+        "top": "7.74",
+        "right": "72.05"
+      },
+      "points": [
+        {
+          "x": 31.87091045549739,
+          "y": 2.1056226398893725,
+          "top": "2.11",
+          "right": "68.13"
+        },
+        {
+          "x": 40.37315398777713,
+          "y": 6.885955119638218,
+          "top": "6.89",
+          "right": "59.63"
+        },
+        {
+          "x": 37.70578346784623,
+          "y": 8.82085159953656,
+          "top": "8.82",
+          "right": "62.29"
+        },
+        {
+          "x": 44.70763108266484,
+          "y": 13.089005599312317,
+          "top": "13.09",
+          "right": "55.29"
+        },
+        {
+          "x": 28.62005263433161,
+          "y": 13.145914319309327,
+          "top": "13.15",
+          "right": "71.38"
+        },
+        {
+          "x": 27.28636737436616,
+          "y": 11.097200399416964,
+          "top": "11.10",
+          "right": "72.71"
+        },
+        {
+          "x": 10.198524981058844,
+          "y": 1.9918051998953523,
+          "top": "1.99",
+          "right": "89.80"
+        },
+        {
+          "x": 31.62084446925387,
+          "y": 1.9918051998953523,
+          "top": "1.99",
+          "right": "68.38"
+        }
+      ],
+      "id": "jtD8901fTjM"
+    },
+    {
+      "mainAreaId": "j4hUdHZJ8oQ",
+      "latinText": "Eğer sorsalar: \"Mü'min misin?\" Eyit: \"Yâ müslüman mısın?\" Eyit: \"Hem mü'minim hem müslümanım.\"",
+      "mainPoint": {
+        "x": 16.478783626723878,
+        "y": 10.16232629145651,
+        "top": "10.16",
+        "right": "83.52"
+      },
+      "points": [
+        {
+          "x": 30.41122524545676,
+          "y": 12.438687380742769,
+          "top": "12.44",
+          "right": "69.59"
+        },
+        {
+          "x": 9.453022468559432,
+          "y": 1.3820763756380854,
+          "top": "1.38",
+          "right": "90.55"
+        },
+        {
+          "x": 4.451633169527116,
+          "y": 2.2763610892862585,
+          "top": "2.28",
+          "right": "95.55"
+        },
+        {
+          "x": 5.047036657507153,
+          "y": 7.967263812501904,
+          "top": "7.97",
+          "right": "94.95"
+        },
+        {
+          "x": 13.144524094035667,
+          "y": 11.137909615436335,
+          "top": "11.14",
+          "right": "86.86"
+        },
+        {
+          "x": 9.57210316615544,
+          "y": 12.92647904273268,
+          "top": "12.93",
+          "right": "90.43"
+        },
+        {
+          "x": 26.362481527192504,
+          "y": 21.950624789546065,
+          "top": "21.95",
+          "right": "73.64"
+        },
+        {
+          "x": 30.41122524545676,
+          "y": 12.276090160079464,
+          "top": "12.28",
+          "right": "69.59"
+        }
+      ],
+      "id": "RQTobuXwm90"
+    },
+    {
+      "mainAreaId": "j4hUdHZJ8oQ",
+      "latinText": "Eğer sorsalar: \"Mü'min kimdir?\" \"Allâhu Teâlâ'ya kemâl mertebe inanub i'tikâd edendir.\"",
+      "mainPoint": {
+        "x": 13.062656450019208,
+        "y": 19.562511115063135,
+        "top": "19.56",
+        "right": "86.94"
+      },
+      "points": [
+        {
+          "x": 13.166852059469084,
+          "y": 10.88386982038058,
+          "top": "10.88",
+          "right": "86.83"
+        },
+        {
+          "x": 5.143790131828687,
+          "y": 7.255913213587053,
+          "top": "7.26",
+          "right": "94.86"
+        },
+        {
+          "x": 5.143790131828687,
+          "y": 22.05228525698026,
+          "top": "22.05",
+          "right": "94.86"
+        },
+        {
+          "x": 27.23325933520225,
+          "y": 31.300017784101016,
+          "top": "31.30",
+          "right": "72.77"
+        },
+        {
+          "x": 27.23325933520225,
+          "y": 21.838876044815937,
+          "top": "21.84",
+          "right": "72.77"
+        },
+        {
+          "x": 10.770353042121952,
+          "y": 13.160234750133382,
+          "top": "13.16",
+          "right": "89.23"
+        },
+        {
+          "x": 13.166852059469084,
+          "y": 10.88386982038058,
+          "top": "10.88",
+          "right": "86.83"
+        }
+      ],
+      "id": "811745Qgx60"
+    },
+    {
+      "mainAreaId": "j4hUdHZJ8oQ",
+      "latinText": "Eyt (söyle): Küfürden ve şirk itmekden kaçandır.",
+      "mainPoint": {
+        "x": 13.68783010671846,
+        "y": 29.592744086786414,
+        "top": "29.59",
+        "right": "86.31"
+      },
+      "points": [
+        {
+          "x": 26.50389006905312,
+          "y": 30.873199359772364,
+          "top": "30.87",
+          "right": "73.50"
+        },
+        {
+          "x": 5.768963788527938,
+          "y": 21.19864840832296,
+          "top": "21.20",
+          "right": "94.23"
+        },
+        {
+          "x": 4.727007694029186,
+          "y": 28.596834430019562,
+          "top": "28.60",
+          "right": "95.27"
+        },
+        {
+          "x": 21.398305206009233,
+          "y": 35.92388404766139,
+          "top": "35.92",
+          "right": "78.60"
+        },
+        {
+          "x": 17.334676437464097,
+          "y": 36.99093010848301,
+          "top": "36.99",
+          "right": "82.67"
+        },
+        {
+          "x": 26.50389006905312,
+          "y": 42.53956962475547,
+          "top": "42.54",
+          "right": "73.50"
+        },
+        {
+          "x": 26.50389006905312,
+          "y": 30.80206295571759,
+          "top": "30.80",
+          "right": "73.50"
+        }
+      ],
+      "id": "3qF3TjbkoXw"
+    },
+    {
+      "mainAreaId": "j4hUdHZJ8oQ",
+      "latinText": "Eğer sorsalar: \"Kimin zürriyetindensin?\" Eyit: \"Hazret-i Âdem Aleyhisselâm zürriyetindenim.\"",
+      "mainPoint": {
+        "x": 13.866159445963829,
+        "y": 38.12884239799675,
+        "top": "38.13",
+        "right": "86.13"
+      },
+      "points": [
+        {
+          "x": 22.36840297824357,
+          "y": 35.85249359811634,
+          "top": "35.85",
+          "right": "77.63"
+        },
+        {
+          "x": 4.697073283701368,
+          "y": 26.804007118591745,
+          "top": "26.80",
+          "right": "95.30"
+        },
+        {
+          "x": 4.863783941197049,
+          "y": 38.868655757957875,
+          "top": "38.87",
+          "right": "95.14"
+        },
+        {
+          "x": 27.369722703114004,
+          "y": 49.1691340774167,
+          "top": "49.17",
+          "right": "72.63"
+        },
+        {
+          "x": 27.28636737436616,
+          "y": 40.80355223785622,
+          "top": "40.80",
+          "right": "72.71"
+        },
+        {
+          "x": 18.784123842086423,
+          "y": 37.78739007801469,
+          "top": "37.79",
+          "right": "81.22"
+        },
+        {
+          "x": 22.36840297824357,
+          "y": 35.795584878119335,
+          "top": "35.80",
+          "right": "77.63"
+        }
+      ],
+      "id": "UAh3WJGiRvc"
+    },
+    {
+      "mainAreaId": "neSxWDE8nrA",
+      "latinText": "Eğer sorarsalar kimin milletindensin Eyt (söyle), millet-i resûlullah din (deyin) Eğer sorarsalar kimin ümmetindensin, âhir zaman peygamberi hazret-i Muhammedü'l-Mustafâ sallallahu aleyhi ve sellem ümmetindenim.",
+      "mainPoint": {
+        "x": 16.796333639423025,
+        "y": 58.11061432031107,
+        "top": "58.11",
+        "right": "83.20"
+      },
+      "points": [
+        {
+          "x": 4.663333183341093,
+          "y": 81.75954767808729,
+          "top": "81.76",
+          "right": "95.34"
+        },
+        {
+          "x": 27.07696761366039,
+          "y": 69.36598902000135,
+          "top": "69.37",
+          "right": "72.92"
+        },
+        {
+          "x": 26.89173096547593,
+          "y": 49.194839979545165,
+          "top": "49.19",
+          "right": "73.11"
+        },
+        {
+          "x": 4.015004914695494,
+          "y": 59.62819293150526,
+          "top": "59.63",
+          "right": "95.98"
+        },
+        {
+          "x": 4.570714859248865,
+          "y": 81.56985035168802,
+          "top": "81.57",
+          "right": "95.43"
+        }
+      ],
+      "id": "xsNg19NEJRo"
+    },
+    {
+      "mainAreaId": "neSxWDE8nrA",
+      "latinText": "Eğer sorarsalar itikadda mezhebin kimdir, eyt ehl-i sünnet ve'l-cemaatdir. Eğer sorarsalar amelde kimin mezhebindensin İmam-ı a'zam Ebû Hanîfe Kûfî Nu'man bin Sâbit mezhebindenim.",
+      "mainPoint": {
+        "x": 13.739928944379484,
+        "y": 84.73147245834258,
+        "top": "84.73",
+        "right": "86.26"
+      },
+      "points": [
+        {
+          "x": 16.981570287607482,
+          "y": 97.69412309562632,
+          "top": "97.69",
+          "right": "83.02"
+        },
+        {
+          "x": 34.949525161499814,
+          "y": 85.80642397460514,
+          "top": "85.81",
+          "right": "65.05"
+        },
+        {
+          "x": 26.89173096547593,
+          "y": 85.49026176393969,
+          "top": "85.49",
+          "right": "73.11"
+        },
+        {
+          "x": 26.52125766910702,
+          "y": 68.60719971440426,
+          "top": "68.61",
+          "right": "73.48"
+        },
+        {
+          "x": 4.107623238787722,
+          "y": 81.12722325675637,
+          "top": "81.13",
+          "right": "95.89"
+        },
+        {
+          "x": 4.84856983152555,
+          "y": 97.63089065349324,
+          "top": "97.63",
+          "right": "95.15"
+        },
+        {
+          "x": 16.981570287607482,
+          "y": 97.69412309562632,
+          "top": "97.69",
+          "right": "83.02"
+        }
+      ],
+      "id": "LxpS0oRCn1o"
+    },
+    {
+      "mainAreaId": "neSxWDE8nrA",
+      "latinText": "Eğer sorarsalar cümle mezhep kaçtır, eyt dörtdür. Evvelki İmam-ı A'zam Ebû Hanîfe İkinci İmam-ı Şâfiî Üçüncü İmam-ı Mâlikî İmam-ı Ahmed Hanbel Bu dört mezhep hakdır.",
+      "mainPoint": {
+        "x": 49.212747071703,
+        "y": 92.12966818791428,
+        "top": "92.13",
+        "right": "50.79"
+      },
+      "points": [
+        {
+          "x": 34.57905186513089,
+          "y": 85.74319153247204,
+          "top": "85.74",
+          "right": "65.42"
+        },
+        {
+          "x": 15.777532074408512,
+          "y": 97.9470528641587,
+          "top": "97.95",
+          "right": "84.22"
+        },
+        {
+          "x": 64.8652438432896,
+          "y": 97.75735553775942,
+          "top": "97.76",
+          "right": "35.13"
+        },
+        {
+          "x": 87.18625994951668,
+          "y": 85.49026176393969,
+          "top": "85.49",
+          "right": "12.81"
+        },
+        {
+          "x": 34.67167018922312,
+          "y": 85.67995909033895,
+          "top": "85.68",
+          "right": "65.33"
+        }
+      ],
+      "id": "vh16RCWh9PE"
+    },
+    {
+      "mainAreaId": "Eu5EzGAqfl8",
+      "latinText": "Mûsâ, Hârûn, Dâvûd, Süleymân, Yûnus, İlyâs, el-Yesa', Zülkifl, Îsâ, Eyyûb, Muhammed salavâtullahi alâ nebiyyinâ ve aleyhim. Uzeyr, Lokmân, Zülkarneyn; bu üçünde ihtilâf olundu, kimi nebîdir dediler ve kimi velîdir dediler. Ve dahi hazret-i Âdem aleyhisselâm zürriyetindenim ve âhir zaman peygamberi Muhammed aleyhissalâtü vesselâm dinindenim ve ümmetindenim elhamdülillah.",
+      "mainPoint": {
+        "x": 56.370817321386404,
+        "y": 23.332701165184147,
+        "top": "23.33",
+        "right": "43.63"
+      },
+      "points": [
+        {
+          "x": 89.3561705554805,
+          "y": 14.633749859697376,
+          "top": "14.63",
+          "right": "10.64"
+        },
+        {
+          "x": 28.86317617670866,
+          "y": 14.79634708036068,
+          "top": "14.80",
+          "right": "71.14"
+        },
+        {
+          "x": 28.505934083920636,
+          "y": 36.828270480238395,
+          "top": "36.83",
+          "right": "71.49"
+        },
+        {
+          "x": 90.66605822903657,
+          "y": 36.66567325957509,
+          "top": "36.67",
+          "right": "9.33"
+        },
+        {
+          "x": 89.3561705554805,
+          "y": 14.471152639034072,
+          "top": "14.47",
+          "right": "10.64"
+        }
+      ],
+      "id": "vETsvIaoxg4"
+    },
+    {
+      "mainAreaId": "Eu5EzGAqfl8",
+      "latinText": "İ'tikadda mezhebim ehl-i sünnet ve'l-cemaat. Ehl-i sünnet ve'l-cemaat demek; mânâsı, resûlullahın ashâbı ve cemaati her ne i'tikad üzere oldular ise, ben dahi ol i'tikad üzere olduğum demekdir. Amelde mezhebim imâm-ı a'zam Ebû Hanîfe. Ben imâm-ı a'zamı imâmım edindim ve anın kitâbullâhdan ve hadîs-i şerîfden anlayıp çıkardığı meseleleri kabul etdim ve anın sözüyle amel ihtiyâr etdim.",
+      "mainPoint": {
+        "x": 57.33537043877135,
+        "y": 44.13840357702427,
+        "top": "44.14",
+        "right": "42.66"
+      },
+      "points": [
+        {
+          "x": 89.01083369710217,
+          "y": 36.398817657430904,
+          "top": "36.40",
+          "right": "10.99"
+        },
+        {
+          "x": 27.82717571916843,
+          "y": 36.398817657430904,
+          "top": "36.40",
+          "right": "72.17"
+        },
+        {
+          "x": 28.327314612721022,
+          "y": 55.52014757642628,
+          "top": "55.52",
+          "right": "71.67"
+        },
+        {
+          "x": 47.16587960320198,
+          "y": 55.74778245641433,
+          "top": "55.75",
+          "right": "52.83"
+        },
+        {
+          "x": 45.83217588706173,
+          "y": 58.93467077624689,
+          "top": "58.93",
+          "right": "54.17"
+        },
+        {
+          "x": 89.84439851968982,
+          "y": 58.479401016270806,
+          "top": "58.48",
+          "right": "10.16"
+        },
+        {
+          "x": 90.51125037775994,
+          "y": 36.28500021743688,
+          "top": "36.29",
+          "right": "9.49"
+        }
+      ],
+      "id": "KCGnYIvRrro"
+    },
+    {
+      "mainAreaId": "Eu5EzGAqfl8",
+      "latinText": "Lâ ilâhe illâllah demek; mânâ-yı şerîfi oldur ki, ibâdete lâyık ve müstehak bir zât yoktur ancak Allah azîmü'ş-şân vardır ve birdir, şerîki ve nazîri yoktur, mekândan münezzehdir. Muhammedün resûlullah demek mânâsı oldur ki âhir zaman peygamberi Muhammed aleyhisselâm Allah azîmü'ş-şânın kuludur ve hem resûlüdür, biz dahi anın ümmetiyiz elhamdülillah.",
+      "mainPoint": {
+        "x": 58.168935261359,
+        "y": 66.10516949587016,
+        "top": "66.11",
+        "right": "41.83"
+      },
+      "points": [
+        {
+          "x": 69.50541684855108,
+          "y": 77.48691349527218,
+          "top": "77.49",
+          "right": "30.49"
+        },
+        {
+          "x": 90.01111148420733,
+          "y": 76.69019141531403,
+          "top": "76.69",
+          "right": "9.99"
+        },
+        {
+          "x": 89.51097259065476,
+          "y": 58.59321845626483,
+          "top": "58.59",
+          "right": "10.49"
+        },
+        {
+          "x": 45.83217588706173,
+          "y": 58.25176613628277,
+          "top": "58.25",
+          "right": "54.17"
+        },
+        {
+          "x": 47.66601849675457,
+          "y": 54.83724293646216,
+          "top": "54.84",
+          "right": "52.33"
+        },
+        {
+          "x": 27.99388868368596,
+          "y": 54.60960805647412,
+          "top": "54.61",
+          "right": "72.01"
+        },
+        {
+          "x": 27.99388868368596,
+          "y": 74.30002517543961,
+          "top": "74.30",
+          "right": "72.01"
+        },
+        {
+          "x": 69.17199091951602,
+          "y": 73.6171205354755,
+          "top": "73.62",
+          "right": "30.83"
+        },
+        {
+          "x": 69.17199091951602,
+          "y": 77.25927861528413,
+          "top": "77.26",
+          "right": "30.83"
+        }
+      ],
+      "id": "_cUMalQ6_c4"
+    },
+    {
+      "mainAreaId": "Eu5EzGAqfl8",
+      "latinText": "Ve dahi namaza dört şey ile girilir: Farz ile, vâcib ile, sünnet ile, müstehab ile. Namazda elleri kulağına kaldırmak sünnet, el ayasını kıbleye teveccüh etdirmek sünnet, er kişi baş parmağını kulağını(n)...",
+      "mainPoint": {
+        "x": 56.16837968714863,
+        "y": 79.99089717514062,
+        "top": "79.99",
+        "right": "43.83"
+      },
+      "points": [
+        {
+          "x": 71.17254649372639,
+          "y": 72.93421589551137,
+          "top": "72.93",
+          "right": "28.83"
+        },
+        {
+          "x": 27.160323861098306,
+          "y": 73.0480333355054,
+          "top": "73.05",
+          "right": "72.84"
+        },
+        {
+          "x": 27.160323861098306,
+          "y": 85.22649941486554,
+          "top": "85.23",
+          "right": "72.84"
+        },
+        {
+          "x": 90.51125037775994,
+          "y": 84.9988645348775,
+          "top": "85.00",
+          "right": "9.49"
+        },
+        {
+          "x": 90.01111148420733,
+          "y": 76.69019141531403,
+          "top": "76.69",
+          "right": "9.99"
+        },
+        {
+          "x": 69.33870388403355,
+          "y": 76.57637397532001,
+          "top": "76.58",
+          "right": "30.66"
+        },
+        {
+          "x": 71.00583352920886,
+          "y": 72.93421589551137,
+          "top": "72.93",
+          "right": "28.99"
+        }
+      ],
+      "id": "rcdYCxO-PEc"
+    },
+    {
+      "mainAreaId": "0C7fWP9W8Kk",
+      "latinText": "Sağdaki kısım: Bismillâhirrahmânirrahîm  Ortadaki kısım: Elhamdülillâhi Rabbi'l-âlemîn  Soldaki kısım: Lâ ilâhe illallâh Muhammedün resûlullah  Ortadaki yuvarlak kısmın içi: Livâü'l-Hamd  Güneş çiziminin altı: Şems",
+      "mainPoint": {
+        "x": 35.61724428859679,
+        "y": 31.618485177682054,
+        "top": "31.62",
+        "right": "64.38"
+      },
+      "points": [
+        {
+          "x": 37.03790895918797,
+          "y": 51.42271973664157,
+          "top": "51.42",
+          "right": "62.96"
+        },
+        {
+          "x": 8.091866295892611,
+          "y": 26.49670037795115,
+          "top": "26.50",
+          "right": "91.91"
+        },
+        {
+          "x": 35.61724428859679,
+          "y": 15.911678458507279,
+          "top": "15.91",
+          "right": "64.38"
+        },
+        {
+          "x": 61.54437452688589,
+          "y": 24.90325621803487,
+          "top": "24.90",
+          "right": "38.46"
+        }
+      ],
+      "id": "KQWTqcL6yNI"
+    },
+    {
+      "mainAreaId": "0C7fWP9W8Kk",
+      "latinText": "(Suhuf-ul A'mal):Bu küçük dikdörtgen şekiller, insanların dünya hayatında yaptıklarının kaydedildiği \"Amel Defterleri\"ni (Suhuf-ul A'mal) temsil eder. Mahşer günü bu defterlerin sahiplerine dağıtılacağı (sağdan veya soldan verileceği) inancını görselleştirir.",
+      "mainPoint": {
+        "x": 48.391571952600884,
+        "y": 73.55504179263738,
+        "top": "73.56",
+        "right": "51.61"
+      },
+      "points": [
+        {
+          "x": 38.18050631122639,
+          "y": 69.2157211452961,
+          "top": "69.22",
+          "right": "61.82"
+        },
+        {
+          "x": 61.04441416039103,
+          "y": 68.78890272096746,
+          "top": "68.79",
+          "right": "38.96"
+        },
+        {
+          "x": 56.16086102755975,
+          "y": 80.52640939000534,
+          "top": "80.53",
+          "right": "43.84"
+        },
+        {
+          "x": 41.73218131692187,
+          "y": 78.6057264805264,
+          "top": "78.61",
+          "right": "58.27"
+        },
+        {
+          "x": 38.29149615515437,
+          "y": 69.00231193313178,
+          "top": "69.00",
+          "right": "61.71"
+        }
+      ],
+      "id": "emBMeT71y8w"
+    },
+    {
+      "mainAreaId": "0C7fWP9W8Kk",
+      "latinText": "Bu iki yapının sağında جبرئيل (Cebrail), hemen altlarında ise ميزان الاعمال (Mîzân-ı A'mâl - Amel Terazisi) yazmaktadır.Terazinin sağında كفة الحسنات (İyilikler Kefesi), solunda ise كفة السيئات (Kötülükler/Günahlar Kefesi) yazıyor.",
+      "mainPoint": {
+        "x": 23.008845337100038,
+        "y": 64.39790789595986,
+        "top": "64.40",
+        "right": "76.99"
+      },
+      "points": [
+        {
+          "x": 10.578029469427182,
+          "y": 54.040520856504024,
+          "top": "54.04",
+          "right": "89.42"
+        },
+        {
+          "x": 34.906911953301204,
+          "y": 53.69906853652196,
+          "top": "53.70",
+          "right": "65.09"
+        },
+        {
+          "x": 36.860325875364076,
+          "y": 81.35670645506886,
+          "top": "81.36",
+          "right": "63.14"
+        },
+        {
+          "x": 10.933195637074977,
+          "y": 82.26724597502101,
+          "top": "82.27",
+          "right": "89.07"
+        },
+        {
+          "x": 10.578029469427182,
+          "y": 53.92670341651,
+          "top": "53.93",
+          "right": "89.42"
+        }
+      ],
+      "id": "1GZJW0Rb4Ow"
+    },
+    {
+      "mainAreaId": "0C7fWP9W8Kk",
+      "latinText": "Hemen sağında كراسي العلماء (Kerâsiyyü'l-Ulemâ) yazmaktadır. Anlamı \"Âlimlerin Kürsüleri\"dir.",
+      "mainPoint": {
+        "x": 16.79343740326361,
+        "y": 46.64238725689272,
+        "top": "46.64",
+        "right": "83.21"
+      },
+      "points": [
+        {
+          "x": 9.334947882659897,
+          "y": 36.398817657430904,
+          "top": "36.40",
+          "right": "90.67"
+        },
+        {
+          "x": 10.75561255325108,
+          "y": 53.3576162165399,
+          "top": "53.36",
+          "right": "89.24"
+        },
+        {
+          "x": 34.19657961800561,
+          "y": 53.01616389655784,
+          "top": "53.02",
+          "right": "65.80"
+        },
+        {
+          "x": 35.79482737242069,
+          "y": 47.439109336850855,
+          "top": "47.44",
+          "right": "64.21"
+        },
+        {
+          "x": 28.158754767993077,
+          "y": 36.967904857401,
+          "top": "36.97",
+          "right": "71.84"
+        },
+        {
+          "x": 8.9797817150121,
+          "y": 36.398817657430904,
+          "top": "36.40",
+          "right": "91.02"
+        }
+      ],
+      "id": "PwVxLyqqXbk"
+    },
+    {
+      "mainAreaId": "0C7fWP9W8Kk",
+      "latinText": "Merdivenli ve Kuleli Yapılar (Minberler): Cami minberlerine benzeyen bu çizimlerin hemen solunda منابر الأنبياء (Menâbirü'l-Enbiyâ) yazmaktadır. Anlamı \"Peygamberlerin Minberleri\"dir. Bu minberlerin hemen üstünde محمد (Muhammed) ismi yer almaktadır.Minberlerin üst tarafında (Makâm-ı Mahmûd) yazmaktadır.",
+      "mainPoint": {
+        "x": 51.33186751931623,
+        "y": 57.80331194580464,
+        "top": "57.80",
+        "right": "48.67"
+      },
+      "points": [
+        {
+          "x": 65.4116098663735,
+          "y": 68.3721312889194,
+          "top": "68.37",
+          "right": "34.59"
+        },
+        {
+          "x": 39.28163758264559,
+          "y": 68.3721312889194,
+          "top": "68.37",
+          "right": "60.72"
+        },
+        {
+          "x": 38.39372590310143,
+          "y": 38.77943712819805,
+          "top": "38.78",
+          "right": "61.61"
+        },
+        {
+          "x": 53.61506898100119,
+          "y": 32.43814552232918,
+          "top": "32.44",
+          "right": "46.38"
+        },
+        {
+          "x": 66.42636607156682,
+          "y": 36.340478818248485,
+          "top": "36.34",
+          "right": "33.57"
+        },
+        {
+          "x": 65.66529891767183,
+          "y": 68.29083267858775,
+          "top": "68.29",
+          "right": "34.33"
+        }
+      ],
+      "id": "6yWes1pdh48"
+    },
+    {
+      "mainAreaId": "0C7fWP9W8Kk",
+      "latinText": "Sağ Kol: Bismillâhirrahmânirrahîm  Orta Kol: Elhamdülillâhi Rabbi'l-âlemîn  Sol Kol: Lâ ilâhe illallâh Muhammedün resûlullah  Kolların Birleştiği Merkez: Livâü'l-Hamd  Direğin Üzeri: Kabza",
+      "mainPoint": {
+        "x": 36.50515970771628,
+        "y": 60.755749816151216,
+        "top": "60.76",
+        "right": "63.49"
+      },
+      "points": [
+        {
+          "x": 38.5205704287506,
+          "y": 81.786401993642,
+          "top": "81.79",
+          "right": "61.48"
+        },
+        {
+          "x": 35.98367991576731,
+          "y": 78.61575619070756,
+          "top": "78.62",
+          "right": "64.02"
+        },
+        {
+          "x": 34.334701082328166,
+          "y": 47.071895382026554,
+          "top": "47.07",
+          "right": "65.67"
+        },
+        {
+          "x": 30.275676261554896,
+          "y": 45.12072873406691,
+          "top": "45.12",
+          "right": "69.72"
+        },
+        {
+          "x": 31.54412151804655,
+          "y": 41.86878432080082,
+          "top": "41.87",
+          "right": "68.46"
+        },
+        {
+          "x": 28.62669742811576,
+          "y": 41.70618710013752,
+          "top": "41.71",
+          "right": "71.37"
+        },
+        {
+          "x": 14.16642150411099,
+          "y": 29.3487983297264,
+          "top": "29.35",
+          "right": "85.83"
+        },
+        {
+          "x": 12.487359422690067,
+          "y": 25.229611986251648,
+          "top": "25.23",
+          "right": "87.51"
+        },
+        {
+          "x": 17.814773407151776,
+          "y": 25.324460151613497,
+          "top": "25.32",
+          "right": "82.19"
+        },
+        {
+          "x": 31.281292090096652,
+          "y": 20.012962891349993,
+          "top": "20.01",
+          "right": "68.72"
+        },
+        {
+          "x": 38.6804781796268,
+          "y": 19.4438738991789,
+          "top": "19.44",
+          "right": "61.32"
+        },
+        {
+          "x": 52.14699686257168,
+          "y": 23.048104182929137,
+          "top": "23.05",
+          "right": "47.85"
+        },
+        {
+          "x": 61.76593877896087,
+          "y": 26.367789970593826,
+          "top": "26.37",
+          "right": "38.23"
+        },
+        {
+          "x": 43.2679735551355,
+          "y": 43.53530790108837,
+          "top": "43.54",
+          "right": "56.73"
+        },
+        {
+          "x": 41.19620145006706,
+          "y": 46.19105653122012,
+          "top": "46.19",
+          "right": "58.80"
+        },
+        {
+          "x": 40.900234006485846,
+          "y": 78.72397725033409,
+          "top": "78.72",
+          "right": "59.10"
+        },
+        {
+          "x": 38.5324944578362,
+          "y": 81.75911854191324,
+          "top": "81.76",
+          "right": "61.47"
+        }
+      ],
+      "id": "fLwSOmwQ6nc"
+    },
+    {
+      "mainAreaId": "0PWjwkl7bww",
+      "latinText": "Türâben 'inde 'ademi'l-mâi (Altındaki Osmanlıca: Toprakla su bulunmadığı yerde*)*",
+      "mainPoint": {
+        "x": 78.18794490325789,
+        "y": 6.748685998111059,
+        "top": "6.75",
+        "right": "21.81"
+      },
+      "points": [
+        {
+          "x": 65.60854735211826,
+          "y": 9.973721784818999,
+          "top": "9.97",
+          "right": "34.39"
+        },
+        {
+          "x": 71.85165576638755,
+          "y": 13.736263535978264,
+          "top": "13.74",
+          "right": "28.15"
+        },
+        {
+          "x": 91.41960751260476,
+          "y": 5.076445219818053,
+          "top": "5.08",
+          "right": "8.58"
+        },
+        {
+          "x": 88.43782438937167,
+          "y": 0.05972288493903592,
+          "top": "0.06",
+          "right": "11.56"
+        },
+        {
+          "x": 78.37430634845995,
+          "y": 0.5375059644513234,
+          "top": "0.54",
+          "right": "21.63"
+        },
+        {
+          "x": 65.70172807471928,
+          "y": 9.734830245062856,
+          "top": "9.73",
+          "right": "34.30"
+        }
+      ],
+      "id": "E2pxxSv7LLA"
+    },
+    {
+      "mainAreaId": "0PWjwkl7bww",
+      "latinText": "Evi't-teyemmümü (Altındaki Osmanlıca: Su ile teyemmüm etmektir*)*",
+      "mainPoint": {
+        "x": 66.07445096512343,
+        "y": 7.226469077623348,
+        "top": "7.23",
+        "right": "33.93"
+      },
+      "points": [
+        {
+          "x": 61.788137725475856,
+          "y": 7.345914847501418,
+          "top": "7.35",
+          "right": "38.21"
+        },
+        {
+          "x": 58.52681243443965,
+          "y": 5.195890989696125,
+          "top": "5.20",
+          "right": "41.47"
+        },
+        {
+          "x": 48.090571503123805,
+          "y": 11.407071023355861,
+          "top": "11.41",
+          "right": "51.91"
+        },
+        {
+          "x": 57.501824485828266,
+          "y": 12.482082952258509,
+          "top": "12.48",
+          "right": "42.50"
+        },
+        {
+          "x": 65.70172807471928,
+          "y": 10.929287943843574,
+          "top": "10.93",
+          "right": "34.30"
+        },
+        {
+          "x": 76.6038726190403,
+          "y": 2.6278069373175805,
+          "top": "2.63",
+          "right": "23.40"
+        },
+        {
+          "x": 72.96982443759997,
+          "y": 1.3736263535978264,
+          "top": "1.37",
+          "right": "27.03"
+        },
+        {
+          "x": 61.788137725475856,
+          "y": 7.226469077623348,
+          "top": "7.23",
+          "right": "38.21"
+        }
+      ],
+      "id": "dG5WXJbxJbQ"
+    },
+    {
+      "mainAreaId": "0PWjwkl7bww",
+      "latinText": "Hâzâ kitâbü şürûti's-salâh (En sol üst köşedeki eğik yazı)  Bismillâhirrahmânirrahîm",
+      "mainPoint": {
+        "x": 17.749480141092736,
+        "y": 7.764026927968995,
+        "top": "7.76",
+        "right": "82.25"
+      },
+      "points": [
+        {
+          "x": 6.257012076095236,
+          "y": 13.669996129586437,
+          "top": "13.67",
+          "right": "93.74"
+        },
+        {
+          "x": 12.262085479427261,
+          "y": 14.134510561174324,
+          "top": "14.13",
+          "right": "87.74"
+        },
+        {
+          "x": 20.752016842758746,
+          "y": 13.60363692507388,
+          "top": "13.60",
+          "right": "79.25"
+        },
+        {
+          "x": 39.18138004608807,
+          "y": 1.9907761353766655,
+          "top": "1.99",
+          "right": "60.82"
+        },
+        {
+          "x": 20.027266604425574,
+          "y": 1.9907761353766655,
+          "top": "1.99",
+          "right": "79.97"
+        },
+        {
+          "x": 6.360547824428547,
+          "y": 13.60363692507388,
+          "top": "13.60",
+          "right": "93.64"
+        }
+      ],
+      "id": "ULTfGwOWzZw"
+    },
+    {
+      "mainAreaId": "0PWjwkl7bww",
+      "latinText": "Bâbü şürûti's-salâti (Altındaki küçük Osmanlıca: Bu bâb namazın şartları beyânındadır*)*",
+      "mainPoint": {
+        "x": 35.03261361802504,
+        "y": 6.196265123043892,
+        "top": "6.20",
+        "right": "64.97"
+      },
+      "points": [
+        {
+          "x": 42.37070966521899,
+          "y": 1.1198069499476913,
+          "top": "1.12",
+          "right": "57.63"
+        },
+        {
+          "x": 25.597918700204247,
+          "y": 9.779647362876503,
+          "top": "9.78",
+          "right": "74.40"
+        },
+        {
+          "x": 30.37350501663206,
+          "y": 11.496684686129631,
+          "top": "11.50",
+          "right": "69.63"
+        },
+        {
+          "x": 30.72293816173653,
+          "y": 13.586990992698656,
+          "top": "13.59",
+          "right": "69.28"
+        },
+        {
+          "x": 32.353626172224075,
+          "y": 12.98976061939322,
+          "top": "12.99",
+          "right": "67.65"
+        },
+        {
+          "x": 50.64062743269153,
+          "y": 1.7170373232531269,
+          "top": "1.72",
+          "right": "49.36"
+        }
+      ],
+      "id": "a1MzEr8yNRE"
+    },
+    {
+      "mainAreaId": "0PWjwkl7bww",
+      "latinText": "Ve hiye semâniyetün (Altındaki küçük Osmanlıca: Namazın şartları sekizdir*)*  El-evvelü'l-vüdûü (Altındaki küçük Osmanlıca: Evvelki abdest almaktır*)*",
+      "mainPoint": {
+        "x": 56.723537029041594,
+        "y": 2.3036232616124237,
+        "top": "2.30",
+        "right": "43.28"
+      },
+      "points": [
+        {
+          "x": 25.707186112632712,
+          "y": 9.214493046449695,
+          "top": "9.21",
+          "right": "74.29"
+        },
+        {
+          "x": 20.64872544815401,
+          "y": 13.736420189614822,
+          "top": "13.74",
+          "right": "79.35"
+        },
+        {
+          "x": 31.963703250277426,
+          "y": 14.589613990212017,
+          "top": "14.59",
+          "right": "68.04"
+        },
+        {
+          "x": 39.285159475180805,
+          "y": 13.480462049435666,
+          "top": "13.48",
+          "right": "60.71"
+        },
+        {
+          "x": 47.139085243713524,
+          "y": 11.944713208360715,
+          "top": "11.94",
+          "right": "52.86"
+        },
+        {
+          "x": 64.57746279757431,
+          "y": 1.8770263613138267,
+          "top": "1.88",
+          "right": "35.42"
+        },
+        {
+          "x": 51.66507636456289,
+          "y": 0.853193800597194,
+          "top": "0.85",
+          "right": "48.33"
+        },
+        {
+          "x": 31.298116320740753,
+          "y": 12.88322638901763,
+          "top": "12.88",
+          "right": "68.70"
+        },
+        {
+          "x": 25.707186112632712,
+          "y": 8.958534906270536,
+          "top": "8.96",
+          "right": "74.29"
+        }
+      ],
+      "id": "_D4EPKPyb8U"
+    },
+    {
+      "mainAreaId": "0PWjwkl7bww",
+      "latinText": "Bi'l-mâi'l-mutlaki",
+      "mainPoint": {
+        "x": 64.96178138108246,
+        "y": 4.047911475265886,
+        "top": "4.05",
+        "right": "35.04"
+      },
+      "points": [
+        {
+          "x": 57.610743249417396,
+          "y": 5.441454770029552,
+          "top": "5.44",
+          "right": "42.39"
+        },
+        {
+          "x": 61.95924467941645,
+          "y": 8.228541359556884,
+          "top": "8.23",
+          "right": "38.04"
+        },
+        {
+          "x": 74.9012132210803,
+          "y": 1.3935432947636657,
+          "top": "1.39",
+          "right": "25.10"
+        },
+        {
+          "x": 66.61835335441543,
+          "y": 0.19907761353766654,
+          "top": "0.20",
+          "right": "33.38"
+        },
+        {
+          "x": 57.714278997750704,
+          "y": 5.375095565516997,
+          "top": "5.38",
+          "right": "42.29"
+        }
+      ],
+      "id": "-i1FUup7umQ"
+    },
+    {
+      "mainAreaId": "jYGsj_oBpjc",
+      "latinText": "Ve's-sânî tahâretü's-sevbi (Altındaki  Osmanlıca: İkincisi esvâbını pâk itmekdür.",
+      "mainPoint": {
+        "x": 79.17766761622356,
+        "y": 14.10956756934091,
+        "top": "14.11",
+        "right": "20.82"
+      },
+      "points": [
+        {
+          "x": 69.74297269840277,
+          "y": 22.470792795617005,
+          "top": "22.47",
+          "right": "30.26"
+        },
+        {
+          "x": 94.55272600082041,
+          "y": 10.750146719497836,
+          "top": "10.75",
+          "right": "5.45"
+        },
+        {
+          "x": 91.05839454977567,
+          "y": 4.852496783106662,
+          "top": "4.85",
+          "right": "8.94"
+        },
+        {
+          "x": 66.24864124735804,
+          "y": 14.034913772677731,
+          "top": "14.03",
+          "right": "33.75"
+        },
+        {
+          "x": 69.74297269840277,
+          "y": 22.396138998953827,
+          "top": "22.40",
+          "right": "30.26"
+        }
+      ],
+      "id": "alCCzR_qTQM"
+    },
+    {
+      "mainAreaId": "jYGsj_oBpjc",
+      "latinText": "Ani'n-necâseti'l-hakîkati ve'l-galîzati (Altındaki  Osmanlıca: Necâset-i hakikiyyeden dahi galîzadan [ve necâset-i hafîfeden dahi galîzadan])",
+      "mainPoint": {
+        "x": 81.94164410774543,
+        "y": 20.305916580841988,
+        "top": "20.31",
+        "right": "18.06"
+      },
+      "points": [
+        {
+          "x": 95.1942198944092,
+          "y": 16.987956355214212,
+          "top": "16.99",
+          "right": "4.81"
+        },
+        {
+          "x": 68.48199682441502,
+          "y": 29.397127599062095,
+          "top": "29.40",
+          "right": "31.52"
+        },
+        {
+          "x": 68.79260406941495,
+          "y": 21.56674146658054,
+          "top": "21.57",
+          "right": "31.21"
+        },
+        {
+          "x": 92.19168319274318,
+          "y": 11.015627949084216,
+          "top": "11.02",
+          "right": "7.81"
+        },
+        {
+          "x": 95.0906841460759,
+          "y": 16.987956355214212,
+          "top": "16.99",
+          "right": "4.91"
+        }
+      ],
+      "id": "Dtzw_rJCjDU"
+    },
+    {
+      "mainAreaId": "jYGsj_oBpjc",
+      "latinText": "Ve's-sâlisü tahâratü'l-mekâni'llezî yusallî fîhi. Ve'r-râbiu tahâratü'l-bedeni mine'l-meniyyi ve'l-bevli ve'l-ğâiti.Osmanlıca:Üçüncüsü mekânı pâk itmekdür, namaz kılacağı yirdür. Dördüncüsü bedeni pâk itmekdür; meniden dahi, bevlden dahi, necasetden dahi.",
+      "mainPoint": {
+        "x": 82.63115039279273,
+        "y": 35.112680238155214,
+        "top": "35.11",
+        "right": "17.37"
+      },
+      "points": [
+        {
+          "x": 91.95412486560072,
+          "y": 18.040064239052192,
+          "top": "18.04",
+          "right": "8.05"
+        },
+        {
+          "x": 67.53681077015122,
+          "y": 29.251082078463174,
+          "top": "29.25",
+          "right": "32.46"
+        },
+        {
+          "x": 71.26600055927442,
+          "y": 50.19349103736288,
+          "top": "50.19",
+          "right": "28.73"
+        },
+        {
+          "x": 95.23936348935212,
+          "y": 39.60846911791901,
+          "top": "39.61",
+          "right": "4.76"
+        },
+        {
+          "x": 92.04291509867508,
+          "y": 17.869338079061162,
+          "top": "17.87",
+          "right": "7.96"
+        }
+      ],
+      "id": "t7leTTmJeD0"
+    },
+    {
+      "mainAreaId": "QwVMOkCnNYc",
+      "latinText": "Arapça Metin (Üst Satır)   Osmanlıca Metin (Alt Satır):Buna müşabih ne var ise; beşincisi,",
+      "mainPoint": {
+        "x": 84.9916568921082,
+        "y": 58.77128815248622,
+        "top": "58.77",
+        "right": "15.01"
+      },
+      "points": [
+        {
+          "x": 95.56583731705712,
+          "y": 65.75555214948064,
+          "top": "65.76",
+          "right": "4.43"
+        },
+        {
+          "x": 71.91518949636982,
+          "y": 56.90881775328772,
+          "top": "56.91",
+          "right": "28.08"
+        },
+        {
+          "x": 72.1573462999946,
+          "y": 49.8728184674267,
+          "top": "49.87",
+          "right": "27.84"
+        },
+        {
+          "x": 95.32368051343234,
+          "y": 58.35740584155322,
+          "top": "58.36",
+          "right": "4.68"
+        },
+        {
+          "x": 95.7272751861403,
+          "y": 65.70381686061401,
+          "top": "65.70",
+          "right": "4.27"
+        }
+      ],
+      "id": "zXKRKSlSEsI",
+      "redDots": [
+        {
+          "x": 93.13237574416102,
+          "y": 64.61356346010099,
+          "top": "64.61",
+          "right": "6.87"
+        },
+        {
+          "x": 91.08335874872562,
+          "y": 64.08824993603513,
+          "top": "64.09",
+          "right": "8.92"
+        },
+        {
+          "x": 89.85394855146438,
+          "y": 63.606712538974755,
+          "top": "63.61",
+          "right": "10.15"
+        },
+        {
+          "x": 89.03434175329022,
+          "y": 63.037622887903396,
+          "top": "63.04",
+          "right": "10.97"
+        },
+        {
+          "x": 87.60002985648543,
+          "y": 62.77496612587047,
+          "top": "62.77",
+          "right": "12.40"
+        },
+        {
+          "x": 86.09741739316614,
+          "y": 62.2934287288101,
+          "top": "62.29",
+          "right": "13.90"
+        },
+        {
+          "x": 85.41441172802101,
+          "y": 61.768115204744234,
+          "top": "61.77",
+          "right": "14.59"
+        },
+        {
+          "x": 82.27258566835339,
+          "y": 61.06769717265642,
+          "top": "61.07",
+          "right": "17.73"
+        },
+        {
+          "x": 82.95559133349852,
+          "y": 60.62993590260154,
+          "top": "60.63",
+          "right": "17.04"
+        },
+        {
+          "x": 81.58958000320825,
+          "y": 60.4110552675741,
+          "top": "60.41",
+          "right": "18.41"
+        },
+        {
+          "x": 80.42847037246153,
+          "y": 59.885741743508234,
+          "top": "59.89",
+          "right": "19.57"
+        },
+        {
+          "x": 79.06245904217127,
+          "y": 59.18532371142041,
+          "top": "59.19",
+          "right": "20.94"
+        },
+        {
+          "x": 78.1745516774826,
+          "y": 58.79133856837102,
+          "top": "58.79",
+          "right": "21.83"
+        },
+        {
+          "x": 77.08174261325038,
+          "y": 58.52868180633809,
+          "top": "58.53",
+          "right": "22.92"
+        },
+        {
+          "x": 75.37422845038753,
+          "y": 58.00336828227223,
+          "top": "58.00",
+          "right": "24.63"
+        },
+        {
+          "x": 74.1448182531263,
+          "y": 57.434278631200876,
+          "top": "57.43",
+          "right": "25.86"
+        },
+        {
+          "x": 72.64220578980701,
+          "y": 56.821412853124045,
+          "top": "56.82",
+          "right": "27.36"
+        },
+        {
+          "x": 84.3216026637888,
+          "y": 61.28657780768386,
+          "top": "61.29",
+          "right": "15.68"
+        },
+        {
+          "x": 85.82421512710809,
+          "y": 61.98699583977167,
+          "top": "61.99",
+          "right": "14.18"
+        }
+      ]
+    },
+    {
+      "mainAreaId": "QwVMOkCnNYc",
+      "latinText": "Arapça Metin (Üst Satır) Osmanlıca Metin (Alt Satır):Avret yerini örtmektir; erkek avreti...",
+      "mainPoint": {
+        "x": 86.35009857597132,
+        "y": 66.08571936688601,
+        "top": "66.09",
+        "right": "13.65"
+      },
+      "points": [
+        {
+          "x": 98.89195093983346,
+          "y": 74.26640583318513,
+          "top": "74.27",
+          "right": "1.11"
+        },
+        {
+          "x": 69.14667276713384,
+          "y": 62.9557175884759,
+          "top": "62.96",
+          "right": "30.85"
+        },
+        {
+          "x": 71.36646964569351,
+          "y": 56.4111684154366,
+          "top": "56.41",
+          "right": "28.63"
+        },
+        {
+          "x": 98.22601187626556,
+          "y": 66.79708340743376,
+          "top": "66.80",
+          "right": "1.77"
+        },
+        {
+          "x": 98.78096109590548,
+          "y": 74.26640583318513,
+          "top": "74.27",
+          "right": "1.22"
+        }
+      ],
+      "id": "CiFR-tRe02Y",
+      "redDots": [
+        {
+          "x": 93.46714501897566,
+          "y": 71.96378681347565,
+          "top": "71.96",
+          "right": "6.53"
+        },
+        {
+          "x": 91.69132845906056,
+          "y": 71.2394927693429,
+          "top": "71.24",
+          "right": "8.31"
+        },
+        {
+          "x": 89.18904148827113,
+          "y": 70.30825756974365,
+          "top": "70.31",
+          "right": "10.81"
+        },
+        {
+          "x": 86.4445977138569,
+          "y": 69.06661063694465,
+          "top": "69.07",
+          "right": "13.56"
+        },
+        {
+          "x": 83.94231074306745,
+          "y": 68.29058130394526,
+          "top": "68.29",
+          "right": "16.06"
+        },
+        {
+          "x": 82.97368352856832,
+          "y": 67.10066966001288,
+          "top": "67.10",
+          "right": "17.03"
+        },
+        {
+          "x": 80.47139655777887,
+          "y": 66.53158148248001,
+          "top": "66.53",
+          "right": "19.53"
+        },
+        {
+          "x": 79.17989360511336,
+          "y": 65.65208157174737,
+          "top": "65.65",
+          "right": "20.82"
+        },
+        {
+          "x": 77.56551491428145,
+          "y": 65.23819926081438,
+          "top": "65.24",
+          "right": "22.43"
+        },
+        {
+          "x": 76.11257409253275,
+          "y": 64.51390521668162,
+          "top": "64.51",
+          "right": "23.89"
+        },
+        {
+          "x": 74.25603859807607,
+          "y": 64.25522877234849,
+          "top": "64.26",
+          "right": "25.74"
+        },
+        {
+          "x": 72.96453564541055,
+          "y": 63.53093472821575,
+          "top": "63.53",
+          "right": "27.04"
+        }
+      ]
+    },
+    {
+      "mainAreaId": "QwVMOkCnNYc",
+      "latinText": "Arapça Metin (Üst Satır),Osmanlıca Metin (Alt Satır):Göbekden dizine dekdir; hâtunlar...",
+      "mainPoint": {
+        "x": 85.66518794134748,
+        "y": 73.53933020078539,
+        "top": "73.54",
+        "right": "14.33"
+      },
+      "points": [
+        {
+          "x": 98.7865187266937,
+          "y": 82.13894233088584,
+          "top": "82.14",
+          "right": "1.21"
+        },
+        {
+          "x": 67.21639954390581,
+          "y": 69.87184855706609,
+          "top": "69.87",
+          "right": "32.78"
+        },
+        {
+          "x": 73.33311013557096,
+          "y": 63.86476655442239,
+          "top": "63.86",
+          "right": "26.67"
+        },
+        {
+          "x": 98.88517534913991,
+          "y": 74.74074660131413,
+          "top": "74.74",
+          "right": "1.11"
+        },
+        {
+          "x": 98.68786210424749,
+          "y": 82.20217477301892,
+          "top": "82.20",
+          "right": "1.31"
+        }
+      ],
+      "id": "dNXc6-qIFTw",
+      "redDots": [
+        {
+          "x": 92.92747404461747,
+          "y": 79.40989438795609,
+          "top": "79.41",
+          "right": "7.07"
+        },
+        {
+          "x": 91.42486158129819,
+          "y": 78.70947635586828,
+          "top": "78.71",
+          "right": "8.58"
+        },
+        {
+          "x": 88.89774062026119,
+          "y": 77.8339538157585,
+          "top": "77.83",
+          "right": "11.10"
+        },
+        {
+          "x": 86.71212249179676,
+          "y": 77.04598352965971,
+          "top": "77.05",
+          "right": "13.29"
+        },
+        {
+          "x": 84.59480492984684,
+          "y": 76.08290873553896,
+          "top": "76.08",
+          "right": "15.41"
+        },
+        {
+          "x": 82.95559133349852,
+          "y": 75.16361006842371,
+          "top": "75.16",
+          "right": "17.04"
+        },
+        {
+          "x": 80.97487490457765,
+          "y": 74.20053527430296,
+          "top": "74.20",
+          "right": "19.03"
+        },
+        {
+          "x": 79.60886357428737,
+          "y": 73.45634111520965,
+          "top": "73.46",
+          "right": "20.39"
+        },
+        {
+          "x": 78.10625111096807,
+          "y": 72.5370424480944,
+          "top": "72.54",
+          "right": "21.89"
+        },
+        {
+          "x": 75.51082958341657,
+          "y": 71.92417667001756,
+          "top": "71.92",
+          "right": "24.49"
+        },
+        {
+          "x": 73.93991655358276,
+          "y": 71.22375863792975,
+          "top": "71.22",
+          "right": "26.06"
+        }
+      ]
+    },
+    {
+      "mainAreaId": "QwVMOkCnNYc",
+      "latinText": "Arapça Metin (Üst Satır),Osmanlıca Metin (Alt Satır):Küllîsi avretdir illâ yüzleri.",
+      "mainPoint": {
+        "x": 86.01712904418736,
+        "y": 81.30890983460786,
+        "top": "81.31",
+        "right": "13.98"
+      },
+      "points": [
+        {
+          "x": 99.44690015947339,
+          "y": 88.20914102792104,
+          "top": "88.21",
+          "right": "0.55"
+        },
+        {
+          "x": 66.92687588857417,
+          "y": 76.25822514671884,
+          "top": "76.26",
+          "right": "33.07"
+        },
+        {
+          "x": 76.47200246638076,
+          "y": 72.3457229237062,
+          "top": "72.35",
+          "right": "23.53"
+        },
+        {
+          "x": 99.66887984732935,
+          "y": 81.94913747110084,
+          "top": "81.95",
+          "right": "0.33"
+        },
+        {
+          "x": 99.33591031554539,
+          "y": 88.13800462386627,
+          "top": "88.14",
+          "right": "0.66"
+        }
+      ],
+      "id": "HbJNPMuw8qo",
+      "redDots": [
+        {
+          "x": 94.51649116801639,
+          "y": 86.29446182953083,
+          "top": "86.29",
+          "right": "5.48"
+        },
+        {
+          "x": 93.38642608443406,
+          "y": 85.77710894086458,
+          "top": "85.78",
+          "right": "6.61"
+        },
+        {
+          "x": 92.25636100085173,
+          "y": 85.4149619187982,
+          "top": "85.41",
+          "right": "7.74"
+        },
+        {
+          "x": 90.23838763731186,
+          "y": 84.69066787466545,
+          "top": "84.69",
+          "right": "9.76"
+        },
+        {
+          "x": 89.18904148827113,
+          "y": 84.32852085259907,
+          "top": "84.33",
+          "right": "10.81"
+        },
+        {
+          "x": 88.38185214285518,
+          "y": 83.86290325279944,
+          "top": "83.86",
+          "right": "11.62"
+        },
+        {
+          "x": 85.71812730298254,
+          "y": 82.72472689773369,
+          "top": "82.72",
+          "right": "14.28"
+        },
+        {
+          "x": 83.29655926673469,
+          "y": 82.10390343133419,
+          "top": "82.10",
+          "right": "16.70"
+        },
+        {
+          "x": 82.73152672494352,
+          "y": 81.58655054266795,
+          "top": "81.59",
+          "right": "17.27"
+        },
+        {
+          "x": 80.39067762323728,
+          "y": 80.70705063193532,
+          "top": "80.71",
+          "right": "19.61"
+        },
+        {
+          "x": 79.01845573603016,
+          "y": 80.24143303213569,
+          "top": "80.24",
+          "right": "20.98"
+        },
+        {
+          "x": 77.0004823724903,
+          "y": 78.99978609933667,
+          "top": "79.00",
+          "right": "23.00"
+        },
+        {
+          "x": 74.65963327078404,
+          "y": 78.4306979218038,
+          "top": "78.43",
+          "right": "25.34"
+        }
+      ]
+    },
+    {
+      "mainAreaId": "QwVMOkCnNYc",
+      "latinText": "Arapça Metin (Üst Satır),Osmanlıca Metin (Alt Satır):Dahi avuçları ve ayakları değildir; câriye...",
+      "mainPoint": {
+        "x": 85.45304491894152,
+        "y": 86.42042278254617,
+        "top": "86.42",
+        "right": "14.55"
+      },
+      "points": [
+        {
+          "x": 99.15225368905129,
+          "y": 96.25755463267606,
+          "top": "96.26",
+          "right": "0.85"
+        },
+        {
+          "x": 66.1726770202685,
+          "y": 82.1115964349686,
+          "top": "82.11",
+          "right": "33.83"
+        },
+        {
+          "x": 77.84237337999164,
+          "y": 79.26614507336079,
+          "top": "79.27",
+          "right": "22.16"
+        },
+        {
+          "x": 99.40594274034963,
+          "y": 88.77808248216408,
+          "top": "88.78",
+          "right": "0.59"
+        },
+        {
+          "x": 99.02540916340213,
+          "y": 96.17625602234442,
+          "top": "96.18",
+          "right": "0.97"
+        }
+      ],
+      "id": "RRe_B45APtM",
+      "redDots": [
+        {
+          "x": 93.99630022631105,
+          "y": 93.3303007950965,
+          "top": "93.33",
+          "right": "6.00"
+        },
+        {
+          "x": 92.04291509867508,
+          "y": 92.41976127514435,
+          "top": "92.42",
+          "right": "7.96"
+        },
+        {
+          "x": 89.11283740722115,
+          "y": 91.67994791518322,
+          "top": "91.68",
+          "right": "10.89"
+        },
+        {
+          "x": 87.86977414418008,
+          "y": 90.65559095523705,
+          "top": "90.66",
+          "right": "12.13"
+        },
+        {
+          "x": 86.00517924961848,
+          "y": 89.91577759527591,
+          "top": "89.92",
+          "right": "13.99"
+        },
+        {
+          "x": 84.31816482120561,
+          "y": 89.3466903953058,
+          "top": "89.35",
+          "right": "15.68"
+        },
+        {
+          "x": 83.25268202431326,
+          "y": 88.77760319533571,
+          "top": "88.78",
+          "right": "16.75"
+        },
+        {
+          "x": 81.65445782897474,
+          "y": 87.81015495538654,
+          "top": "87.81",
+          "right": "18.35"
+        },
+        {
+          "x": 79.61228246826443,
+          "y": 87.12725031542242,
+          "top": "87.13",
+          "right": "20.39"
+        },
+        {
+          "x": 78.45800943829772,
+          "y": 86.55816311545232,
+          "top": "86.56",
+          "right": "21.54"
+        },
+        {
+          "x": 76.59341454373613,
+          "y": 85.70453231549716,
+          "top": "85.70",
+          "right": "23.41"
+        },
+        {
+          "x": 74.72881964917453,
+          "y": 85.24926255552109,
+          "top": "85.25",
+          "right": "25.27"
+        },
+        {
+          "x": 73.92970755150527,
+          "y": 84.850901515542,
+          "top": "84.85",
+          "right": "26.07"
+        }
+      ]
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

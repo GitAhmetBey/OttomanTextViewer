@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Osmanlıca Oku</string>
+    <string name="title_activity_main">Osmanlıca Oku</string>
+    <string name="package_name">com.ottoman.app</string>
+    <string name="custom_url_scheme">com.ottoman.app</string>
+</resources>

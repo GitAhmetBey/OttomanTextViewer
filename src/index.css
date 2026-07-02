@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+.overlay-word {
+  color: transparent;
+}
+
+.overlay-word::selection {
+  background-color: rgba(250, 204, 21, 0.4); /* Yarı saydam sarı fosforlu kalem efekti */
+  color: transparent;
+}
