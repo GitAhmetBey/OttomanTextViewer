@@ -248,15 +248,15 @@ export default function OverviewMode() {
                           setSelectedChildId(child.id); 
                         }}
                       />
-                      {/* EĞER BU YAVRU ALANA KIRMIZI NOKTA EKLENMİŞSE ONLARI ÇİZ */}
+                      {/* EĞER BU YAVRU ALANA KIRMIZI NOKTA EKLENMİŞSE VE SEÇİLİYSE ONLARI ÇİZ */}
                       {/* NOT: SVG'de drop-shadow filtresi çok ağır → kaldırıldı, nokta rengi koyulaştırıldı */}
-                      {child.redDots && child.redDots.map((dot, i) => (
+                      {selectedChildId === child.id && child.redDots && child.redDots.map((dot, i) => (
                          <circle 
                            key={`reddot-${child.id}-${i}`}
                            cx={dot.x} 
                            cy={dot.y} 
                            r="0.28" 
-                           fill={selectedChildId === child.id ? '#ff6666' : '#ff3333'}
+                           fill='#ff3333'
                            stroke="rgba(255,100,100,0.4)"
                            strokeWidth="0.15"
                            vectorEffect="non-scaling-stroke"
