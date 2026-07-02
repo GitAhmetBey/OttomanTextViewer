@@ -171,6 +171,8 @@ export default function OverviewMode() {
           {/* POP-OUT EFEKTİ (Plakadan Kopan Parça + Birlikte Büyüyen Çerçeveler) */}
           {mainAreas.map(area => {
             const isSelected = selectedMainAreaId === area.id;
+            if (!isSelected) return null; // MOBİL PERFORMANS İÇİN: Sadece seçili olan alanı render et!
+            
             const clipPathStr = `polygon(${area.points.map(p => `${100 - parseFloat(p.right)}% ${p.top}%`).join(', ')})`;
             return (
               <div 
@@ -182,13 +184,13 @@ export default function OverviewMode() {
                   width: '100%',
                   height: '100%',
                   pointerEvents: 'none', // wrapper tıklamaları engellemesin, sadece içindeki poligonlar tıklanabilsin
-                  zIndex: isSelected ? 60 : 1,
+                  zIndex: 60,
                   transformOrigin: `${100 - parseFloat(area.mainPoint.right)}% ${area.mainPoint.top}%`,
-                  // Ana alan büyütme oranını mobilde bir tık artırdık
-                  transform: isSelected ? `scale(${isMobile ? 1.25 : 1.15}) translateY(-5px)` : 'scale(1)',
-                  opacity: isSelected ? 1 : 0,
-                  filter: 'drop-shadow(0px 30px 40px rgba(0,0,0,1)) drop-shadow(0px 0px 20px rgba(199, 161, 91, 0.8))',
-                  transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  transform: `scale(${isMobile ? 1.25 : 1.15}) translateY(-5px) translateZ(0)`,
+                  opacity: 1,
+                  filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))', // Çok daha hafif gölge, performansı inanılmaz artırır
+                  willChange: 'transform, opacity', // Donanım hızlandırması (GPU) sağlar
+                  transition: 'all 0.3s ease-out'
                 }}
               >
                 {/* Kesilmiş Resim */}
@@ -550,19 +552,20 @@ export default function OverviewMode() {
             {/* ÜST KISIM: Arapça Kırpılmış Resim */}
             <div style={{ position: 'relative', width: '100%', height: '55vh', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
-                   <img 
-                     src={page.imageUrl}
-                     onError={(e) => { e.target.onerror = null; e.target.src = "/resim.png"; }}
-                     alt="Kelime Detayı"
-                     style={{
-                       position: 'absolute',
-                       width: calculatedWidth,
-                       maxWidth: 'none',
-                       clipPath: clipPathStr,
-                       transform: `translate(-${childX}%, -${childY}%)`,
-                       filter: 'drop-shadow(0px 0px 30px rgba(0, 255, 255, 0.5))'
-                     }}
-                   />
+                     <img 
+                       src={page.imageUrl}
+                       onError={(e) => { e.target.onerror = null; e.target.src = "/resim.png"; }}
+                       alt="Kelime Detayı"
+                       style={{
+                         position: 'absolute',
+                         width: calculatedWidth,
+                         maxWidth: 'none',
+                         clipPath: clipPathStr,
+                         transform: `translate(-${childX}%, -${childY}%) translateZ(0)`,
+                         willChange: 'transform',
+                         filter: 'drop-shadow(0px 0px 15px rgba(0, 255, 255, 0.4))'
+                       }}
+                     />
                 </div>
             </div>
             
