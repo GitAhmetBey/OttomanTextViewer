@@ -28,6 +28,7 @@ export const api = {
   },
   
   createMainArea: async (data) => {
+    if (!data.id) data.id = Date.now().toString();
     await setDoc(doc(db, 'mainAreas', data.id.toString()), data);
     return data;
   },
@@ -51,6 +52,7 @@ export const api = {
   },
   
   createChildArea: async (data) => {
+    if (!data.id) data.id = Date.now().toString() + Math.floor(Math.random() * 1000);
     await setDoc(doc(db, 'childAreas', data.id.toString()), data);
     return data;
   },
