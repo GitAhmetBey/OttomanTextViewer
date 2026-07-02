@@ -214,6 +214,7 @@ export default function MapperMode() {
                   onClick={(e) => { 
                     if (!isSelected) {
                       e.stopPropagation();
+                      document.activeElement?.blur(); // Mobil klavyeyi kapatmak icin
                       setSelectedMainAreaId(area.id);
                       setCurrentMainPoint(null);
                       setCurrentPolygon([]);
@@ -330,6 +331,7 @@ export default function MapperMode() {
             onChange={(e) => {
               const val = e.target.value;
               const matchedArea = mainAreas.find(a => String(a.id) === val);
+              document.activeElement?.blur(); // Mobil klavyeyi kapatmak icin
               setSelectedMainAreaId(matchedArea ? matchedArea.id : null);
               setCurrentMainPoint(null);
               setCurrentPolygon([]);
