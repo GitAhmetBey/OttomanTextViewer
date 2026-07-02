@@ -25,6 +25,14 @@ export default function MapperMode() {
   const imageRef = useRef(null);
 
   useEffect(() => {
+    // Sayfa değiştiğinde seçimleri ve zoom seviyesini sıfırla
+    setSelectedMainAreaId(null);
+    setCurrentMainPoint(null);
+    setCurrentPolygon([]);
+    setDotModeChildId(null);
+    setActiveChildId(null);
+    setZoomLevel(1);
+
     loadData();
   }, [activePageId]);
 

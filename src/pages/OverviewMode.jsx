@@ -71,6 +71,14 @@ export default function OverviewMode() {
   };
 
   useEffect(() => {
+    // Sayfa değiştiğinde tüm seçimleri ve yakınlaştırmayı (zoom) sıfırla (Genel görünüme dön)
+    setSelectedMainAreaId(null);
+    setSelectedChildId(null);
+    setPreviousZoomLevel(null);
+    setZoomLevel(isMobile ? 0.7 : 1);
+    setFullScreenChildId(null);
+    setFullTextModalAreaId(null);
+
     // Sayfa verisi (tek seferlik - sayfa resmi değişmediği için yeterli)
     api.getPage(activePageId).then(p => setPage(p)).catch(console.error);
 
