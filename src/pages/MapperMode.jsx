@@ -20,6 +20,7 @@ export default function MapperMode() {
   const [currentMainPoint, setCurrentMainPoint] = useState(null);
   const [currentPolygon, setCurrentPolygon] = useState([]); 
   const [dotModeChildId, setDotModeChildId] = useState(null);
+  const [activeChildId, setActiveChildId] = useState(null);
 
   const imageRef = useRef(null);
 
@@ -219,6 +220,7 @@ export default function MapperMode() {
                       setCurrentMainPoint(null);
                       setCurrentPolygon([]);
                       setDotModeChildId(null);
+                      setActiveChildId(null);
                     }
                   }}
                   fill={isSelected ? "rgba(255, 255, 255, 0.05)" : "rgba(0,0,0,0)"}
@@ -236,16 +238,20 @@ export default function MapperMode() {
             })}
 
             {/* YAVRU ALANLARIN ÇİZİMİ */}
-            {currentChildren.map((child) => (
+            {currentChildren.map((child) => {
+              const isActive = activeChildId === child.id;
+              return (
               <polygon 
                 key={`childpoly-${child.id}`}
                 points={child.points.map(p => `${100 - parseFloat(p.right)},${parseFloat(p.top)}`).join(' ')}
-                fill="rgba(0, 255, 0, 0.25)" 
-                stroke="#00ff00"
-                strokeWidth="2"
+                fill={isActive ? "rgba(255, 204, 0, 0.4)" : "rgba(0, 255, 0, 0.25)"} 
+                stroke={isActive ? "#ffcc00" : "#00ff00"}
+                strokeWidth={isActive ? "3" : "2"}
                 vectorEffect="non-scaling-stroke"
+                style={{ transition: 'all 0.2s' }}
               />
-            ))}
+              );
+            })}
 
             {/* ŞU AN ÇİZİLEN ŞEKİL */}
             {currentPolygon.length > 0 && (
@@ -336,6 +342,7 @@ export default function MapperMode() {
               setCurrentMainPoint(null);
               setCurrentPolygon([]);
               setDotModeChildId(null);
+              setActiveChildId(null);
             }}
             style={styles.dropdown}
           >
@@ -399,9 +406,17 @@ export default function MapperMode() {
                 :
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {currentChildren.map((c, idx) => (
-                <div key={c.id} style={{padding: '10px', backgroundColor: '#1a1a1a', borderRadius: '6px', display: 'flex', flexDirection: 'column', gap: '8px', borderLeft: '3px solid #00ffff'}}>
+                <div key={c.id} 
+                  onClick={() => setActiveChildId(c.id)}
+                  style={{
+                    padding: '10px', backgroundColor: '#1a1a1a', borderRadius: '6px', display: 'flex', flexDirection: 'column', gap: '8px', 
+                    borderLeft: activeChildId === c.id ? '3px solid #ffcc00' : '3px solid #00ffff',
+                    boxShadow: activeChildId === c.id ? '0 0 10px rgba(255,204,0,0.3)' : 'none',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer'
+                  }}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <span style={{color: '#00ffff', fontWeight: 'bold'}}>Yavru #{idx + 1}</span>
+                    <span style={{color: activeChildId === c.id ? '#ffcc00' : '#00ffff', fontWeight: 'bold'}}>Yavru #{idx + 1}</span>
                     <button onClick={() => deleteChildArea(c.id)} style={{color:'#ff4444', background:'none', border:'none', cursor:'pointer', fontSize: '12px'}}>Sil</button>
                   </div>
                   <input 
