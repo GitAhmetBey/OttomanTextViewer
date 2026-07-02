@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, getDocs, getDoc, doc, query, where, setDoc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, query, where, setDoc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 
 export const api = {
   getPages: async () => {
@@ -73,5 +73,87 @@ export const api = {
     const promises = mainAreas.map(m => api.getChildAreas(m.id));
     const results = await Promise.all(promises);
     return results.flat();
+  },
+
+  // ── GERÇEk ZAMANLI DİNLEYİCİLER (onSnapshot) ──────────────────────────
+  // Kullanım: const unsub = api.subscribeToMainAreas(pageId, (areas) => setMainAreas(areas))
+  // Bileşen unmount olunca: unsub() çağır!
+
+  subscribeToMainAreas: (pageId, callback) => {
+    const q1 = query(collection(db, 'mainAreas'), where('pageId', '==', Number(pageId)));
+    const q2 = query(collection(db, 'mainAreas'), where('pageId', '==', String(pageId)));
+
+    const results = new Map();
+
+    const handleSnapshot = () => {
+      callback(Array.from(results.values()));
+    };
+
+    const unsub1 = onSnapshot(q1, (snap) => {
+      snap.docs.forEach(d => results.set(d.id, d.data()));
+      snap.docChanges().forEach(change => {
+        if (change.type === 'removed') results.delete(change.doc.id);
+      });
+      handleSnapshot();
+    });
+
+    const unsub2 = onSnapshot(q2, (snap) => {
+      snap.docs.forEach(d => results.set(d.id, d.data()));
+      snap.docChanges().forEach(change => {
+        if (change.type === 'removed') results.delete(change.doc.id);
+      });
+      handleSnapshot();
+    });
+
+    // Her iki dinleyiciyi de durduran fonksiyon döndür
+    return () => { unsub1(); unsub2(); };
+  },
+
+  subscribeToChildAreasForPage: (pageId, callback) => {
+    // Önce mainArea id'lerini al, sonra her birinin childArea'larını dinle
+    const q1 = query(collection(db, 'mainAreas'), where('pageId', '==', Number(pageId)));
+    const q2 = query(collection(db, 'mainAreas'), where('pageId', '==', String(pageId)));
+
+    const mainAreaMap = new Map();     // mainAreaId -> true
+    const childMap = new Map();        // childId -> childData
+    const childUnsubMap = new Map();   // mainAreaId -> unsub fn
+
+    const emitChildren = () => callback(Array.from(childMap.values()));
+
+    const watchChildren = (mainAreaId) => {
+      if (childUnsubMap.has(mainAreaId)) return;
+      const cq = query(collection(db, 'childAreas'), where('mainAreaId', '==', mainAreaId));
+      const unsub = onSnapshot(cq, (snap) => {
+        snap.docs.forEach(d => childMap.set(d.id, d.data()));
+        snap.docChanges().forEach(change => {
+          if (change.type === 'removed') childMap.delete(change.doc.id);
+        });
+        emitChildren();
+      });
+      childUnsubMap.set(mainAreaId, unsub);
+    };
+
+    const handleMainSnap = (snap) => {
+      snap.docs.forEach(d => {
+        const area = d.data();
+        mainAreaMap.set(d.id, true);
+        watchChildren(area.id);
+      });
+      snap.docChanges().forEach(change => {
+        if (change.type === 'removed') {
+          const unsub = childUnsubMap.get(change.doc.id);
+          if (unsub) { unsub(); childUnsubMap.delete(change.doc.id); }
+          mainAreaMap.delete(change.doc.id);
+        }
+      });
+    };
+
+    const unsub1 = onSnapshot(q1, handleMainSnap);
+    const unsub2 = onSnapshot(q2, handleMainSnap);
+
+    return () => {
+      unsub1(); unsub2();
+      childUnsubMap.forEach(fn => fn());
+    };
   }
 };

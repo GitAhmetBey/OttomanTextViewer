@@ -71,35 +71,31 @@ export default function OverviewMode() {
   };
 
   useEffect(() => {
-    loadData();
-    
-    // Mobil görünüm için ekran boyutunu dinle (Tabletleri de kapsamak için 1024px)
+    // Sayfa verisi (tek seferlik - sayfa resmi değişmediği için yeterli)
+    api.getPage(activePageId).then(p => setPage(p)).catch(console.error);
+
+    // ── GERÇEk ZAMANLI DİNLEYİCİLER ──────────────────────────────────────
+    // Ana alanlar değişince (paragraf güncelleme, yeni alan vb.) anında yansı
+    const unsubMain = api.subscribeToMainAreas(activePageId, (areas) => {
+      setMainAreas(areas);
+    });
+
+    // Yavru alanlar değişince anında yansı
+    const unsubChildren = api.subscribeToChildAreasForPage(activePageId, (children) => {
+      setChildAreas(children);
+    });
+
+    // Mobil görünüm için ekran boyutunu dinle
     const handleResize = () => setIsMobile(window.innerWidth <= 1024);
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    // Bileşen ekrandan kalkınca dinleyicileri durdur (bellek sızıntısı önlenir)
+    return () => {
+      unsubMain();
+      unsubChildren();
+      window.removeEventListener('resize', handleResize);
+    };
   }, [activePageId]);
-
-  // Başka bir ana alana zoom yapılınca Latince kutusunu kapat
-  const prevMainAreaIdRef = useRef(null);
-  useEffect(() => {
-    if (selectedMainAreaId !== null && selectedMainAreaId !== prevMainAreaIdRef.current) {
-      setSelectedChildId(null);
-    }
-    prevMainAreaIdRef.current = selectedMainAreaId;
-  }, [selectedMainAreaId]);
-
-  const loadData = async () => {
-    try {
-      const p = await api.getPage(activePageId);
-      setPage(p);
-      const mAreas = await api.getMainAreas(activePageId);
-      setMainAreas(mAreas);
-      const cAreas = await api.getAllChildAreasForPage(activePageId);
-      setChildAreas(cAreas);
-    } catch (err) {
-      console.error("Yükleme hatası", err);
-    }
-  };
 
   const handleBackgroundClick = (e) => {
     if (e.target.tagName.toLowerCase() === 'img') {
