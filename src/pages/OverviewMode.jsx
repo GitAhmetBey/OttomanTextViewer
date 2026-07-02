@@ -135,16 +135,6 @@ export default function OverviewMode() {
           <button onClick={() => handleZoom(-0.03)} style={styles.zoomBtn}>-</button>
           <span style={{ color: '#00ffff', fontSize: '14px', fontWeight: 'bold', width: '45px', textAlign: 'center' }}>{Math.round(zoomLevel * 100)}%</span>
           <button onClick={() => handleZoom(0.03)} style={styles.zoomBtn}>+</button>
-          
-          {/* SIFIRLA BUTONU */}
-          <button onClick={() => {
-            setZoomLevel(isMobile ? 0.7 : 1);
-            setSelectedMainAreaId(null);
-            setSelectedChildId(null);
-            setPreviousZoomLevel(null);
-          }} style={{ ...styles.zoomBtn, fontSize: '14px', width: 'auto', padding: '0 10px', borderRadius: '4px' }}>
-             👁️ Genel
-          </button>
         </div>
 
         {/* MOBİL SAYFA GEÇİŞ KONTROLLERİ (Sadece mobilde resmin üzerinde yüzer) */}
@@ -153,6 +143,55 @@ export default function OverviewMode() {
             <button onClick={() => navigate(`/overview/${Math.max(1, activePageId - 1)}`)} style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px'}}>&lt;</button>
             <span style={{ color: '#fff', fontWeight: 'bold', fontSize: '16px', whiteSpace: 'nowrap' }}>Sayfa {activePageId} / 110</span>
             <button onClick={() => navigate(`/overview/${Math.min(110, activePageId + 1)}`)} style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px'}}>&gt;</button>
+          </div>
+        )}
+
+        {/* ANA ALAN KAPATMA BUTONU (Sadece bir ana alan seçiliyse görünür) */}
+        {selectedMainAreaId && (
+          <div 
+            onClick={() => {
+              setZoomLevel(isMobile ? 0.7 : 1);
+              setSelectedMainAreaId(null);
+              setSelectedChildId(null);
+              setPreviousZoomLevel(null);
+            }}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(255, 68, 68, 0.95)',
+              color: 'white',
+              padding: isMobile ? '10px 20px' : '12px 24px',
+              borderRadius: '40px',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              fontSize: isMobile ? '16px' : '18px',
+              boxShadow: '0 8px 25px rgba(255, 68, 68, 0.5)',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(5px)',
+              transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+              gap: '10px'
+            }}
+            onMouseEnter={(e) => {
+              if (isMobile) return;
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.backgroundColor = '#ff2222';
+            }}
+            onMouseLeave={(e) => {
+              if (isMobile) return;
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.backgroundColor = 'rgba(255, 68, 68, 0.95)';
+            }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            Kapat
           </div>
         )}
 
