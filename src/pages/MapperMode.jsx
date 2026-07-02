@@ -419,13 +419,17 @@ export default function MapperMode() {
                     <span style={{color: activeChildId === c.id ? '#ffcc00' : '#00ffff', fontWeight: 'bold'}}>Yavru #{idx + 1}</span>
                     <button onClick={() => deleteChildArea(c.id)} style={{color:'#ff4444', background:'none', border:'none', cursor:'pointer', fontSize: '12px'}}>Sil</button>
                   </div>
-                  <input 
-                    type="text" 
-                    placeholder="Latince metin (Örn: Musa)" 
+                  <textarea
+                    placeholder="Latince metin (Birden fazla satır yazabilirsiniz)" 
                     value={c.latinText || ""}
                     onChange={(e) => updateChildLatin(c.id, e.target.value)}
                     onBlur={(e) => saveChildLatin(c.id, e.target.value)}
-                    style={{ padding: '8px', borderRadius: '4px', border: '1px solid #444', backgroundColor: '#000', color: '#fff', width: '100%', boxSizing: 'border-box' }}
+                    style={{ 
+                      padding: '8px', borderRadius: '4px', border: '1px solid #444', 
+                      backgroundColor: '#000', color: '#fff', width: '100%', 
+                      boxSizing: 'border-box', minHeight: '60px', resize: 'vertical',
+                      fontFamily: 'inherit', fontSize: '13px', lineHeight: '1.5'
+                    }}
                   />
                   <div style={{display: 'flex', gap: '10px'}}>
                     <button 

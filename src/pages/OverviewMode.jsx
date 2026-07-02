@@ -420,7 +420,8 @@ export default function OverviewMode() {
                 maxWidth: '800px',
                 width: '100%',
                 maxHeight: '30vh',
-                overflowY: 'auto'
+                overflowY: 'auto',
+                whiteSpace: 'pre-wrap'
               }}>
                 {child.latinText || "Bu kelimenin latince okunuşu henüz girilmemiş."}
               </div>
@@ -628,7 +629,8 @@ export default function OverviewMode() {
             }}>
                <div style={{ 
                  color: '#fff', fontSize: isMobile ? '18px' : '22px', 
-                 textAlign: 'center', fontWeight: 'bold', lineHeight: '1.6', maxWidth: '800px'
+                 textAlign: 'center', fontWeight: 'bold', lineHeight: '1.6', maxWidth: '800px',
+                 whiteSpace: 'pre-wrap'
                }}>
                    {child.latinText}
                </div>
