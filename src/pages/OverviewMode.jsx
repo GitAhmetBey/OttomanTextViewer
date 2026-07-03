@@ -132,28 +132,22 @@ export default function OverviewMode() {
     }
 
     if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
-      // Geçiş Efekti: Önce Genel Görünüme dön (uzaklaş)
+      // Geçiş Efekti: Sadece seçimi kaldır (Genel görünüme geçer gibi aydınlat)
       setSelectedMainAreaId(null);
       setSelectedChildId(null);
-      setZoomLevel(isMobile ? 0.7 : 1);
       
-      // Biraz bekle, sonra yeni ana alana git ve yakınlaş
+      // Biraz bekle, sonra yeni ana alana git ve merkezine kay (Zoom değiştirmeden)
       setTimeout(() => {
-        setZoomLevel(isMobile ? 1.5 : 2.5); // Okuma için otomatik yakınlaşma
         setSelectedMainAreaId(newMainAreaId);
         setSelectedChildId(newChildId);
       }, 800); 
       return;
     }
     
-    // Aynı ana alan içindeysek veya zaten genel görünümdeysek direkt git
-    if (!selectedMainAreaId && newMainAreaId) {
-       setZoomLevel(isMobile ? 1.5 : 2.5); // Genel görünümden geliyorsak yakınlaş
-    }
-    
+    // Aynı ana alan içindeysek veya genel görünümden geliyorsak direkt git
     setSelectedMainAreaId(newMainAreaId);
     setSelectedChildId(newChildId);
-  }, [effectiveSequence, childAreas, selectedMainAreaId, isMobile]);
+  }, [effectiveSequence, childAreas, selectedMainAreaId]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
