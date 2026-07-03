@@ -580,8 +580,14 @@ export default function MapperMode() {
               onFocus={e => e.target.style.borderColor = '#c7a15b'}
               onBlurCapture={e => e.target.style.borderColor = '#555'}
             />
-            <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
-              💾 Kutunun dışına tıklayınca kaydedilir · Firebase'e anında yansır
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
+              <div style={{ fontSize: '11px', color: '#666' }}>
+                💾 Kutunun dışına tıklayınca kaydedilir · Firebase'e anında yansır
+              </div>
+              <button 
+                onClick={() => deleteMainArea(selectedMainAreaId)}
+                style={{ backgroundColor: '#2a1a1a', border: '1px solid #cc4444', color: '#cc4444', borderRadius: '4px', cursor: 'pointer', padding: '4px 8px', fontSize: '11px' }}
+              >🗑️ Ana Alanı Sil</button>
             </div>
           </div>
         )}
