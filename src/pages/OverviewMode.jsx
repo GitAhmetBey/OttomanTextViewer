@@ -486,15 +486,31 @@ export default function OverviewMode() {
         {/* Slayt Modu İçin Ana Ekranda Gezinme Butonları (Sağ-Sol) */}
         {currentSequenceIndex > 0 && (
           <button 
+            onPointerDown={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex - 1); }}
-            style={styles.slideshowNavBtnLeft}
+            style={{
+              ...styles.slideshowNavBtnLeft,
+              width: isMobile ? '65px' : '50px',
+              height: isMobile ? '65px' : '50px',
+              fontSize: isMobile ? '28px' : '20px',
+              backgroundColor: 'rgba(0,0,0,0.75)'
+            }}
           >❮</button>
         )}
         
         {currentSequenceIndex !== -1 && currentSequenceIndex < effectiveSequence.length - 1 && (
           <button 
+            onPointerDown={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex + 1); }}
-            style={styles.slideshowNavBtnRight}
+            style={{
+              ...styles.slideshowNavBtnRight,
+              width: isMobile ? '65px' : '50px',
+              height: isMobile ? '65px' : '50px',
+              fontSize: isMobile ? '28px' : '20px',
+              backgroundColor: 'rgba(0,0,0,0.75)'
+            }}
           >❯</button>
         )}
 
@@ -956,7 +972,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    transition: 'all 0.2s'
+    transition: 'all 0.2s',
+    userSelect: 'none',
+    WebkitTapHighlightColor: 'transparent',
+    touchAction: 'manipulation'
   },
   slideshowNavBtnRight: {
     position: 'absolute',
@@ -975,6 +994,9 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    transition: 'all 0.2s'
+    transition: 'all 0.2s',
+    userSelect: 'none',
+    WebkitTapHighlightColor: 'transparent',
+    touchAction: 'manipulation'
   }
 };
