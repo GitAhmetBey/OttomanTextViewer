@@ -18,6 +18,7 @@ export default function OverviewMode() {
   const [fullScreenChildId, setFullScreenChildId] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
   const [zoomLevel, setZoomLevel] = useState(window.innerWidth <= 1024 ? 0.7 : 1);
+  const [transitioningSequenceIndex, setTransitioningSequenceIndex] = useState(null);
   const scrollContainerRef = useRef(null);
 
   const effectiveSequence = useMemo(() => {
@@ -66,6 +67,8 @@ export default function OverviewMode() {
     }
     return -1;
   }, [selectedChildId, selectedMainAreaId, effectiveSequence]);
+
+  const displaySequenceIndex = transitioningSequenceIndex !== null ? transitioningSequenceIndex : currentSequenceIndex;
 
   const focusOnTarget = useCallback((mainId, childId) => {
     const container = scrollContainerRef.current;
@@ -133,11 +136,13 @@ export default function OverviewMode() {
 
     if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
       // Geçiş Efekti: Sadece seçimi kaldır (Genel görünüme geçer gibi aydınlat)
+      setTransitioningSequenceIndex(index);
       setSelectedMainAreaId(null);
       setSelectedChildId(null);
       
       // Biraz bekle, sonra yeni ana alana git ve merkezine kay (Zoom değiştirmeden)
       setTimeout(() => {
+        setTransitioningSequenceIndex(null);
         setSelectedMainAreaId(newMainAreaId);
         setSelectedChildId(newChildId);
       }, 800); 
@@ -484,11 +489,11 @@ export default function OverviewMode() {
         </div>
 
         {/* Slayt Modu İçin Ana Ekranda Gezinme Butonları (Sağ-Sol) */}
-        {currentSequenceIndex > 0 && (
+        {displaySequenceIndex > 0 && (
           <button 
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
-            onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex - 1); }}
+            onClick={(e) => { e.stopPropagation(); goToSequenceIndex(displaySequenceIndex - 1); }}
             style={{
               ...styles.slideshowNavBtnLeft,
               width: isMobile ? '65px' : '50px',
@@ -499,11 +504,11 @@ export default function OverviewMode() {
           >❮</button>
         )}
         
-        {currentSequenceIndex !== -1 && currentSequenceIndex < effectiveSequence.length - 1 && (
+        {displaySequenceIndex !== -1 && displaySequenceIndex < effectiveSequence.length - 1 && (
           <button 
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
-            onClick={(e) => { e.stopPropagation(); goToSequenceIndex(currentSequenceIndex + 1); }}
+            onClick={(e) => { e.stopPropagation(); goToSequenceIndex(displaySequenceIndex + 1); }}
             style={{
               ...styles.slideshowNavBtnRight,
               width: isMobile ? '65px' : '50px',
