@@ -35,6 +35,23 @@ export const api = {
     return { success: true };
   },
 
+  deleteEmptyPages: async (keepPageId) => {
+    const pages = await api.getPages();
+    let deletedCount = 0;
+    for (const p of pages) {
+      if (p.id.toString() === keepPageId.toString()) continue; // Şu anki sayfayı atlat
+      const mains = await api.getMainAreas(p.id);
+      // Ana alan yoksa VE resim yoksa veya varsayılan resimdeyse: boş sayfa
+      const hasContent = mains.length > 0;
+      const hasCustomImage = p.imageUrl && !p.imageUrl.startsWith('/resim') && !p.imageUrl.startsWith('http') === false || p.imageUrl?.startsWith('data:');
+      if (!hasContent && !hasCustomImage) {
+        await deleteDoc(doc(db, 'pages', p.id.toString()));
+        deletedCount++;
+      }
+    }
+    return deletedCount;
+  },
+
   deletePage: async (pageId) => {
     const idStr = pageId.toString();
     // 1. Sayfaya ait tüm ana alanları bul

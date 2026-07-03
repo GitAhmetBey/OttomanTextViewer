@@ -124,9 +124,24 @@ export default function MapperMode() {
     try {
       setLoading(true);
       await api.deletePage(activePageId);
-      navigate(`/mapper/${Math.max(1, activePageId - 1)}`);
+      // Silinen sayfadan sonraki ilk sayfaya git
+      const remaining = allPages.filter(p => p.id.toString() !== activePageId.toString());
+      navigate(`/mapper/${remaining.length > 0 ? remaining[0].id : '1'}`);
     } catch (err) {
       alert('Sayfa silinemedi: ' + err.message);
+      setLoading(false);
+    }
+  };
+
+  const handleCleanEmptyPages = async () => {
+    if (!window.confirm(`İçi boş (hiç alan çizilmemiş) sayfalar silinecek. Şu anki sayfa korunacak. Devam edilsin mi?`)) return;
+    try {
+      setLoading(true);
+      const count = await api.deleteEmptyPages(activePageId);
+      alert(`${count} boş sayfa silindi.`);
+      await loadData();
+    } catch (err) {
+      alert('Temizleme hatası: ' + err.message);
       setLoading(false);
     }
   };
@@ -494,7 +509,7 @@ export default function MapperMode() {
         
         <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#334433', border: '1px solid #00cc66', color: '#00cc66', marginBottom: '8px'}}>➕ Yeni Sayfa Ekle</button>
         
-        <div style={{ display: 'flex', gap: '6px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', gap: '6px', marginBottom: '6px' }}>
           <button
             onClick={handleRenamePage}
             style={{ flex: 1, padding: '8px', backgroundColor: '#1a2a3a', border: '1px solid #4488cc', color: '#4488cc', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}
@@ -504,6 +519,11 @@ export default function MapperMode() {
             style={{ flex: 1, padding: '8px', backgroundColor: '#2a1a1a', border: '1px solid #cc4444', color: '#cc4444', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}
           >🗑️ Sayfayı Sil</button>
         </div>
+
+        <button
+          onClick={handleCleanEmptyPages}
+          style={{ width: '100%', padding: '8px', backgroundColor: '#1a1a2a', border: '1px solid #886600', color: '#ccaa00', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px', marginBottom: '20px' }}
+        >🧹 Boş Sayfaları Temizle ({allPages.length} sayfa var)</button>
 
         <h2 style={{ fontSize: '18px', margin: '0 0 15px 0', color: '#00ccff', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
           Haritalama (Sayfa {activePageId})
