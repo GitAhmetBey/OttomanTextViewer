@@ -10,22 +10,12 @@ export const api = {
   },
   
   uploadImage: async (file) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'ottoman_upload');
-    
-    const response = await fetch(
-      'https://api.cloudinary.com/v1_1/bypcvmgu/image/upload',
-      { method: 'POST', body: formData }
-    );
-    
-    if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.error?.message || 'Cloudinary yükleme hatası');
-    }
-    
-    const data = await response.json();
-    return data.secure_url;
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result); // base64 data URL
+      reader.onerror = (e) => reject(new Error('Dosya okunamadı'));
+      reader.readAsDataURL(file);
+    });
   },
   
   getPage: async (id) => {
