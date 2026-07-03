@@ -192,11 +192,14 @@ export default function SortMode() {
                 {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
                 <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{allPages.length})</span>
               </span>
-              <button 
-                onClick={() => nextPage && navigate(`/sort/${nextPage.id}`)} 
-                disabled={!nextPage}
-                style={{...styles.pageBtn, opacity: nextPage ? 1 : 0.3, cursor: nextPage ? 'pointer' : 'default'}}
-              >&gt;</button>
+              {nextPage ? (
+                <button 
+                  onClick={() => navigate(`/sort/${nextPage.id}`)} 
+                  style={{...styles.pageBtn, cursor: 'pointer'}}
+                >&gt;</button>
+              ) : (
+                <span style={{ color: '#ff4444', fontWeight: 'bold', fontSize: '12px', padding: '5px 10px', backgroundColor: '#331111', borderRadius: '4px' }}>SON</span>
+              )}
             </div>
           );
         })()}

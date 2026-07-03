@@ -346,11 +346,14 @@ export default function OverviewMode() {
               <span style={{ color: '#fff', fontSize: '16px', fontWeight: 'bold' }}>
                 {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
               </span>
-              <button 
-                onClick={() => nextPage && navigate(`/overview/${nextPage.id}`)} 
-                disabled={!nextPage}
-                style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px', opacity: nextPage ? 1 : 0.3, cursor: nextPage ? 'pointer' : 'default'}}
-              >&gt;</button>
+              {nextPage ? (
+                <button 
+                  onClick={() => navigate(`/overview/${nextPage.id}`)} 
+                  style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px', cursor: 'pointer'}}
+                >&gt;</button>
+              ) : (
+                <span style={{ color: '#ff4444', fontWeight: 'bold', fontSize: '14px', padding: '5px 10px', backgroundColor: '#331111', borderRadius: '4px' }}>SON</span>
+              )}
             </div>
           );
         })()}
@@ -725,11 +728,14 @@ export default function OverviewMode() {
                   {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
                   <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{allPages.length})</span>
                 </span>
-                <button 
-                  onClick={() => nextPage && navigate(`/overview/${nextPage.id}`)} 
-                  disabled={!nextPage}
-                  style={{...styles.pageBtn, opacity: nextPage ? 1 : 0.3, cursor: nextPage ? 'pointer' : 'default'}}
-                >&gt;</button>
+                {nextPage ? (
+                  <button 
+                    onClick={() => navigate(`/overview/${nextPage.id}`)} 
+                    style={{...styles.pageBtn, cursor: 'pointer'}}
+                  >&gt;</button>
+                ) : (
+                  <span style={{ color: '#ff4444', fontWeight: 'bold', fontSize: '12px', padding: '5px 10px', backgroundColor: '#331111', borderRadius: '4px' }}>SON</span>
+                )}
               </div>
             );
           })()}
