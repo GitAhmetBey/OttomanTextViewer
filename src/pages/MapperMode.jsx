@@ -9,6 +9,7 @@ export default function MapperMode() {
 
   const [page, setPage] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [mainAreas, setMainAreas] = useState([]);
   const [childAreas, setChildAreas] = useState([]);
   const [selectedMainAreaId, setSelectedMainAreaId] = useState(null);
@@ -66,25 +67,36 @@ export default function MapperMode() {
     if (!file) return;
     
     try {
+      setUploading(true);
       setLoading(true);
-      const pages = await api.getPages();
-      const maxId = pages.length > 0 ? Math.max(...pages.map(p => parseInt(p.id) || 0)) : 0;
-      const nextId = maxId + 1;
+      
+      let targetId = activePageId;
+      if (page) { // Eğer zaten var olan bir sayfadaysak "Yeni Sayfa" ekleniyordur
+        const pages = await api.getPages();
+        const maxId = pages.length > 0 ? Math.max(...pages.map(p => parseInt(p.id) || 0)) : 0;
+        targetId = maxId + 1;
+      }
       
       // Upload image to Firebase Storage
-      const imageUrl = await api.uploadImage(file, nextId.toString());
+      const imageUrl = await api.uploadImage(file, targetId.toString());
       
       await api.createPage({
-        id: nextId.toString(),
+        id: targetId.toString(),
         imageUrl: imageUrl,
         readingSequence: []
       });
       
-      navigate(`/mapper/${nextId}`);
+      if (activePageId === targetId) {
+        await loadData(); // Reload current page data
+      } else {
+        navigate(`/mapper/${targetId}`);
+      }
     } catch (err) {
-      alert("Sayfa oluşturulurken hata oluştu!");
+      alert("Sayfa oluşturulurken hata oluştu! " + err.message);
       console.error(err);
       setLoading(false);
+    } finally {
+      setUploading(false);
     }
     
     // Reset file input
@@ -212,6 +224,7 @@ export default function MapperMode() {
 
   const currentChildren = childAreas.filter(c => c.mainAreaId === selectedMainAreaId);
 
+  if (uploading) return <div style={{color:'#00ccff', padding: '20px', fontSize: '18px', fontWeight: 'bold'}}>📸 Resim yükleniyor, lütfen bekleyin... (Bu işlem dosya boyutuna göre birkaç saniye sürebilir)</div>;
   if (loading) return <div style={{color:'white', padding: '20px'}}>Yükleniyor... (Eğer hata veriyorsa terminalde `npm start` çalıştırdığınızdan emin olun)</div>;
   if (!page) {
     return (
