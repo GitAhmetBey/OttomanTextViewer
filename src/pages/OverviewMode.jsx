@@ -135,17 +135,20 @@ export default function OverviewMode() {
     }
 
     if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
-      // Geçiş Efekti: Sadece seçimi kaldır (Genel görünüme geçer gibi aydınlat)
+      // Geçiş Efekti: Önce ışıkları söndür (karartmayı kaldır)
       setTransitioningSequenceIndex(index);
       setSelectedMainAreaId(null);
       setSelectedChildId(null);
       
-      // Biraz bekle, sonra yeni ana alana git ve merkezine kay (Zoom değiştirmeden)
+      // HEDEF ALANA DOĞRU KAMERAYI KAYDIR (Bu, uçuş/pan hissi verecek!)
+      focusOnTarget(newMainAreaId, newChildId);
+      
+      // Kamera kayması bittiğinde (1 saniye sonra), yeni hedefin ışıklarını yak (Pop-out yap)
       setTimeout(() => {
         setTransitioningSequenceIndex(null);
         setSelectedMainAreaId(newMainAreaId);
         setSelectedChildId(newChildId);
-      }, 800); 
+      }, 1000); 
       return;
     }
     
