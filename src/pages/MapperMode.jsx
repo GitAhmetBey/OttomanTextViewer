@@ -24,6 +24,7 @@ export default function MapperMode() {
   const [activeChildId, setActiveChildId] = useState(null);
 
   const imageRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     // Sayfa değiştiğinde seçimleri ve zoom seviyesini sıfırla
@@ -54,18 +55,28 @@ export default function MapperMode() {
     setLoading(false);
   };
 
-  const handleAddNewPage = async () => {
-    const imageUrl = window.prompt("Yeni sayfa için resim URL'sini girin (boş bırakırsanız varsayılan resim atanır):");
-    if (imageUrl === null) return; // İptal edildi
+  const handleAddNewPage = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const onFileSelected = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
     
     try {
+      setLoading(true);
       const pages = await api.getPages();
       const maxId = pages.length > 0 ? Math.max(...pages.map(p => parseInt(p.id) || 0)) : 0;
       const nextId = maxId + 1;
       
+      // Upload image to Firebase Storage
+      const imageUrl = await api.uploadImage(file, nextId.toString());
+      
       await api.createPage({
         id: nextId.toString(),
-        imageUrl: imageUrl || "/resim.png",
+        imageUrl: imageUrl,
         readingSequence: []
       });
       
@@ -73,7 +84,11 @@ export default function MapperMode() {
     } catch (err) {
       alert("Sayfa oluşturulurken hata oluştu!");
       console.error(err);
+      setLoading(false);
     }
+    
+    // Reset file input
+    e.target.value = null;
   };
 
   const handleMouseMove = (e) => {
@@ -202,6 +217,13 @@ export default function MapperMode() {
     return (
       <div style={{color:'white', padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start'}}>
         <h2>Sayfa Bulunamadı (Sayfa {activePageId})</h2>
+        <input 
+          type="file" 
+          accept="image/*" 
+          ref={fileInputRef} 
+          style={{ display: 'none' }} 
+          onChange={onFileSelected} 
+        />
         <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#00cc66', width: 'auto', padding: '10px 20px'}}>➕ Bu Sayfayı Oluştur Veya Yeni Sayfa Ekle</button>
         <button onClick={() => navigate(`/mapper/${Math.max(1, activePageId - 1)}`)} style={{...styles.btn, backgroundColor: '#444', width: 'auto', padding: '10px 20px'}}>Geri Dön</button>
       </div>
@@ -210,6 +232,13 @@ export default function MapperMode() {
 
   return (
     <div style={styles.mainLayout}>
+      <input 
+        type="file" 
+        accept="image/*" 
+        ref={fileInputRef} 
+        style={{ display: 'none' }} 
+        onChange={onFileSelected} 
+      />
       {isHovering && (
         <div style={{ ...styles.floatingTooltip, left: mousePos.clientX + 15, top: mousePos.clientY + 15 }}>
           {!currentMainPoint 

@@ -1,5 +1,6 @@
-import { db } from './firebase';
+import { db, storage } from './firebase';
 import { collection, getDocs, getDoc, doc, query, where, setDoc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export const api = {
   getPages: async () => {
@@ -7,6 +8,13 @@ export const api = {
     const pages = snap.docs.map(doc => doc.data());
     // Sort pages by their numeric id if possible
     return pages.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+  },
+  
+  uploadImage: async (file, pageId) => {
+    const fileRef = ref(storage, `pages/${pageId}_${file.name}`);
+    await uploadBytes(fileRef, file);
+    const downloadURL = await getDownloadURL(fileRef);
+    return downloadURL;
   },
   
   getPage: async (id) => {
