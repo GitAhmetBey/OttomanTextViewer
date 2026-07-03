@@ -664,10 +664,10 @@ export default function OverviewMode() {
       {/* SAĞ: DETAY PANELİ (Sadece Masaüstünde Görünür) */}
       {!isMobile && (
         <div style={styles.sidebar}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
             <button onClick={() => navigate(`/overview/${Math.max(1, activePageId - 1)}`)} style={styles.pageBtn}>&lt;</button>
-            <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId} / 110</span>
-            <button onClick={() => navigate(`/overview/${Math.min(110, activePageId + 1)}`)} style={styles.pageBtn}>&gt;</button>
+            <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId}</span>
+            <button onClick={() => navigate(`/overview/${activePageId + 1}`)} style={styles.pageBtn}>&gt;</button>
           </div>
 
           {effectiveSequence.length > 0 && !selectedMainAreaId && (

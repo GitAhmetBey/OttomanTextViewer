@@ -8,6 +8,7 @@ export default function MapperMode() {
   const activePageId = Number(pageId || 1);
 
   const [page, setPage] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [mainAreas, setMainAreas] = useState([]);
   const [childAreas, setChildAreas] = useState([]);
   const [selectedMainAreaId, setSelectedMainAreaId] = useState(null);
@@ -37,17 +38,41 @@ export default function MapperMode() {
   }, [activePageId]);
 
   const loadData = async () => {
+    setLoading(true);
     try {
       const p = await api.getPage(activePageId);
       setPage(p);
-      const mAreas = await api.getMainAreas(activePageId);
-      setMainAreas(mAreas);
-      
-      // Tüm yavru alanları yükle
-      const cAreas = await api.getAllChildAreasForPage(activePageId);
-      setChildAreas(cAreas);
+      if (p) {
+        const mAreas = await api.getMainAreas(activePageId);
+        setMainAreas(mAreas);
+        const cAreas = await api.getAllChildAreasForPage(activePageId);
+        setChildAreas(cAreas);
+      }
     } catch (err) {
       console.error("Veri yüklenemedi", err);
+    }
+    setLoading(false);
+  };
+
+  const handleAddNewPage = async () => {
+    const imageUrl = window.prompt("Yeni sayfa için resim URL'sini girin (boş bırakırsanız varsayılan resim atanır):");
+    if (imageUrl === null) return; // İptal edildi
+    
+    try {
+      const pages = await api.getPages();
+      const maxId = pages.length > 0 ? Math.max(...pages.map(p => parseInt(p.id) || 0)) : 0;
+      const nextId = maxId + 1;
+      
+      await api.createPage({
+        id: nextId.toString(),
+        imageUrl: imageUrl || "/resim.png",
+        readingSequence: []
+      });
+      
+      navigate(`/mapper/${nextId}`);
+    } catch (err) {
+      alert("Sayfa oluşturulurken hata oluştu!");
+      console.error(err);
     }
   };
 
@@ -172,7 +197,16 @@ export default function MapperMode() {
 
   const currentChildren = childAreas.filter(c => c.mainAreaId === selectedMainAreaId);
 
-  if (!page) return <div style={{color:'white', padding: '20px'}}>Yükleniyor... (Eğer hata veriyorsa terminalde `npm start` çalıştırdığınızdan emin olun)</div>;
+  if (loading) return <div style={{color:'white', padding: '20px'}}>Yükleniyor... (Eğer hata veriyorsa terminalde `npm start` çalıştırdığınızdan emin olun)</div>;
+  if (!page) {
+    return (
+      <div style={{color:'white', padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start'}}>
+        <h2>Sayfa Bulunamadı (Sayfa {activePageId})</h2>
+        <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#00cc66', width: 'auto', padding: '10px 20px'}}>➕ Bu Sayfayı Oluştur Veya Yeni Sayfa Ekle</button>
+        <button onClick={() => navigate(`/mapper/${Math.max(1, activePageId - 1)}`)} style={{...styles.btn, backgroundColor: '#444', width: 'auto', padding: '10px 20px'}}>Geri Dön</button>
+      </div>
+    );
+  }
 
   return (
     <div style={styles.mainLayout}>
@@ -327,11 +361,13 @@ export default function MapperMode() {
       <div style={styles.sidebar}>
         
         {/* SAYFA SEÇİMİ */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
           <button onClick={() => navigate(`/mapper/${Math.max(1, activePageId - 1)}`)} style={styles.pageBtn}>&lt;</button>
-          <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId} / 110</span>
-          <button onClick={() => navigate(`/mapper/${Math.min(110, activePageId + 1)}`)} style={styles.pageBtn}>&gt;</button>
+          <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId}</span>
+          <button onClick={() => navigate(`/mapper/${activePageId + 1}`)} style={styles.pageBtn}>&gt;</button>
         </div>
+        
+        <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#334433', border: '1px solid #00cc66', color: '#00cc66', marginBottom: '20px'}}>➕ Yeni Sayfa Ekle</button>
 
         <h2 style={{ fontSize: '18px', margin: '0 0 15px 0', color: '#00ccff', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
           Haritalama (Sayfa {activePageId})

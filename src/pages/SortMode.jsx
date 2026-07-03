@@ -161,8 +161,8 @@ export default function SortMode() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           <button onClick={() => navigate(`/sort/${Math.max(1, activePageId - 1)}`)} style={styles.pageBtn}>&lt;</button>
-          <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId} / 110</span>
-          <button onClick={() => navigate(`/sort/${Math.min(110, activePageId + 1)}`)} style={styles.pageBtn}>&gt;</button>
+          <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId}</span>
+          <button onClick={() => navigate(`/sort/${activePageId + 1}`)} style={styles.pageBtn}>&gt;</button>
         </div>
       </div>
 

@@ -14,6 +14,12 @@ export const api = {
     return snap.exists() ? snap.data() : null;
   },
   
+  createPage: async (data) => {
+    if (!data.id) data.id = Date.now().toString();
+    await setDoc(doc(db, 'pages', data.id.toString()), data);
+    return data;
+  },
+  
   updatePageSequence: async (pageId, sequence) => {
     const ref = doc(db, 'pages', pageId.toString());
     await updateDoc(ref, { readingSequence: sequence });
