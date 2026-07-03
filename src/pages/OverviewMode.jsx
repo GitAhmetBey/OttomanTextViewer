@@ -67,20 +67,93 @@ export default function OverviewMode() {
     return -1;
   }, [selectedChildId, selectedMainAreaId, effectiveSequence]);
 
+  const focusOnTarget = useCallback((mainId, childId) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const img = container.querySelector('img');
+    if (!img) return;
+
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        let pctX = 0.5;
+        let pctY = 0.5;
+
+        if (childId) {
+          const child = childAreas.find(c => c.id === childId);
+          if (child && child.mainPoint) {
+            pctX = (100 - parseFloat(child.mainPoint.right)) / 100;
+            pctY = parseFloat(child.mainPoint.top) / 100;
+          }
+        } else if (mainId) {
+          const area = mainAreas.find(a => a.id === mainId);
+          if (area && area.mainPoint) {
+            pctX = (100 - parseFloat(area.mainPoint.right)) / 100;
+            pctY = parseFloat(area.mainPoint.top) / 100;
+          }
+        } else {
+           return; 
+        }
+
+        const newImgWidth = img.clientWidth;
+        const newImgHeight = img.clientHeight;
+        const targetScrollLeft = (newImgWidth * pctX) - container.clientWidth / 2;
+        const targetScrollTop = (newImgHeight * pctY) - container.clientHeight / 2;
+
+        container.scrollTo({
+          left: targetScrollLeft,
+          top: targetScrollTop,
+          behavior: 'smooth'
+        });
+      }, 50); 
+    });
+  }, [childAreas, mainAreas]);
+
+  useEffect(() => {
+    if (selectedChildId || selectedMainAreaId) {
+      focusOnTarget(selectedMainAreaId, selectedChildId);
+    }
+  }, [selectedChildId, selectedMainAreaId, focusOnTarget]);
+
   const goToSequenceIndex = useCallback((index) => {
     if (index < 0 || index >= effectiveSequence.length) return;
     const item = effectiveSequence[index];
+    
+    let newMainAreaId = null;
+    let newChildId = null;
+    
     if (item.type === 'main') {
-      setSelectedMainAreaId(item.id);
-      setSelectedChildId(null);
+      newMainAreaId = item.id;
     } else {
       const c = childAreas.find(child => child.id === item.id);
       if (c) {
-        setSelectedMainAreaId(c.mainAreaId);
-        setSelectedChildId(c.id);
+        newMainAreaId = c.mainAreaId;
+        newChildId = c.id;
       }
     }
-  }, [effectiveSequence, childAreas]);
+
+    if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
+      // Geçiş Efekti: Önce Genel Görünüme dön (uzaklaş)
+      setSelectedMainAreaId(null);
+      setSelectedChildId(null);
+      setZoomLevel(isMobile ? 0.7 : 1);
+      
+      // Biraz bekle, sonra yeni ana alana git ve yakınlaş
+      setTimeout(() => {
+        setZoomLevel(isMobile ? 1.5 : 2.5); // Okuma için otomatik yakınlaşma
+        setSelectedMainAreaId(newMainAreaId);
+        setSelectedChildId(newChildId);
+      }, 800); 
+      return;
+    }
+    
+    // Aynı ana alan içindeysek veya zaten genel görünümdeysek direkt git
+    if (!selectedMainAreaId && newMainAreaId) {
+       setZoomLevel(isMobile ? 1.5 : 2.5); // Genel görünümden geliyorsak yakınlaş
+    }
+    
+    setSelectedMainAreaId(newMainAreaId);
+    setSelectedChildId(newChildId);
+  }, [effectiveSequence, childAreas, selectedMainAreaId, isMobile]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
