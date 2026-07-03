@@ -470,7 +470,7 @@ export default function OverviewMode() {
                     pointerEvents: 'auto', 
                     cursor: 'pointer', 
                     transition: 'all 0.4s ease-out',
-                    filter: isTarget ? 'drop-shadow(0px 0px 10px rgba(199, 161, 91, 1))' : 'none',
+                    filter: isTarget ? 'drop-shadow(0px 0px 12px rgba(0, 255, 0, 1))' : 'none',
                     zIndex: isTarget ? 50 : 1
                   }}
                   onClick={(e) => {
@@ -479,8 +479,8 @@ export default function OverviewMode() {
                     setSelectedChildId(null); // Ana alan değişince veya kapanınca alttaki yavru panelini kapat
                   }}
                   
-                  fill={isSelected ? "transparent" : (isTarget ? "rgba(199, 161, 91, 0.25)" : "rgba(0,0,0,0)")}
-                  stroke={isSelected ? "transparent" : (isTarget ? "#c7a15b" : "transparent")}
+                  fill={isSelected ? "transparent" : (isTarget ? "rgba(0, 255, 0, 0.25)" : "rgba(0,0,0,0)")}
+                  stroke={isSelected ? "transparent" : (isTarget ? "#00ff00" : "transparent")}
                   strokeWidth={isTarget ? "4" : "2"}
                   vectorEffect="non-scaling-stroke"
                   
