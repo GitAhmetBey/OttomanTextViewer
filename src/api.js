@@ -1,6 +1,5 @@
-import { db, storage } from './firebase';
+import { db } from './firebase';
 import { collection, getDocs, getDoc, doc, query, where, setDoc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export const api = {
   getPages: async () => {
@@ -10,11 +9,23 @@ export const api = {
     return pages.sort((a, b) => parseInt(a.id) - parseInt(b.id));
   },
   
-  uploadImage: async (file, pageId) => {
-    const fileRef = ref(storage, `pages/${pageId}_${file.name}`);
-    await uploadBytes(fileRef, file);
-    const downloadURL = await getDownloadURL(fileRef);
-    return downloadURL;
+  uploadImage: async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'ottoman_upload');
+    
+    const response = await fetch(
+      'https://api.cloudinary.com/v1_1/bypcvmgu/image/upload',
+      { method: 'POST', body: formData }
+    );
+    
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error?.message || 'Cloudinary yükleme hatası');
+    }
+    
+    const data = await response.json();
+    return data.secure_url;
   },
   
   getPage: async (id) => {

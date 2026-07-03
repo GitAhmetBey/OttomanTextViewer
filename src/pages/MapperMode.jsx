@@ -77,8 +77,8 @@ export default function MapperMode() {
         targetId = maxId + 1;
       }
       
-      // Upload image to Firebase Storage
-      const imageUrl = await api.uploadImage(file, targetId.toString());
+      // Upload image to Cloudinary
+      const imageUrl = await api.uploadImage(file);
       
       await api.createPage({
         id: targetId.toString(),
