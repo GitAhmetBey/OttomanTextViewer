@@ -270,7 +270,14 @@ export default function MapperMode() {
   const currentChildren = childAreas.filter(c => c.mainAreaId === selectedMainAreaId);
 
   if (uploading) return <div style={{color:'#00ccff', padding: '20px', fontSize: '18px', fontWeight: 'bold'}}>📸 Resim yükleniyor, lütfen bekleyin... (Bu işlem dosya boyutuna göre birkaç saniye sürebilir)</div>;
-  if (loading) return <div style={{color:'white', padding: '20px'}}>Yükleniyor... (Eğer hata veriyorsa terminalde `npm start` çalıştırdığınızdan emin olun)</div>;
+  if (loading) return (
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#111', color: '#fff'}}>
+      <div style={{width: '40px', height: '40px', border: '4px solid #333', borderTop: '4px solid #00ccff', borderRadius: '50%', animation: 'spin 1s linear infinite', marginBottom: '20px'}} />
+      <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
+      <div style={{fontSize: '18px', fontWeight: 'bold'}}>Sayfa Yükleniyor...</div>
+      <div style={{color: '#888', marginTop: '10px', fontSize: '14px'}}>Veriler getiriliyor, lütfen bekleyin.</div>
+    </div>
+  );
   if (!page) {
     return (
       <div style={{color:'white', padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start'}}>

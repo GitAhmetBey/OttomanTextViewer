@@ -12,6 +12,7 @@ export default function SortMode() {
   const [mainAreas, setMainAreas] = useState([]);
   const [childAreas, setChildAreas] = useState([]);
   const [sequence, setSequence] = useState([]);
+  const [allPages, setAllPages] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,6 +20,17 @@ export default function SortMode() {
       try {
         const p = await api.getPage(activePageId);
         setPage(p);
+        
+        const pages = await api.getPages();
+        const sorted = [
+          ...pages.filter(p => !p.id.toString().startsWith('taslak')).sort((a, b) => parseInt(a.id) - parseInt(b.id)),
+          ...pages.filter(p => p.id.toString().startsWith('taslak')).sort((a, b) => {
+            const na = parseInt(a.id.replace('taslak-', '')) || 0;
+            const nb = parseInt(b.id.replace('taslak-', '')) || 0;
+            return na - nb;
+          })
+        ];
+        setAllPages(sorted);
       } catch (err) {
         console.error("Sayfa yüklenirken hata:", err);
       }
@@ -149,7 +161,13 @@ export default function SortMode() {
     }
   };
 
-  if (loading) return <div style={{color:'white', padding: '20px'}}>Yükleniyor...</div>;
+  if (loading || !page) return (
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#111', color: '#fff'}}>
+      <div style={{width: '40px', height: '40px', border: '4px solid #333', borderTop: '4px solid #00ccff', borderRadius: '50%', animation: 'spin 1s linear infinite', marginBottom: '20px'}} />
+      <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
+      <div style={{fontSize: '18px', fontWeight: 'bold'}}>Sayfa Yükleniyor...</div>
+    </div>
+  );
 
   return (
     <div style={styles.container}>
@@ -159,11 +177,29 @@ export default function SortMode() {
           <button onClick={() => navigate(`/mapper/${activePageId}`)} style={styles.tabBtn}>✏️ Haritalama Modu</button>
           <button style={{...styles.tabBtn, ...styles.activeTab}}>🔄 Sıralama Modu</button>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <button onClick={() => navigate(`/sort/${Math.max(1, activePageId - 1)}`)} style={styles.pageBtn}>&lt;</button>
-          <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId}</span>
-          <button onClick={() => navigate(`/sort/${activePageId + 1}`)} style={styles.pageBtn}>&gt;</button>
-        </div>
+        {(() => {
+          const currentIndex = allPages.findIndex(p => p.id.toString() === activePageId.toString());
+          const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
+          const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+          return (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <button 
+                onClick={() => prevPage && navigate(`/sort/${prevPage.id}`)} 
+                disabled={!prevPage}
+                style={{...styles.pageBtn, opacity: prevPage ? 1 : 0.3, cursor: prevPage ? 'pointer' : 'default'}}
+              >&lt;</button>
+              <span style={{ color: '#fff', fontWeight: 'bold' }}>
+                {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
+                <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{allPages.length})</span>
+              </span>
+              <button 
+                onClick={() => nextPage && navigate(`/sort/${nextPage.id}`)} 
+                disabled={!nextPage}
+                style={{...styles.pageBtn, opacity: nextPage ? 1 : 0.3, cursor: nextPage ? 'pointer' : 'default'}}
+              >&gt;</button>
+            </div>
+          );
+        })()}
       </div>
 
       <div style={styles.content}>

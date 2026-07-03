@@ -8,6 +8,8 @@ export default function OverviewMode() {
   const activePageId = Number(pageId || 1);
 
   const [page, setPage] = useState(null);
+  const [allPages, setAllPages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [mainAreas, setMainAreas] = useState([]);
   const [childAreas, setChildAreas] = useState([]);
   const [selectedMainAreaId, setSelectedMainAreaId] = useState(null);
@@ -235,7 +237,26 @@ export default function OverviewMode() {
     setFullTextModalAreaId(null);
 
     // Sayfa verisi (tek seferlik - sayfa resmi değişmediği için yeterli)
-    api.getPage(activePageId).then(p => setPage(p)).catch(console.error);
+    setLoading(true);
+    api.getPage(activePageId).then(p => {
+      setPage(p);
+      setLoading(false);
+    }).catch(err => {
+      console.error(err);
+      setLoading(false);
+    });
+
+    api.getPages().then(pages => {
+      const sorted = [
+        ...pages.filter(p => !p.id.toString().startsWith('taslak')).sort((a, b) => parseInt(a.id) - parseInt(b.id)),
+        ...pages.filter(p => p.id.toString().startsWith('taslak')).sort((a, b) => {
+          const na = parseInt(a.id.replace('taslak-', '')) || 0;
+          const nb = parseInt(b.id.replace('taslak-', '')) || 0;
+          return na - nb;
+        })
+      ];
+      setAllPages(sorted);
+    }).catch(console.error);
 
     // ── GERÇEk ZAMANLI DİNLEYİCİLER ──────────────────────────────────────
     // Ana alanlar değişince (paragraf güncelleme, yeni alan vb.) anında yansı
@@ -275,7 +296,13 @@ export default function OverviewMode() {
     [childAreas, selectedMainAreaId]
   );
 
-  if (!page) return <div style={{color:'white', padding: '20px'}}>Yükleniyor...</div>;
+  if (loading || !page) return (
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#111', color: '#fff'}}>
+      <div style={{width: '40px', height: '40px', border: '4px solid #333', borderTop: '4px solid #00ccff', borderRadius: '50%', animation: 'spin 1s linear infinite', marginBottom: '20px'}} />
+      <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
+      <div style={{fontSize: '18px', fontWeight: 'bold'}}>Sayfa Yükleniyor...</div>
+    </div>
+  );
 
   // MOBİL VE MASAÜSTÜ ORTAK YAPI (KIRMIZI ELMA)
   // Sadece sağ taraftaki detay paneli mobilde gizlenir.
@@ -305,9 +332,28 @@ export default function OverviewMode() {
         {/* MOBİL SAYFA GEÇİŞ KONTROLLERİ (Sadece mobilde resmin üzerinde yüzer) */}
         {isMobile && !selectedChildId && (
           <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 15px', borderRadius: '8px', border: '1px solid #c7a15b', gap: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)' }}>
-            <button onClick={() => navigate(`/overview/${Math.max(1, activePageId - 1)}`)} style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px'}}>&lt;</button>
-            <span style={{ color: '#fff', fontWeight: 'bold', fontSize: '16px', whiteSpace: 'nowrap' }}>Sayfa {activePageId} / 110</span>
-            <button onClick={() => navigate(`/overview/${Math.min(110, activePageId + 1)}`)} style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px'}}>&gt;</button>
+        {(() => {
+          const currentIndex = allPages.findIndex(p => p.id.toString() === activePageId.toString());
+          const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
+          const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+          return (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <button 
+                onClick={() => prevPage && navigate(`/overview/${prevPage.id}`)} 
+                disabled={!prevPage}
+                style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px', opacity: prevPage ? 1 : 0.3, cursor: prevPage ? 'pointer' : 'default'}}
+              >&lt;</button>
+              <span style={{ color: '#fff', fontSize: '16px', fontWeight: 'bold' }}>
+                {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
+              </span>
+              <button 
+                onClick={() => nextPage && navigate(`/overview/${nextPage.id}`)} 
+                disabled={!nextPage}
+                style={{...styles.pageBtn, padding: '5px 15px', fontSize: '16px', opacity: nextPage ? 1 : 0.3, cursor: nextPage ? 'pointer' : 'default'}}
+              >&gt;</button>
+            </div>
+          );
+        })()}
           </div>
         )}
 
@@ -664,11 +710,29 @@ export default function OverviewMode() {
       {/* SAĞ: DETAY PANELİ (Sadece Masaüstünde Görünür) */}
       {!isMobile && (
         <div style={styles.sidebar}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-            <button onClick={() => navigate(`/overview/${Math.max(1, activePageId - 1)}`)} style={styles.pageBtn}>&lt;</button>
-            <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId}</span>
-            <button onClick={() => navigate(`/overview/${activePageId + 1}`)} style={styles.pageBtn}>&gt;</button>
-          </div>
+          {(() => {
+            const currentIndex = allPages.findIndex(p => p.id.toString() === activePageId.toString());
+            const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
+            const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+            return (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <button 
+                  onClick={() => prevPage && navigate(`/overview/${prevPage.id}`)} 
+                  disabled={!prevPage}
+                  style={{...styles.pageBtn, opacity: prevPage ? 1 : 0.3, cursor: prevPage ? 'pointer' : 'default'}}
+                >&lt;</button>
+                <span style={{ color: '#fff', fontWeight: 'bold' }}>
+                  {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
+                  <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{allPages.length})</span>
+                </span>
+                <button 
+                  onClick={() => nextPage && navigate(`/overview/${nextPage.id}`)} 
+                  disabled={!nextPage}
+                  style={{...styles.pageBtn, opacity: nextPage ? 1 : 0.3, cursor: nextPage ? 'pointer' : 'default'}}
+                >&gt;</button>
+              </div>
+            );
+          })()}
 
           {effectiveSequence.length > 0 && !selectedMainAreaId && (
             <button 
