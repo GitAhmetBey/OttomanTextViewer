@@ -178,9 +178,11 @@ export default function SortMode() {
           <button style={{...styles.tabBtn, ...styles.activeTab}}>🔄 Sıralama Modu</button>
         </div>
         {(() => {
-          const currentIndex = allPages.findIndex(p => p.id.toString() === activePageId.toString());
-          const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
-          const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+          const isDraft = activePageId.toString().startsWith('taslak');
+          const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
+          const currentIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
+          const prevPage = currentIndex > 0 ? groupPages[currentIndex - 1] : null;
+          const nextPage = currentIndex < groupPages.length - 1 ? groupPages[currentIndex + 1] : null;
           return (
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
               <button 
@@ -190,7 +192,7 @@ export default function SortMode() {
               >&lt;</button>
               <span style={{ color: '#fff', fontWeight: 'bold' }}>
                 {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
-                <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{allPages.length})</span>
+                <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{groupPages.length})</span>
               </span>
               {nextPage ? (
                 <button 

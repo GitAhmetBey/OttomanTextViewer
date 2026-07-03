@@ -333,9 +333,11 @@ export default function OverviewMode() {
         {isMobile && !selectedChildId && (
           <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 15px', borderRadius: '8px', border: '1px solid #c7a15b', gap: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)' }}>
         {(() => {
-          const currentIndex = allPages.findIndex(p => p.id.toString() === activePageId.toString());
-          const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
-          const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+          const isDraft = activePageId.toString().startsWith('taslak');
+          const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
+          const currentIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
+          const prevPage = currentIndex > 0 ? groupPages[currentIndex - 1] : null;
+          const nextPage = currentIndex < groupPages.length - 1 ? groupPages[currentIndex + 1] : null;
           return (
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
               <button 
@@ -714,9 +716,11 @@ export default function OverviewMode() {
       {!isMobile && (
         <div style={styles.sidebar}>
           {(() => {
-            const currentIndex = allPages.findIndex(p => p.id.toString() === activePageId.toString());
-            const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
-            const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+            const isDraft = activePageId.toString().startsWith('taslak');
+            const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
+            const currentIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
+            const prevPage = currentIndex > 0 ? groupPages[currentIndex - 1] : null;
+            const nextPage = currentIndex < groupPages.length - 1 ? groupPages[currentIndex + 1] : null;
             return (
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <button 
@@ -726,7 +730,7 @@ export default function OverviewMode() {
                 >&lt;</button>
                 <span style={{ color: '#fff', fontWeight: 'bold' }}>
                   {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
-                  <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{allPages.length})</span>
+                  <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{groupPages.length})</span>
                 </span>
                 {nextPage ? (
                   <button 
