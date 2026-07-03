@@ -19,6 +19,7 @@ export default function OverviewMode() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
   const [zoomLevel, setZoomLevel] = useState(window.innerWidth <= 1024 ? 0.7 : 1);
   const [transitioningSequenceIndex, setTransitioningSequenceIndex] = useState(null);
+  const [transitioningTargetMainAreaId, setTransitioningTargetMainAreaId] = useState(null);
   const scrollContainerRef = useRef(null);
 
   const effectiveSequence = useMemo(() => {
@@ -137,6 +138,7 @@ export default function OverviewMode() {
     if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
       // Geçiş Efekti: Önce ışıkları söndür (karartmayı kaldır)
       setTransitioningSequenceIndex(index);
+      setTransitioningTargetMainAreaId(newMainAreaId); // HEDEF ALANI KAYDET (parlatmak için)
       setSelectedMainAreaId(null);
       setSelectedChildId(null);
       
@@ -146,6 +148,7 @@ export default function OverviewMode() {
       // Kamera kayması bittiğinde (1 saniye sonra), yeni hedefin ışıklarını yak (Pop-out yap)
       setTimeout(() => {
         setTransitioningSequenceIndex(null);
+        setTransitioningTargetMainAreaId(null);
         setSelectedMainAreaId(newMainAreaId);
         setSelectedChildId(newChildId);
       }, 1000); 
@@ -456,26 +459,33 @@ export default function OverviewMode() {
           <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{...styles.svgOverlay, zIndex: 45}}>
             {mainAreas.map((area) => {
               const isSelected = selectedMainAreaId === area.id;
+              const isTarget = transitioningTargetMainAreaId === area.id;
               const pointsStr = area.points.map(p => `${100 - parseFloat(p.right)},${parseFloat(p.top)}`).join(' ');
               
               return (
                 <polygon 
                   key={`mainpoly-${area.id}`}
                   points={pointsStr}
-                  style={{ pointerEvents: 'auto', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                  style={{ 
+                    pointerEvents: 'auto', 
+                    cursor: 'pointer', 
+                    transition: 'all 0.4s ease-out',
+                    filter: isTarget ? 'drop-shadow(0px 0px 10px rgba(199, 161, 91, 1))' : 'none',
+                    zIndex: isTarget ? 50 : 1
+                  }}
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedMainAreaId(isSelected ? null : area.id); // Tıklanan alan zaten açıksa kapat
                     setSelectedChildId(null); // Ana alan değişince veya kapanınca alttaki yavru panelini kapat
                   }}
                   
-                  fill={isSelected ? "transparent" : "rgba(0,0,0,0)"}
-                  stroke={isSelected ? "transparent" : "transparent"}
-                  strokeWidth="2"
+                  fill={isSelected ? "transparent" : (isTarget ? "rgba(199, 161, 91, 0.25)" : "rgba(0,0,0,0)")}
+                  stroke={isSelected ? "transparent" : (isTarget ? "#c7a15b" : "transparent")}
+                  strokeWidth={isTarget ? "4" : "2"}
                   vectorEffect="non-scaling-stroke"
                   
-                  onMouseEnter={(e) => { if (!isSelected) e.target.style.fill = "rgba(199, 161, 91, 0.05)"; }}
-                  onMouseLeave={(e) => { if (!isSelected) e.target.style.fill = "rgba(0,0,0,0)"; }}
+                  onMouseEnter={(e) => { if (!isSelected && !isTarget) e.target.style.fill = "rgba(199, 161, 91, 0.05)"; }}
+                  onMouseLeave={(e) => { if (!isSelected && !isTarget) e.target.style.fill = "rgba(0,0,0,0)"; }}
                 />
               );
             })}
