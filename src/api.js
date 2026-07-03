@@ -34,7 +34,64 @@ export const api = {
     await updateDoc(ref, { readingSequence: sequence });
     return { success: true };
   },
-  
+
+  deletePage: async (pageId) => {
+    const idStr = pageId.toString();
+    // 1. Sayfaya ait tüm ana alanları bul
+    const mainAreas = await api.getMainAreas(pageId);
+    // 2. Her ana alanın yavru alanlarını ve kendisini sil
+    for (const main of mainAreas) {
+      const children = await api.getChildAreas(main.id);
+      for (const child of children) {
+        await deleteDoc(doc(db, 'childAreas', child.id.toString()));
+      }
+      await deleteDoc(doc(db, 'mainAreas', main.id.toString()));
+    }
+    // 3. Sayfayı sil
+    await deleteDoc(doc(db, 'pages', idStr));
+    return { success: true };
+  },
+
+  renamePage: async (oldId, newId) => {
+    const oldStr = oldId.toString();
+    const newStr = newId.toString();
+
+    // 1. Hedef numara dolu mu?
+    const existing = await api.getPage(newStr);
+    if (existing) {
+      // Dolu — taslak slotuna taşı
+      const allPages = await api.getPages();
+      let draftNum = 1;
+      while (allPages.find(p => p.id === `taslak-${draftNum}`)) draftNum++;
+      const draftId = `taslak-${draftNum}`;
+
+      // Çakışan sayfayı taslak slotuna kopyala
+      await setDoc(doc(db, 'pages', draftId), { ...existing, id: draftId });
+      // Çakışan sayfanın ana alanlarının pageId'sini güncelle
+      const conflictMains = await api.getMainAreas(newStr);
+      for (const m of conflictMains) {
+        await updateDoc(doc(db, 'mainAreas', m.id.toString()), { pageId: draftId });
+      }
+      // Eski çakışan sayfayı sil
+      await deleteDoc(doc(db, 'pages', newStr));
+    }
+
+    // 2. Mevcut sayfayı yeni ID ile kopyala
+    const currentPage = await api.getPage(oldStr);
+    await setDoc(doc(db, 'pages', newStr), { ...currentPage, id: newStr });
+
+    // 3. Mevcut sayfanın ana alanlarının pageId'sini güncelle
+    const mains = await api.getMainAreas(oldStr);
+    for (const m of mains) {
+      await updateDoc(doc(db, 'mainAreas', m.id.toString()), { pageId: Number(newStr) || newStr });
+    }
+
+    // 4. Eski sayfayı sil
+    await deleteDoc(doc(db, 'pages', oldStr));
+
+    return { newId: newStr };
+  },
+
   getMainAreas: async (pageId) => {
     // pageId can be string or number in db.json, let's query both
     const q1 = query(collection(db, 'mainAreas'), where('pageId', '==', Number(pageId)));

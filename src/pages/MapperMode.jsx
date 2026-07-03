@@ -103,6 +103,33 @@ export default function MapperMode() {
     e.target.value = null;
   };
 
+  const handleDeletePage = async () => {
+    if (!window.confirm(`Sayfa ${activePageId} ve bu sayfadaki TÜM alan ve kelimeler silinecek. Emin misiniz?`)) return;
+    try {
+      setLoading(true);
+      await api.deletePage(activePageId);
+      navigate(`/mapper/${Math.max(1, activePageId - 1)}`);
+    } catch (err) {
+      alert('Sayfa silinemedi: ' + err.message);
+      setLoading(false);
+    }
+  };
+
+  const handleRenamePage = async () => {
+    const input = window.prompt(`Bu sayfanın yeni numarasını girin (şu an: ${activePageId}):`);
+    if (!input || input.trim() === '') return;
+    const newId = input.trim();
+    if (newId === activePageId.toString()) return;
+    try {
+      setLoading(true);
+      const result = await api.renamePage(activePageId, newId);
+      navigate(`/mapper/${result.newId}`);
+    } catch (err) {
+      alert('Sayfa yeniden numaralandırılamadı: ' + err.message);
+      setLoading(false);
+    }
+  };
+
   const handleMouseMove = (e) => {
     if (!imageRef.current) return;
     const rect = imageRef.current.getBoundingClientRect();
@@ -409,7 +436,18 @@ export default function MapperMode() {
           <button onClick={() => navigate(`/mapper/${activePageId + 1}`)} style={styles.pageBtn}>&gt;</button>
         </div>
         
-        <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#334433', border: '1px solid #00cc66', color: '#00cc66', marginBottom: '20px'}}>➕ Yeni Sayfa Ekle</button>
+        <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#334433', border: '1px solid #00cc66', color: '#00cc66', marginBottom: '8px'}}>➕ Yeni Sayfa Ekle</button>
+        
+        <div style={{ display: 'flex', gap: '6px', marginBottom: '20px' }}>
+          <button
+            onClick={handleRenamePage}
+            style={{ flex: 1, padding: '8px', backgroundColor: '#1a2a3a', border: '1px solid #4488cc', color: '#4488cc', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}
+          >🔢 Numarayı Değiştir</button>
+          <button
+            onClick={handleDeletePage}
+            style={{ flex: 1, padding: '8px', backgroundColor: '#2a1a1a', border: '1px solid #cc4444', color: '#cc4444', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}
+          >🗑️ Sayfayı Sil</button>
+        </div>
 
         <h2 style={{ fontSize: '18px', margin: '0 0 15px 0', color: '#00ccff', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
           Haritalama (Sayfa {activePageId})
