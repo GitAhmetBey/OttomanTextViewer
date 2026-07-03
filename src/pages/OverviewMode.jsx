@@ -387,24 +387,37 @@ export default function OverviewMode() {
                     vectorEffect="non-scaling-stroke"
                   />
                   {/* Seçiliyse İçindeki Yavru Alanların Çerçevesi */}
-                  {isSelected && currentChildren.map((child) => (
+                  {isSelected && currentChildren.map((child) => {
+                    const isChildSelected = selectedChildId === child.id;
+                    return (
                     <React.Fragment key={`popout-child-group-${child.id}`}>
                       <polygon 
                         key={`popout-child-${child.id}`}
                         points={child.points.map(p => `${100 - parseFloat(p.right)},${parseFloat(p.top)}`).join(' ')}
                         fill={
-                          selectedChildId === child.id ? "rgba(199, 161, 91, 0.15)" : 
+                          isChildSelected ? "rgba(0, 255, 255, 0.25)" : 
                           "transparent"
                         } 
-                        stroke="#c7a15b"
-                        strokeWidth="1.5"
+                        stroke={
+                          isChildSelected ? "#00ffff" : 
+                          "rgba(199, 161, 91, 0.6)"
+                        }
+                        strokeWidth={
+                          isChildSelected ? "3.5" : 
+                          "1.5"
+                        }
                         vectorEffect="non-scaling-stroke"
-                        style={{ pointerEvents: 'auto', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                        style={{ 
+                          pointerEvents: 'auto', 
+                          cursor: 'pointer', 
+                          transition: 'all 0.3s ease',
+                          filter: isChildSelected ? 'drop-shadow(0px 0px 8px rgba(0,255,255,0.6))' : 'none',
+                          zIndex: isChildSelected ? 10 : 1
+                        }}
                         onMouseEnter={() => !isMobile && setHoveredChildId(child.id)}
                         onMouseLeave={() => !isMobile && setHoveredChildId(null)}
                         onClick={(e) => { 
                           e.stopPropagation();
-                          // startTransition ile state güncellemesini düşük öncelikli yap → donma önlenir
                           setSelectedChildId(child.id); 
                         }}
                       />
@@ -424,7 +437,8 @@ export default function OverviewMode() {
                          />
                       ))}
                     </React.Fragment>
-                  ))}
+                    );
+                  })}
                 </svg>
 
               </div>
