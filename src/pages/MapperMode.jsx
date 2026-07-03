@@ -5,11 +5,14 @@ import { api } from '../api';
 export default function MapperMode() {
   const { pageId } = useParams();
   const navigate = useNavigate();
-  const activePageId = Number(pageId || 1);
+  // pageId can be a number ("1") or a draft string ("taslak-1")
+  const activePageId = pageId || '1';
+  const activePageIdNum = Number(activePageId); // NaN for taslak pages
 
   const [page, setPage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [allPages, setAllPages] = useState([]);
   const [mainAreas, setMainAreas] = useState([]);
   const [childAreas, setChildAreas] = useState([]);
   const [selectedMainAreaId, setSelectedMainAreaId] = useState(null);
@@ -42,6 +45,19 @@ export default function MapperMode() {
   const loadData = async () => {
     setLoading(true);
     try {
+      // Tüm sayfaları yükle (navigasyon için)
+      const pages = await api.getPages();
+      // Numaralı sayfalar önce, taşlak sayfalar sonda
+      const sorted = [
+        ...pages.filter(p => !p.id.toString().startsWith('taslak')).sort((a, b) => parseInt(a.id) - parseInt(b.id)),
+        ...pages.filter(p => p.id.toString().startsWith('taslak')).sort((a, b) => {
+          const na = parseInt(a.id.replace('taslak-', '')) || 0;
+          const nb = parseInt(b.id.replace('taslak-', '')) || 0;
+          return na - nb;
+        })
+      ];
+      setAllPages(sorted);
+
       const p = await api.getPage(activePageId);
       setPage(p);
       if (p) {
@@ -256,7 +272,7 @@ export default function MapperMode() {
   if (!page) {
     return (
       <div style={{color:'white', padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start'}}>
-        <h2>Sayfa Bulunamadı (Sayfa {activePageId})</h2>
+        <h2>Sayfa Bulunamadı ({activePageId})</h2>
         <input 
           type="file" 
           accept="image/*" 
@@ -265,7 +281,7 @@ export default function MapperMode() {
           onChange={onFileSelected} 
         />
         <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#00cc66', width: 'auto', padding: '10px 20px'}}>➕ Bu Sayfayı Oluştur Veya Yeni Sayfa Ekle</button>
-        <button onClick={() => navigate(`/mapper/${Math.max(1, activePageId - 1)}`)} style={{...styles.btn, backgroundColor: '#444', width: 'auto', padding: '10px 20px'}}>Geri Dön</button>
+        <button onClick={() => navigate('/mapper/1')} style={{...styles.btn, backgroundColor: '#444', width: 'auto', padding: '10px 20px'}}>← İlk Sayfaya Dön</button>
       </div>
     );
   }
@@ -429,12 +445,52 @@ export default function MapperMode() {
       {/* SAĞ: NOT DEFTERİ (SIDEBAR) */}
       <div style={styles.sidebar}>
         
-        {/* SAYFA SEÇİMİ */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-          <button onClick={() => navigate(`/mapper/${Math.max(1, activePageId - 1)}`)} style={styles.pageBtn}>&lt;</button>
-          <span style={{ color: '#fff', fontWeight: 'bold' }}>Sayfa {activePageId}</span>
-          <button onClick={() => navigate(`/mapper/${activePageId + 1}`)} style={styles.pageBtn}>&gt;</button>
-        </div>
+        {/* SAYFA SEÇİMİ - dinamik, sadece gerçek sayfalar */}
+        {(() => {
+          const currentIndex = allPages.findIndex(p => p.id.toString() === activePageId.toString());
+          const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
+          const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+          return (
+            <div style={{ marginBottom: '10px' }}>
+              {/* Ok navigasyonu */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <button
+                  onClick={() => prevPage && navigate(`/mapper/${prevPage.id}`)}
+                  disabled={!prevPage}
+                  style={{ ...styles.pageBtn, opacity: prevPage ? 1 : 0.3, cursor: prevPage ? 'pointer' : 'default' }}
+                >&lt;</button>
+                <span style={{ color: activePageId.toString().startsWith('taslak') ? '#ffaa44' : '#fff', fontWeight: 'bold', fontSize: '13px' }}>
+                  {activePageId.toString().startsWith('taslak') ? `📄 ${activePageId}` : `Sayfa ${activePageId}`}
+                  <span style={{ color: '#666', fontSize: '11px', marginLeft: '6px' }}>({currentIndex + 1}/{allPages.length})</span>
+                </span>
+                <button
+                  onClick={() => nextPage && navigate(`/mapper/${nextPage.id}`)}
+                  disabled={!nextPage}
+                  style={{ ...styles.pageBtn, opacity: nextPage ? 1 : 0.3, cursor: nextPage ? 'pointer' : 'default' }}
+                >&gt;</button>
+              </div>
+              {/* Dropdown - tüm sayfalar */}
+              <select
+                value={activePageId.toString()}
+                onChange={e => navigate(`/mapper/${e.target.value}`)}
+                style={{ ...styles.dropdown, fontSize: '12px', padding: '6px 8px' }}
+              >
+                <optgroup label="📖 Sayfalar">
+                  {allPages.filter(p => !p.id.toString().startsWith('taslak')).map(p => (
+                    <option key={p.id} value={p.id.toString()}>Sayfa {p.id}</option>
+                  ))}
+                </optgroup>
+                {allPages.some(p => p.id.toString().startsWith('taslak')) && (
+                  <optgroup label="📄 Taslaklar">
+                    {allPages.filter(p => p.id.toString().startsWith('taslak')).map(p => (
+                      <option key={p.id} value={p.id.toString()}>{p.id}</option>
+                    ))}
+                  </optgroup>
+                )}
+              </select>
+            </div>
+          );
+        })()}
         
         <button onClick={handleAddNewPage} style={{...styles.btn, backgroundColor: '#334433', border: '1px solid #00cc66', color: '#00cc66', marginBottom: '8px'}}>➕ Yeni Sayfa Ekle</button>
         
