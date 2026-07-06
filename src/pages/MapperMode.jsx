@@ -836,12 +836,10 @@ const styles = {
     fontWeight: 'bold'
   },
   codeOutput: {
-    flex: 1,
     backgroundColor: '#111',
     border: '1px solid #333',
     borderRadius: '6px',
     padding: '10px',
-    overflowY: 'auto',
     fontSize: '12px',
     color: '#e6e6e6'
   },
