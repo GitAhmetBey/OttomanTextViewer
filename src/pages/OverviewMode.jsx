@@ -413,13 +413,11 @@ export default function OverviewMode() {
                   left: 0,
                   width: '100%',
                   height: '100%',
-                  pointerEvents: 'none', // wrapper tıklamaları engellemesin, sadece içindeki poligonlar tıklanabilsin
+                  pointerEvents: 'none',
                   zIndex: 60,
-                  transformOrigin: `${100 - parseFloat(area.mainPoint.right)}% ${area.mainPoint.top}%`,
-                  transform: `scale(${isMobile ? 1.25 : 1.15}) translateY(-5px) translateZ(0)`,
                   opacity: 1,
-                  filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))', // Çok daha hafif gölge, performansı inanılmaz artırır
-                  willChange: 'transform, opacity', // Donanım hızlandırması (GPU) sağlar
+                  filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.8))',
+                  willChange: 'opacity',
                   transition: 'all 0.3s ease-out'
                 }}
               >
