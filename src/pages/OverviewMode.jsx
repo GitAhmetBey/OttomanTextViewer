@@ -662,7 +662,9 @@ export default function OverviewMode() {
               </style>
               
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', maxWidth: '800px', marginBottom: '15px', alignItems: 'center' }}>
-                <span style={{ color: '#00ffff', fontWeight: 'bold', fontSize: '14px' }}>SEÇİLİ KELİME</span>
+                <span style={{ color: '#00ffff', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase' }}>
+                  {child.description || "SEÇİLİ KELİME"}
+                </span>
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                   <button 
                     onClick={() => handleZoom(-0.25)}
@@ -706,22 +708,6 @@ export default function OverviewMode() {
                 whiteSpace: 'pre-wrap'
               }}>
                 {child.latinText || "Bu kelimenin latince okunuşu henüz girilmemiş."}
-                
-                {child.description && (
-                  <div style={{
-                    marginTop: '15px',
-                    padding: '12px',
-                    backgroundColor: 'rgba(0,0,0,0.4)',
-                    borderLeft: '3px solid #00ffff',
-                    borderRadius: '4px',
-                    fontSize: isMobile ? '15px' : '16px',
-                    color: '#dddddd',
-                    textAlign: 'left'
-                  }}>
-                    <div style={{color: '#00ffff', fontSize: '12px', marginBottom: '6px', fontWeight: 'bold'}}>NEYDEN BAHSEDİYOR?</div>
-                    {child.description}
-                  </div>
-                )}
               </div>
             </div>
           );
@@ -965,24 +951,12 @@ export default function OverviewMode() {
                  textAlign: 'center', fontWeight: 'bold', lineHeight: '1.6', maxWidth: '800px',
                  whiteSpace: 'pre-wrap'
                }}>
-                   {child.latinText}
-                   
                    {child.description && (
-                     <div style={{
-                       marginTop: '15px',
-                       padding: '12px',
-                       backgroundColor: 'rgba(0,0,0,0.6)',
-                       borderLeft: '3px solid #c7a15b',
-                       borderRadius: '4px',
-                       fontSize: isMobile ? '15px' : '18px',
-                       color: '#dddddd',
-                       textAlign: 'left',
-                       fontWeight: 'normal'
-                     }}>
-                       <div style={{color: '#c7a15b', fontSize: '13px', marginBottom: '6px', fontWeight: 'bold'}}>NEYDEN BAHSEDİYOR?</div>
+                     <div style={{ color: '#c7a15b', fontSize: isMobile ? '16px' : '20px', marginBottom: '15px', textTransform: 'uppercase' }}>
                        {child.description}
                      </div>
                    )}
+                   {child.latinText}
                </div>
             </div>
           </div>
