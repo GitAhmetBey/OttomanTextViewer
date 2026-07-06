@@ -662,8 +662,8 @@ export default function OverviewMode() {
               </style>
               
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', maxWidth: '800px', marginBottom: '15px', alignItems: 'center' }}>
-                <span style={{ color: '#00ffff', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase' }}>
-                  {child.description || "SEÇİLİ KELİME"}
+                <span style={{ color: '#00ffff', fontWeight: 'bold', fontSize: '14px' }}>
+                  {(child.description || "SEÇİLİ KELİME").toLocaleUpperCase('tr-TR')}
                 </span>
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                   <button 
@@ -952,8 +952,8 @@ export default function OverviewMode() {
                  whiteSpace: 'pre-wrap'
                }}>
                    {child.description && (
-                     <div style={{ color: '#c7a15b', fontSize: isMobile ? '16px' : '20px', marginBottom: '15px', textTransform: 'uppercase' }}>
-                       {child.description}
+                     <div style={{ color: '#c7a15b', fontSize: isMobile ? '16px' : '20px', marginBottom: '15px' }}>
+                       {child.description.toLocaleUpperCase('tr-TR')}
                      </div>
                    )}
                    {child.latinText}
