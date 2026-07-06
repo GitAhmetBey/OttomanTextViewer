@@ -785,19 +785,23 @@ const styles = {
     pointerEvents: 'none'
   },
   sidebar: {
-    width: '300px',
-    minWidth: '300px',
-    backgroundColor: '#1e1e1e',
-    borderLeft: '1px solid #333',
-    padding: '20px',
+    width: '450px',
+    minWidth: '450px',
+    height: '100%',
+    backgroundColor: '#121212',
+    borderLeft: '1px solid #2a2a2a',
+    padding: '25px',
     display: 'flex',
     flexDirection: 'column',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    overflowY: 'auto',
+    boxShadow: '-10px 0 30px rgba(0,0,0,0.8)',
+    zIndex: 10
   },
   dropdown: {
     width: '100%', 
-    padding: '10px', 
-    backgroundColor: '#2a2a2a', 
+    padding: '12px', 
+    backgroundColor: '#1e1e1e', 
     color: '#fff', 
     border: '1px solid #444', 
     borderRadius: '6px', 
