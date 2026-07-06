@@ -619,53 +619,83 @@ export default function MapperMode() {
                 <div key={c.id} 
                   onClick={() => setActiveChildId(c.id)}
                   style={{
-                    padding: '10px', backgroundColor: '#1a1a1a', borderRadius: '6px', display: 'flex', flexDirection: 'column', gap: '8px', 
-                    borderLeft: activeChildId === c.id ? '3px solid #ffcc00' : '3px solid #00ffff',
-                    boxShadow: activeChildId === c.id ? '0 0 10px rgba(255,204,0,0.3)' : 'none',
+                    padding: '16px', backgroundColor: activeChildId === c.id ? '#1e1e1e' : '#151515', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '12px', 
+                    border: activeChildId === c.id ? '1px solid #c7a15b' : '1px solid #333',
+                    borderLeft: activeChildId === c.id ? '4px solid #c7a15b' : '4px solid #333',
+                    boxShadow: activeChildId === c.id ? '0 4px 15px rgba(0,0,0,0.5)' : 'none',
                     transition: 'all 0.2s',
                     cursor: 'pointer'
                   }}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <span style={{color: activeChildId === c.id ? '#ffcc00' : '#00ffff', fontWeight: 'bold'}}>Yavru #{idx + 1}</span>
-                    <button onClick={() => deleteChildArea(c.id)} style={{color:'#ff4444', background:'none', border:'none', cursor:'pointer', fontSize: '12px'}}>Sil</button>
+                    <span style={{color: activeChildId === c.id ? '#c7a15b' : '#888', fontWeight: 'bold', fontSize: '13px', letterSpacing: '0.5px'}}>{idx + 1}. YAVRU ALAN</span>
+                    <button onClick={() => deleteChildArea(c.id)} style={{color:'#ff4444', background:'rgba(255, 68, 68, 0.1)', padding: '4px 8px', borderRadius: '4px', border:'none', cursor:'pointer', fontSize: '12px', fontWeight: 'bold', transition: 'background 0.2s'}}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(255, 68, 68, 0.2)'}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(255, 68, 68, 0.1)'}
+                    >SİL</button>
                   </div>
-                  <textarea
-                    placeholder="Latince metin (Birden fazla satır yazabilirsiniz)" 
-                    value={c.latinText || ""}
-                    onChange={(e) => updateChildLatin(c.id, e.target.value)}
-                    onBlur={(e) => saveChildLatin(c.id, e.target.value)}
-                    style={{ 
-                      padding: '8px', borderRadius: '4px', border: '1px solid #444', 
-                      backgroundColor: '#000', color: '#fff', width: '100%', 
-                      boxSizing: 'border-box', minHeight: '60px', resize: 'vertical',
-                      fontFamily: 'inherit', fontSize: '13px', lineHeight: '1.5',
-                      marginBottom: '8px'
-                    }}
-                  />
-                  <textarea
-                    placeholder="Neyden bahsediyor? (İçerik özeti veya notlar)" 
-                    value={c.description || ""}
-                    onChange={(e) => updateChildDescription(c.id, e.target.value)}
-                    onBlur={(e) => saveChildDescription(c.id, e.target.value)}
-                    style={{ 
-                      padding: '8px', borderRadius: '4px', border: '1px solid #444', 
-                      backgroundColor: '#0d1a0d', color: '#fff', width: '100%', 
-                      boxSizing: 'border-box', minHeight: '40px', resize: 'vertical',
-                      fontFamily: 'inherit', fontSize: '12px', lineHeight: '1.4'
-                    }}
-                  />
-                  <div style={{display: 'flex', gap: '10px'}}>
+                  
+                  <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
+                    <label style={{fontSize: '11px', color: '#888', textTransform: 'uppercase', letterSpacing: '0.5px'}}>Latince Okunuşu</label>
+                    <textarea
+                      placeholder="Latince metin (Birden fazla satır yazabilirsiniz)" 
+                      value={c.latinText || ""}
+                      onChange={(e) => updateChildLatin(c.id, e.target.value)}
+                      style={{ 
+                        padding: '10px', borderRadius: '6px', border: '1px solid #444', 
+                        backgroundColor: '#0a0a0a', color: '#fff', width: '100%', 
+                        boxSizing: 'border-box', minHeight: '70px', resize: 'vertical',
+                        fontFamily: 'inherit', fontSize: '14px', lineHeight: '1.5',
+                        transition: 'border-color 0.2s',
+                        outline: 'none'
+                      }}
+                      onFocus={e => e.currentTarget.style.borderColor = '#c7a15b'}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = '#444'; saveChildLatin(c.id, e.target.value); }}
+                    />
+                  </div>
+
+                  <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
+                    <label style={{fontSize: '11px', color: '#888', textTransform: 'uppercase', letterSpacing: '0.5px'}}>Neyden Bahsediyor?</label>
+                    <input
+                      placeholder="İçerik özeti veya notlar" 
+                      value={c.description || ""}
+                      onChange={(e) => updateChildDescription(c.id, e.target.value)}
+                      style={{ 
+                        padding: '10px', borderRadius: '6px', border: '1px solid #444', 
+                        backgroundColor: '#0a0a0a', color: '#c7c7c7', width: '100%', 
+                        boxSizing: 'border-box',
+                        fontFamily: 'inherit', fontSize: '13px',
+                        transition: 'border-color 0.2s',
+                        outline: 'none'
+                      }}
+                      onFocus={e => e.currentTarget.style.borderColor = '#c7a15b'}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = '#444'; saveChildDescription(c.id, e.target.value); }}
+                    />
+                  </div>
+                  
+                  <div style={{display: 'flex', alignItems: 'center', gap: '10px', marginTop: '5px', borderTop: '1px dashed #333', paddingTop: '12px'}}>
                     <button 
                       onClick={() => setDotModeChildId(dotModeChildId === c.id ? null : c.id)} 
                       style={{
-                        backgroundColor: dotModeChildId === c.id ? '#ff3333' : 'transparent', 
-                        border: '1px solid #ff3333', color: dotModeChildId === c.id ? '#000' : '#ff3333', 
-                        padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', marginTop: '5px', fontWeight: 'bold'
-                      }}>
-                      {dotModeChildId === c.id ? "🔴 Moddan Çık" : "🔴 Nokta Koy"}
+                        backgroundColor: dotModeChildId === c.id ? 'rgba(255, 51, 51, 0.15)' : 'transparent', 
+                        border: '1px solid #ff3333', color: '#ff3333', 
+                        padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold',
+                        transition: 'all 0.2s'
+                      }}
+                      onMouseEnter={e => {
+                        if (dotModeChildId !== c.id) {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 51, 51, 0.1)';
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        if (dotModeChildId !== c.id) {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }
+                      }}
+                      >
+                      {dotModeChildId === c.id ? "🔴 Modu Kapat" : "🔴 Nokta Koy"}
                     </button>
                     {dotModeChildId === c.id && (
-                       <span style={{fontSize: '11px', color: '#ff3333', marginTop: '10px'}}>Resmin üstüne tıklayarak nokta bırakın. Silmek için noktaya tıklayın.</span>
+                       <span style={{fontSize: '11px', color: '#aaa', flex: 1, lineHeight: '1.3'}}>Resme tıklayıp nokta bırakın. Silmek için noktaya tıklayın.</span>
                     )}
                   </div>
                 </div>
