@@ -22,6 +22,7 @@ export default function OverviewMode() {
   const [zoomLevel, setZoomLevel] = useState(window.innerWidth <= 1024 ? 0.7 : 1);
   const [transitioningSequenceIndex, setTransitioningSequenceIndex] = useState(null);
   const [transitioningTargetMainAreaId, setTransitioningTargetMainAreaId] = useState(null);
+  const [pendingTransitionIndex, setPendingTransitionIndex] = useState(null);
   const scrollContainerRef = useRef(null);
 
   const effectiveSequence = useMemo(() => {
@@ -120,6 +121,25 @@ export default function OverviewMode() {
     }
   }, [selectedChildId, selectedMainAreaId, focusOnTarget]);
 
+  const executeTransition = useCallback((index, newMainAreaId, newChildId) => {
+    // Geçiş Efekti: Önce ışıkları söndür (karartmayı kaldır)
+    setTransitioningSequenceIndex(index);
+    setTransitioningTargetMainAreaId(newMainAreaId); // HEDEF ALANI KAYDET (parlatmak için)
+    setSelectedMainAreaId(null);
+    setSelectedChildId(null);
+    
+    // HEDEF ALANA DOĞRU KAMERAYI KAYDIR (Bu, uçuş/pan hissi verecek!)
+    focusOnTarget(newMainAreaId, newChildId);
+    
+    // Kamera kayması bittiğinde (1 saniye sonra), yeni hedefin ışıklarını yak (Pop-out yap)
+    setTimeout(() => {
+      setTransitioningSequenceIndex(null);
+      setTransitioningTargetMainAreaId(null);
+      setSelectedMainAreaId(newMainAreaId);
+      setSelectedChildId(newChildId);
+    }, 1000); 
+  }, [focusOnTarget]);
+
   const goToSequenceIndex = useCallback((index) => {
     if (index < 0 || index >= effectiveSequence.length) return;
     const item = effectiveSequence[index];
@@ -138,29 +158,22 @@ export default function OverviewMode() {
     }
 
     if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
-      // Geçiş Efekti: Önce ışıkları söndür (karartmayı kaldır)
-      setTransitioningSequenceIndex(index);
-      setTransitioningTargetMainAreaId(newMainAreaId); // HEDEF ALANI KAYDET (parlatmak için)
-      setSelectedMainAreaId(null);
-      setSelectedChildId(null);
-      
-      // HEDEF ALANA DOĞRU KAMERAYI KAYDIR (Bu, uçuş/pan hissi verecek!)
-      focusOnTarget(newMainAreaId, newChildId);
-      
-      // Kamera kayması bittiğinde (1 saniye sonra), yeni hedefin ışıklarını yak (Pop-out yap)
-      setTimeout(() => {
-        setTransitioningSequenceIndex(null);
-        setTransitioningTargetMainAreaId(null);
-        setSelectedMainAreaId(newMainAreaId);
-        setSelectedChildId(newChildId);
-      }, 1000); 
-      return;
+      if (index > currentSequenceIndex) {
+        // İleriye doğru gidiyorsak ve alan değişiyorsa menü göster
+        setPendingTransitionIndex(index);
+        return;
+      } else {
+        // Geriye gidiyorsak direkt geç
+        executeTransition(index, newMainAreaId, newChildId);
+        return;
+      }
     }
     
     // Aynı ana alan içindeysek veya genel görünümden geliyorsak direkt git
     setSelectedMainAreaId(newMainAreaId);
     setSelectedChildId(newChildId);
-  }, [effectiveSequence, childAreas, selectedMainAreaId]);
+  }, [effectiveSequence, childAreas, selectedMainAreaId, currentSequenceIndex, executeTransition]);
+
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -304,11 +317,74 @@ export default function OverviewMode() {
     </div>
   );
 
+  const isDraft = activePageId.toString().startsWith('taslak');
+  const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
+  const currentIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
+  const prevPage = currentIndex > 0 ? groupPages[currentIndex - 1] : null;
+  const nextPage = currentIndex !== -1 && currentIndex < groupPages.length - 1 ? groupPages[currentIndex + 1] : null;
+
   // MOBİL VE MASAÜSTÜ ORTAK YAPI (KIRMIZI ELMA)
   // Sadece sağ taraftaki detay paneli mobilde gizlenir.
   return (
     <div style={styles.mainLayout}>
       
+      {/* GEÇİŞ EKRANI (Ana Alan Bittiğinde Seçenek Sunan Minimalist Tasarım) */}
+      {pendingTransitionIndex !== null && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+          backgroundColor: 'rgba(10, 10, 10, 0.95)',
+          zIndex: 999999, display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          color: '#fff', backdropFilter: 'blur(5px)'
+        }}>
+          <h2 style={{ fontSize: isMobile ? '22px' : '28px', color: '#c7a15b', marginBottom: '15px', letterSpacing: '1px' }}>Bu Bölüm Tamamlandı</h2>
+          <p style={{ fontSize: isMobile ? '14px' : '16px', color: '#aaa', marginBottom: '40px', textAlign: 'center', padding: '0 20px' }}>Okumaya nasıl devam etmek istersiniz?</p>
+          
+          <div style={{ display: 'flex', gap: '20px', flexDirection: isMobile ? 'column' : 'row', width: isMobile ? '80%' : 'auto' }}>
+            <button 
+              onClick={() => {
+                const index = pendingTransitionIndex;
+                const item = effectiveSequence[index];
+                let newMainAreaId = null;
+                let newChildId = null;
+                if (item.type === 'main') {
+                  newMainAreaId = item.id;
+                } else {
+                  const c = childAreas.find(child => child.id === item.id);
+                  if (c) {
+                    newMainAreaId = c.mainAreaId;
+                    newChildId = c.id;
+                  }
+                }
+                setPendingTransitionIndex(null);
+                executeTransition(index, newMainAreaId, newChildId);
+              }}
+              style={{ padding: '15px 30px', fontSize: '15px', backgroundColor: '#1a1a1a', color: '#c7a15b', border: '1px solid #c7a15b', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.2s', width: '100%' }}
+            >
+              📖 Haşiyeden / Sıradakinden Devam
+            </button>
+
+            <button 
+              onClick={() => {
+                setPendingTransitionIndex(null);
+                if (nextPage) navigate(`/overview/${nextPage.id}`);
+              }}
+              style={{ padding: '15px 30px', fontSize: '15px', backgroundColor: '#c7a15b', color: '#000', border: 'none', borderRadius: '8px', cursor: nextPage ? 'pointer' : 'not-allowed', fontWeight: 'bold', opacity: nextPage ? 1 : 0.5, transition: 'all 0.2s', width: '100%' }}
+              disabled={!nextPage}
+            >
+              ⏭️ Sonraki Sayfaya Geç {nextPage ? `(Sayfa ${nextPage.id})` : '(Son)'}
+            </button>
+          </div>
+          
+          <button 
+            onClick={() => setPendingTransitionIndex(null)}
+            style={{ marginTop: '30px', background: 'none', border: 'none', color: '#666', textDecoration: 'underline', cursor: 'pointer', fontSize: '13px' }}
+          >
+            Vazgeç ve ekranda kal
+          </button>
+        </div>
+      )}
+
       {/* SOL: DEVASA RESİM ALANI (Mobilde Tam Ekran) */}
       <div style={{ flex: 1, position: 'relative', height: '100%', overflow: 'hidden', backgroundColor: '#111', display: 'flex', flexDirection: 'column' }}>
         
@@ -333,11 +409,6 @@ export default function OverviewMode() {
         {isMobile && !selectedChildId && (
           <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 15px', borderRadius: '8px', border: '1px solid #c7a15b', gap: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)' }}>
         {(() => {
-          const isDraft = activePageId.toString().startsWith('taslak');
-          const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
-          const currentIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
-          const prevPage = currentIndex > 0 ? groupPages[currentIndex - 1] : null;
-          const nextPage = currentIndex < groupPages.length - 1 ? groupPages[currentIndex + 1] : null;
           return (
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
               <button 
