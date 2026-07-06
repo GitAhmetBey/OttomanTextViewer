@@ -12,8 +12,52 @@ export const api = {
   uploadImage: async (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = (e) => resolve(e.target.result); // base64 data URL
-      reader.onerror = (e) => reject(new Error('Dosya okunamadı'));
+      reader.onload = (e) => {
+        const base64 = e.target.result;
+        // 500 KB limit for base64 string (approx 500,000 characters)
+        const MAX_SIZE = 500 * 1024;
+        
+        if (base64.length <= MAX_SIZE) {
+          resolve(base64);
+          return;
+        }
+
+        // Resim 500 KB'den büyükse küçültme/sıkıştırma işlemi başlar
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          
+          let scale = 0.99; // %1 küçülterek başla
+          let step = 0.01;  // Düşüş hızı (her seferinde artacak: %1, %2, %3...)
+          
+          const compress = () => {
+            canvas.width = img.width * scale;
+            canvas.height = img.height * scale;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // JPEG formatında ve %85 kaliteyle sıkıştır
+            const newDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+            
+            if (newDataUrl.length <= MAX_SIZE || scale <= 0.1) {
+              resolve(newDataUrl);
+            } else {
+              // Eğer hala 500 KB altı değilse, küçültme oranını kademeli artır
+              step += 0.01; 
+              scale -= step;
+              if (scale < 0.1) scale = 0.1;
+              
+              // Tarayıcının donmasını engellemek için küçük bir gecikmeyle döngüye gir
+              setTimeout(compress, 10);
+            }
+          };
+          
+          compress();
+        };
+        img.onerror = () => reject(new Error('Resim sıkıştırılırken hata oluştu'));
+        img.src = base64;
+      };
+      reader.onerror = () => reject(new Error('Dosya okunamadı'));
       reader.readAsDataURL(file);
     });
   },
