@@ -706,6 +706,22 @@ export default function OverviewMode() {
                 whiteSpace: 'pre-wrap'
               }}>
                 {child.latinText || "Bu kelimenin latince okunuşu henüz girilmemiş."}
+                
+                {child.description && (
+                  <div style={{
+                    marginTop: '15px',
+                    padding: '12px',
+                    backgroundColor: 'rgba(0,0,0,0.4)',
+                    borderLeft: '3px solid #00ffff',
+                    borderRadius: '4px',
+                    fontSize: isMobile ? '15px' : '16px',
+                    color: '#dddddd',
+                    textAlign: 'left'
+                  }}>
+                    <div style={{color: '#00ffff', fontSize: '12px', marginBottom: '6px', fontWeight: 'bold'}}>NEYDEN BAHSEDİYOR?</div>
+                    {child.description}
+                  </div>
+                )}
               </div>
             </div>
           );
@@ -950,6 +966,23 @@ export default function OverviewMode() {
                  whiteSpace: 'pre-wrap'
                }}>
                    {child.latinText}
+                   
+                   {child.description && (
+                     <div style={{
+                       marginTop: '15px',
+                       padding: '12px',
+                       backgroundColor: 'rgba(0,0,0,0.6)',
+                       borderLeft: '3px solid #c7a15b',
+                       borderRadius: '4px',
+                       fontSize: isMobile ? '15px' : '18px',
+                       color: '#dddddd',
+                       textAlign: 'left',
+                       fontWeight: 'normal'
+                     }}>
+                       <div style={{color: '#c7a15b', fontSize: '13px', marginBottom: '6px', fontWeight: 'bold'}}>NEYDEN BAHSEDİYOR?</div>
+                       {child.description}
+                     </div>
+                   )}
                </div>
             </div>
           </div>

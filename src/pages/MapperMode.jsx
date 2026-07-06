@@ -267,6 +267,16 @@ export default function MapperMode() {
     } catch(e) { console.error("Hata", e); }
   };
 
+  const updateChildDescription = (childId, newText) => {
+    setChildAreas(childAreas.map(c => c.id === childId ? { ...c, description: newText } : c));
+  };
+
+  const saveChildDescription = async (childId, newText) => {
+    try {
+      await api.updateChildArea(childId, { description: newText });
+    } catch(e) { console.error("Hata", e); }
+  };
+
   const currentChildren = childAreas.filter(c => c.mainAreaId === selectedMainAreaId);
 
   if (uploading) return <div style={{color:'#00ccff', padding: '20px', fontSize: '18px', fontWeight: 'bold'}}>📸 Resim yükleniyor, lütfen bekleyin... (Bu işlem dosya boyutuna göre birkaç saniye sürebilir)</div>;
@@ -628,7 +638,20 @@ export default function MapperMode() {
                       padding: '8px', borderRadius: '4px', border: '1px solid #444', 
                       backgroundColor: '#000', color: '#fff', width: '100%', 
                       boxSizing: 'border-box', minHeight: '60px', resize: 'vertical',
-                      fontFamily: 'inherit', fontSize: '13px', lineHeight: '1.5'
+                      fontFamily: 'inherit', fontSize: '13px', lineHeight: '1.5',
+                      marginBottom: '8px'
+                    }}
+                  />
+                  <textarea
+                    placeholder="Neyden bahsediyor? (İçerik özeti veya notlar)" 
+                    value={c.description || ""}
+                    onChange={(e) => updateChildDescription(c.id, e.target.value)}
+                    onBlur={(e) => saveChildDescription(c.id, e.target.value)}
+                    style={{ 
+                      padding: '8px', borderRadius: '4px', border: '1px solid #444', 
+                      backgroundColor: '#0d1a0d', color: '#fff', width: '100%', 
+                      boxSizing: 'border-box', minHeight: '40px', resize: 'vertical',
+                      fontFamily: 'inherit', fontSize: '12px', lineHeight: '1.4'
                     }}
                   />
                   <div style={{display: 'flex', gap: '10px'}}>
