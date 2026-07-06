@@ -332,15 +332,13 @@ export default function OverviewMode() {
       {pendingTransitionIndex !== null && (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: 'rgba(10, 10, 10, 0.95)',
+          backgroundColor: 'rgba(0, 0, 0, 0.6)',
           zIndex: 999999, display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
-          color: '#fff', backdropFilter: 'blur(5px)'
+          backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)'
         }}>
-          <h2 style={{ fontSize: isMobile ? '22px' : '28px', color: '#c7a15b', marginBottom: '15px', letterSpacing: '1px' }}>Bu Bölüm Tamamlandı</h2>
-          <p style={{ fontSize: isMobile ? '14px' : '16px', color: '#aaa', marginBottom: '40px', textAlign: 'center', padding: '0 20px' }}>Okumaya nasıl devam etmek istersiniz?</p>
           
-          <div style={{ display: 'flex', gap: '20px', flexDirection: isMobile ? 'column' : 'row', width: isMobile ? '80%' : 'auto' }}>
+          <div style={{ display: 'flex', gap: '20px', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center' }}>
             <button 
               onClick={() => {
                 const index = pendingTransitionIndex;
@@ -359,9 +357,16 @@ export default function OverviewMode() {
                 setPendingTransitionIndex(null);
                 executeTransition(index, newMainAreaId, newChildId);
               }}
-              style={{ padding: '15px 30px', fontSize: '15px', backgroundColor: '#1a1a1a', color: '#c7a15b', border: '1px solid #c7a15b', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.2s', width: '100%' }}
+              style={{ 
+                padding: '12px 40px', fontSize: '18px', fontWeight: '300',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)', color: '#fff', 
+                border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '30px',
+                cursor: 'pointer', transition: 'all 0.3s ease', minWidth: '160px'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
             >
-              📖 Haşiyeden / Sıradakinden Devam
+              Haşiye
             </button>
 
             <button 
@@ -369,18 +374,32 @@ export default function OverviewMode() {
                 setPendingTransitionIndex(null);
                 if (nextPage) navigate(`/overview/${nextPage.id}`);
               }}
-              style={{ padding: '15px 30px', fontSize: '15px', backgroundColor: '#c7a15b', color: '#000', border: 'none', borderRadius: '8px', cursor: nextPage ? 'pointer' : 'not-allowed', fontWeight: 'bold', opacity: nextPage ? 1 : 0.5, transition: 'all 0.2s', width: '100%' }}
+              style={{ 
+                padding: '12px 40px', fontSize: '18px', fontWeight: '300',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)', color: '#fff', 
+                border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '30px',
+                cursor: nextPage ? 'pointer' : 'not-allowed', transition: 'all 0.3s ease', 
+                opacity: nextPage ? 1 : 0.5, minWidth: '160px'
+              }}
               disabled={!nextPage}
+              onMouseEnter={(e) => { if(nextPage) e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; }}
+              onMouseLeave={(e) => { if(nextPage) e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; }}
             >
-              ⏭️ Sonraki Sayfaya Geç {nextPage ? `(Sayfa ${nextPage.id})` : '(Son)'}
+              Sonraki
             </button>
           </div>
           
           <button 
             onClick={() => setPendingTransitionIndex(null)}
-            style={{ marginTop: '30px', background: 'none', border: 'none', color: '#666', textDecoration: 'underline', cursor: 'pointer', fontSize: '13px' }}
+            style={{ 
+              marginTop: '50px', background: 'none', border: 'none', 
+              color: 'rgba(255, 255, 255, 0.4)', cursor: 'pointer', 
+              fontSize: '14px', transition: 'color 0.3s ease' 
+            }}
+            onMouseEnter={(e) => e.target.style.color = '#fff'}
+            onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.4)'}
           >
-            Vazgeç ve ekranda kal
+            Kapat
           </button>
         </div>
       )}
@@ -622,7 +641,7 @@ export default function OverviewMode() {
         </div>
 
         {/* Slayt Modu İçin Ana Ekranda Gezinme Butonları (Sağ-Sol) */}
-        {displaySequenceIndex > 0 && (
+        {displaySequenceIndex > 0 && pendingTransitionIndex === null && (
           <button 
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
@@ -637,7 +656,7 @@ export default function OverviewMode() {
           >❮</button>
         )}
         
-        {displaySequenceIndex !== -1 && displaySequenceIndex < effectiveSequence.length - 1 && (
+        {displaySequenceIndex !== -1 && displaySequenceIndex < effectiveSequence.length - 1 && pendingTransitionIndex === null && (
           <button 
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
