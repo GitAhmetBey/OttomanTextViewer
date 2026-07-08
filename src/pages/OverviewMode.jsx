@@ -24,6 +24,7 @@ export default function OverviewMode() {
   const [transitioningSequenceIndex, setTransitioningSequenceIndex] = useState(null);
   const [transitioningTargetMainAreaId, setTransitioningTargetMainAreaId] = useState(null);
   const [shouldAutoStart, setShouldAutoStart] = useState(false);
+  const [shouldAutoStartFromEnd, setShouldAutoStartFromEnd] = useState(false);
   const scrollContainerRef = useRef(null);
 
   const effectiveSequence = useMemo(() => {
@@ -152,7 +153,17 @@ export default function OverviewMode() {
         }
         return;
     }
-    if (index < 0) return;
+    if (index < 0) {
+      // Slaytın başındaysak önceki sayfaya geç
+      const isDraft = activePageId.toString().startsWith('taslak');
+      const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
+      const cIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
+      const pPage = cIndex > 0 ? groupPages[cIndex - 1] : null;
+      if (pPage) {
+        navigate(`/overview/${pPage.id}`, { state: { autoStartFromEnd: true } });
+      }
+      return;
+    }
     const item = effectiveSequence[index];
     
     let newMainAreaId = null;
@@ -195,6 +206,10 @@ export default function OverviewMode() {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (currentSequenceIndex === 0 && e.key === 'ArrowLeft') {
+        goToSequenceIndex(-1);
+        return;
+      }
       if (currentSequenceIndex !== -1) {
         if (e.key === 'ArrowRight') {
           goToSequenceIndex(currentSequenceIndex + 1);
@@ -310,24 +325,37 @@ export default function OverviewMode() {
     };
   }, [activePageId]);
 
-  // location.state'den autoStart bayrağını oku ve state'e taşı
+  // location.state'den autoStart bayrağını oku
   useEffect(() => {
     if (location.state?.autoStartSequence) {
       setShouldAutoStart(true);
       navigate(location.pathname, { replace: true, state: {} });
+    } else if (location.state?.autoStartFromEnd) {
+      setShouldAutoStartFromEnd(true);
+      navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location.state, location.pathname, navigate]);
 
-  // Alanlar yüklendikten sonra A1'e git
+  // Alanlar yüklendikten sonra A1'e git (geçiş animasyonu: önce genel görünüm, sonra A1)
   useEffect(() => {
     if (shouldAutoStart && mainAreas.length > 0 && effectiveSequence.length > 0) {
       setShouldAutoStart(false);
-      // Biraz gecikme koy ki resim DOM'a yerleşsin
+      // Önce genel görünümü göster (700ms), sonra A1'e geç
       setTimeout(() => {
         goToSequenceIndex(0);
-      }, 300);
+      }, 700);
     }
   }, [shouldAutoStart, mainAreas.length, effectiveSequence.length, goToSequenceIndex]);
+
+  // Önceki sayfadan dönülmüş: son sıra öğesine geç
+  useEffect(() => {
+    if (shouldAutoStartFromEnd && mainAreas.length > 0 && effectiveSequence.length > 0) {
+      setShouldAutoStartFromEnd(false);
+      setTimeout(() => {
+        goToSequenceIndex(effectiveSequence.length - 1);
+      }, 700);
+    }
+  }, [shouldAutoStartFromEnd, mainAreas.length, effectiveSequence.length, goToSequenceIndex]);
 
   const handleBackgroundClick = (e) => {
     if (e.target.tagName.toLowerCase() === 'img') {
@@ -595,7 +623,7 @@ export default function OverviewMode() {
         </div>
 
         {/* Slayt Modu İçin Ana Ekranda Gezinme Butonları (Sağ-Sol) */}
-        {displaySequenceIndex > 0 && (
+        {displaySequenceIndex !== -1 && (displaySequenceIndex > 0 || prevPage) && (
           <button 
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
