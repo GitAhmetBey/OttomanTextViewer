@@ -827,7 +827,8 @@ export default function OverviewMode() {
                 width: '100%',
                 maxHeight: '30vh',
                 overflowY: 'auto',
-                whiteSpace: 'pre-wrap'
+                whiteSpace: 'pre-wrap',
+                fontStyle: isA1 ? 'normal' : 'italic'
               }}>
                 {child.latinText || "Bu kelimenin latince okunuşu henüz girilmemiş."}
               </div>
@@ -1011,6 +1012,11 @@ export default function OverviewMode() {
 
       {/* TAM EKRAN ARAPÇA KELİME GÖRÜNÜMÜ */}
       {fullScreenChildId && childAreas.filter(c => c.id === fullScreenChildId).map(child => {
+        const targetMainArea = mainAreas.find(m => m.id === child.mainAreaId);
+        const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
+        const colorHex = isA1 ? '#c7a15b' : '#8892b0';
+        const colorRgba = isA1 ? 'rgba(199, 161, 91, 0.4)' : 'rgba(136, 146, 176, 0.4)';
+
         const xs = child.points.map(p => 100 - parseFloat(p.right));
         const ys = child.points.map(p => parseFloat(p.top));
         const childX = 100 - parseFloat(child.mainPoint.right);
@@ -1056,7 +1062,7 @@ export default function OverviewMode() {
                          clipPath: clipPathStr,
                          transform: `translate(-${childX}%, -${childY}%) translateZ(0)`,
                          willChange: 'transform',
-                         filter: 'drop-shadow(0px 0px 15px rgba(0, 255, 255, 0.4))'
+                         filter: `drop-shadow(0px 0px 15px ${colorRgba})`
                        }}
                      />
                 </div>
@@ -1071,10 +1077,11 @@ export default function OverviewMode() {
                <div style={{ 
                  color: '#fff', fontSize: isMobile ? '18px' : '22px', 
                  textAlign: 'center', fontWeight: 'bold', lineHeight: '1.6', maxWidth: '800px',
-                 whiteSpace: 'pre-wrap'
+                 whiteSpace: 'pre-wrap',
+                 fontStyle: isA1 ? 'normal' : 'italic'
                }}>
                    {child.description && (
-                     <div style={{ color: '#c7a15b', fontSize: isMobile ? '16px' : '20px', marginBottom: '15px' }}>
+                     <div style={{ color: colorHex, fontSize: isMobile ? '16px' : '20px', marginBottom: '15px', fontStyle: 'normal' }}>
                        {child.description.toLocaleUpperCase('tr-TR')}
                      </div>
                    )}
