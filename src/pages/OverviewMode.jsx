@@ -404,7 +404,12 @@ export default function OverviewMode() {
       `}</style>
       <div key={`page-${activePageId}`} style={{ ...styles.mainLayout, animation: 'pageTurnFade 0.6s ease-out forwards' }}>
         
-      <div style={{ flex: 1, position: 'relative', height: '100%', overflow: 'hidden', backgroundColor: '#111', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ 
+        flex: 1, position: 'relative', height: '100%', overflow: 'hidden', 
+        backgroundColor: (!selectedMainAreaId || (mainAreas.length > 0 && selectedMainAreaId === mainAreas[0].id)) ? '#111' : '#1a222c', 
+        display: 'flex', flexDirection: 'column',
+        transition: 'background-color 0.5s ease'
+      }}>
         
         <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 10px', borderRadius: '8px', border: '1px solid #444', gap: '10px', boxShadow: '0 5px 15px rgba(0,0,0,0.5)' }}>
           <button onClick={() => handleZoom(-0.03)} style={styles.zoomBtn}>-</button>
