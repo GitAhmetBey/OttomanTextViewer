@@ -119,7 +119,7 @@ export default function OverviewMode() {
     if (selectedChildId || selectedMainAreaId) {
       focusOnTarget(selectedMainAreaId, selectedChildId);
     }
-  }, [selectedChildId, selectedMainAreaId, focusOnTarget]);
+  }, [selectedChildId, selectedMainAreaId, focusOnTarget, mainAreas.length, childAreas.length]);
 
   const executeTransition = useCallback((index, newMainAreaId, newChildId) => {
     // Geçiş Efekti: Önce ışıkları söndür (karartmayı kaldır)
@@ -330,11 +330,7 @@ export default function OverviewMode() {
   );
 
   if (loading || !page) return (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#111', color: '#fff'}}>
-      <div style={{width: '40px', height: '40px', border: '4px solid #333', borderTop: '4px solid #00ccff', borderRadius: '50%', animation: 'spin 1s linear infinite', marginBottom: '20px'}} />
-      <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
-      <div style={{fontSize: '18px', fontWeight: 'bold'}}>Sayfa Yükleniyor...</div>
-    </div>
+    <div style={{ width: '100%', height: '100vh', backgroundColor: '#111' }}></div>
   );
 
   const isDraft = activePageId.toString().startsWith('taslak');
