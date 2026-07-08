@@ -50,15 +50,15 @@ export default function OverviewMode() {
       return false;
     });
 
-    // Kullanıcı isteği: Slayt sadece ilk ana alan (A1) ve onun yavruları üzerinde ilerlesin.
-    // Diğer ana alanlar (A2, vb.) slaytta gösterilmesin.
+    // Kullanıcı isteği: Slayt sadece O ANKİ ANA ALAN ve onun yavruları üzerinde ilerlesin.
+    // Eğer hiçbir şey seçili değilse, A1 (ilk ana alan) baz alınır.
     if (mainAreas.length > 0) {
-      const firstMainId = mainAreas[0].id;
+      const activeMainId = selectedMainAreaId || mainAreas[0].id;
       currentSeq = currentSeq.filter(s => {
-        if (s.type === 'main') return s.id === firstMainId;
+        if (s.type === 'main') return s.id === activeMainId;
         if (s.type === 'child') {
            const c = childAreas.find(child => child.id === s.id);
-           return c && c.mainAreaId === firstMainId;
+           return c && c.mainAreaId === activeMainId;
         }
         return false;
       });
@@ -67,17 +67,20 @@ export default function OverviewMode() {
     if (!page.readingSequence || page.readingSequence.length === 0) {
       const defaultSeq = [];
       if (mainAreas.length > 0) {
-        const m = mainAreas[0];
-        defaultSeq.push({ id: m.id, type: 'main' });
-        childAreas.filter(c => c.mainAreaId === m.id).forEach(c => {
-          defaultSeq.push({ id: c.id, type: 'child' });
-        });
+        const activeMainId = selectedMainAreaId || mainAreas[0].id;
+        const m = mainAreas.find(a => a.id === activeMainId);
+        if (m) {
+          defaultSeq.push({ id: m.id, type: 'main' });
+          childAreas.filter(c => c.mainAreaId === m.id).forEach(c => {
+            defaultSeq.push({ id: c.id, type: 'child' });
+          });
+        }
       }
       return defaultSeq;
     }
     
     return currentSeq;
-  }, [page, mainAreas, childAreas]);
+  }, [page, mainAreas, childAreas, selectedMainAreaId]);
 
   const currentSequenceIndex = useMemo(() => {
     if (selectedChildId) {
@@ -590,9 +593,19 @@ export default function OverviewMode() {
           
           <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{...styles.svgOverlay, zIndex: 45}}>
             {mainAreas.map((area) => {
+              const pts = area.points || [];
+              if (pts.length < 3) return null;
+              
               const isSelected = selectedMainAreaId === area.id;
-              const isTarget = transitioningTargetMainAreaId === area.id;
-              const pointsStr = area.points.map(p => `${100 - parseFloat(p.right)},${parseFloat(p.top)}`).join(' ');
+              const isTarget = transitioningTargetMainAreaId === area.id || isSelected;
+              const isA1 = mainAreas.length > 0 && area.id === mainAreas[0].id;
+              
+              const pointsStr = pts.map(p => `${p.x},${p.y}`).join(' ');
+              
+              // Renk Vurguları
+              const frameColor = isA1 ? "#c7a15b" : "#00ffff"; // A1 Altın Sarısı, Haşiye Camgöbeği
+              const fillColor = isA1 ? "rgba(199, 161, 91, 0.25)" : "rgba(0, 255, 255, 0.15)";
+              const hoverFillColor = isA1 ? "rgba(199, 161, 91, 0.1)" : "rgba(0, 255, 255, 0.05)";
               
               return (
                 <polygon 
@@ -602,7 +615,7 @@ export default function OverviewMode() {
                     pointerEvents: 'auto', 
                     cursor: 'pointer', 
                     transition: 'all 0.4s ease-out',
-                    filter: isTarget ? 'drop-shadow(0px 0px 12px rgba(0, 255, 0, 1))' : 'none',
+                    filter: isTarget ? `drop-shadow(0px 0px 12px ${frameColor})` : 'none',
                     zIndex: isTarget ? 50 : 1
                   }}
                   onClick={(e) => {
@@ -611,12 +624,12 @@ export default function OverviewMode() {
                     setSelectedChildId(null); // Ana alan değişince veya kapanınca alttaki yavru panelini kapat
                   }}
                   
-                  fill={isSelected ? "transparent" : (isTarget ? "rgba(0, 255, 0, 0.25)" : "rgba(0,0,0,0)")}
-                  stroke={isSelected ? "transparent" : (isTarget ? "#00ff00" : "transparent")}
-                  strokeWidth={isTarget ? "4" : "2"}
+                  fill={isSelected ? "transparent" : (isTarget ? fillColor : "rgba(0,0,0,0)")}
+                  stroke={isSelected ? "transparent" : (isTarget ? frameColor : "transparent")}
+                  strokeWidth={isTarget ? (isA1 ? "4" : "3") : "2"}
                   vectorEffect="non-scaling-stroke"
                   
-                  onMouseEnter={(e) => { if (!isSelected && !isTarget) e.target.style.fill = "rgba(199, 161, 91, 0.05)"; }}
+                  onMouseEnter={(e) => { if (!isSelected && !isTarget) e.target.style.fill = hoverFillColor; }}
                   onMouseLeave={(e) => { if (!isSelected && !isTarget) e.target.style.fill = "rgba(0,0,0,0)"; }}
                 />
               );
@@ -720,19 +733,24 @@ export default function OverviewMode() {
 
         {/* ALT: YAVRU KELİME TERCÜME KARTI */}
         {selectedChildId && childAreas.filter(c => c.id === selectedChildId).map(child => {
-          return (
-            <div key={`bottom-card-${child.id}`} style={{
-              width: '100%',
-              backgroundColor: '#1a1a1a',
-              borderTop: '2px solid #c7a15b',
-              padding: '20px',
-              boxShadow: '0 -10px 30px rgba(0,0,0,0.8)',
-              zIndex: 10000,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              animation: 'slideUp 0.3s ease-out',
-            }}>
+            const targetMainArea = mainAreas.find(m => m.id === selectedMainAreaId);
+            const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
+            const cardBgColor = isA1 ? 'rgba(20, 20, 20, 0.95)' : 'rgba(15, 25, 35, 0.95)';
+            const cardBorderColor = isA1 ? '#c7a15b' : '#00ffff';
+            
+            return (
+              <div key={`bottom-card-${child.id}`} style={{
+                width: '100%',
+                backgroundColor: cardBgColor,
+                borderTop: `2px solid ${cardBorderColor}`,
+                padding: '20px',
+                boxShadow: '0 -10px 30px rgba(0,0,0,0.8)',
+                zIndex: 10000,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                animation: 'slideUp 0.3s ease-out',
+              }}>
               <style>
                 {`
                   @keyframes slideUp {
@@ -743,20 +761,20 @@ export default function OverviewMode() {
               </style>
               
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', maxWidth: '800px', marginBottom: '15px', alignItems: 'center' }}>
-                <span style={{ color: '#00ffff', fontWeight: 'bold', fontSize: '14px' }}>
+                <span style={{ color: cardBorderColor, fontWeight: 'bold', fontSize: '14px' }}>
                   {(child.description || "SEÇİLİ KELİME").toLocaleUpperCase('tr-TR')}
                 </span>
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                   <button 
                     onClick={() => handleZoom(-0.25)}
-                    style={{ background: 'none', border: 'none', color: '#00ffff', fontSize: '24px', cursor: 'pointer', padding: '0 5px' }}
+                    style={{ background: 'none', border: 'none', color: cardBorderColor, fontSize: '24px', cursor: 'pointer', padding: '0 5px' }}
                     title="Resmi Uzaklaştır (-)"
                   >
                     -
                   </button>
                   <button 
                     onClick={() => handleZoom(0.25)}
-                    style={{ background: 'none', border: 'none', color: '#00ffff', fontSize: '24px', cursor: 'pointer', padding: '0 5px' }}
+                    style={{ background: 'none', border: 'none', color: cardBorderColor, fontSize: '24px', cursor: 'pointer', padding: '0 5px' }}
                     title="Resmi Yakınlaştır (+)"
                   >
                     +
