@@ -23,6 +23,7 @@ export default function OverviewMode() {
   const [zoomLevel, setZoomLevel] = useState(window.innerWidth <= 1024 ? 0.7 : 1);
   const [transitioningSequenceIndex, setTransitioningSequenceIndex] = useState(null);
   const [transitioningTargetMainAreaId, setTransitioningTargetMainAreaId] = useState(null);
+  const [shouldAutoStart, setShouldAutoStart] = useState(false);
   const scrollContainerRef = useRef(null);
 
   const effectiveSequence = useMemo(() => {
@@ -309,12 +310,24 @@ export default function OverviewMode() {
     };
   }, [activePageId]);
 
+  // location.state'den autoStart bayrağını oku ve state'e taşı
   useEffect(() => {
-    if (!loading && page && effectiveSequence.length > 0 && location.state?.autoStartSequence) {
-      goToSequenceIndex(0);
+    if (location.state?.autoStartSequence) {
+      setShouldAutoStart(true);
       navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [loading, page, effectiveSequence, location.state, location.pathname, navigate, goToSequenceIndex]);
+  }, [location.state, location.pathname, navigate]);
+
+  // Alanlar yüklendikten sonra A1'e git
+  useEffect(() => {
+    if (shouldAutoStart && mainAreas.length > 0 && effectiveSequence.length > 0) {
+      setShouldAutoStart(false);
+      // Biraz gecikme koy ki resim DOM'a yerleşsin
+      setTimeout(() => {
+        goToSequenceIndex(0);
+      }, 300);
+    }
+  }, [shouldAutoStart, mainAreas.length, effectiveSequence.length, goToSequenceIndex]);
 
   const handleBackgroundClick = (e) => {
     if (e.target.tagName.toLowerCase() === 'img') {
