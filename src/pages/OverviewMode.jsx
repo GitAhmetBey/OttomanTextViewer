@@ -753,7 +753,7 @@ export default function OverviewMode() {
         {selectedChildId && childAreas.filter(c => c.id === selectedChildId).map(child => {
             const targetMainArea = mainAreas.find(m => m.id === selectedMainAreaId);
             const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
-            const cardBgColor = isA1 ? 'rgba(20, 20, 20, 0.95)' : 'rgba(15, 20, 25, 0.95)';
+            const cardBgColor = isA1 ? 'rgba(10, 10, 10, 0.95)' : 'rgba(30, 39, 49, 0.95)';
             const cardBorderColor = isA1 ? '#c7a15b' : '#8892b0';
             
             return (
@@ -1060,7 +1060,7 @@ export default function OverviewMode() {
         return (
           <div key={`fullscreen-${child.id}`} style={{
             position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-            backgroundColor: 'rgba(0,0,0,0.98)', zIndex: 999999,
+            backgroundColor: isA1 ? 'rgba(8, 8, 8, 0.98)' : 'rgba(30, 39, 49, 0.98)', zIndex: 999999,
             display: 'flex', flexDirection: 'column', alignItems: 'center',
             overflow: 'hidden', cursor: 'pointer'
           }} onClick={() => setFullScreenChildId(null)}>
