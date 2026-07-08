@@ -332,72 +332,70 @@ export default function OverviewMode() {
       {pendingTransitionIndex !== null && (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          backgroundColor: '#121212', // Solid dark color for eye comfort
           zIndex: 999999, display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center',
-          backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)'
+          alignItems: 'center', justifyContent: 'center'
         }}>
           
-          <div style={{ display: 'flex', gap: '20px', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center' }}>
-            <button 
-              onClick={() => {
-                const index = pendingTransitionIndex;
-                const item = effectiveSequence[index];
-                let newMainAreaId = null;
-                let newChildId = null;
-                if (item.type === 'main') {
-                  newMainAreaId = item.id;
-                } else {
-                  const c = childAreas.find(child => child.id === item.id);
-                  if (c) {
-                    newMainAreaId = c.mainAreaId;
-                    newChildId = c.id;
-                  }
-                }
-                setPendingTransitionIndex(null);
-                executeTransition(index, newMainAreaId, newChildId);
-              }}
-              style={{ 
-                padding: '12px 40px', fontSize: '18px', fontWeight: '300',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)', color: '#fff', 
-                border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '30px',
-                cursor: 'pointer', transition: 'all 0.3s ease', minWidth: '160px'
-              }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
-            >
-              Haşiye
-            </button>
+          <button 
+            onClick={() => {
+              setPendingTransitionIndex(null);
+              if (nextPage) navigate(`/overview/${nextPage.id}`);
+            }}
+            style={{ 
+              padding: '16px 50px', fontSize: '18px', fontWeight: '400',
+              backgroundColor: 'transparent', color: '#fff', 
+              border: '1px solid #444', borderRadius: '40px',
+              cursor: nextPage ? 'pointer' : 'not-allowed', transition: 'all 0.3s ease', 
+              opacity: nextPage ? 1 : 0.5, marginBottom: '25px', letterSpacing: '1px'
+            }}
+            disabled={!nextPage}
+            onMouseEnter={(e) => { if(nextPage) { e.target.style.backgroundColor = '#fff'; e.target.style.color = '#000'; } }}
+            onMouseLeave={(e) => { if(nextPage) { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#fff'; } }}
+          >
+            Sonraki Sayfa
+          </button>
 
-            <button 
-              onClick={() => {
-                setPendingTransitionIndex(null);
-                if (nextPage) navigate(`/overview/${nextPage.id}`);
-              }}
-              style={{ 
-                padding: '12px 40px', fontSize: '18px', fontWeight: '300',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)', color: '#fff', 
-                border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '30px',
-                cursor: nextPage ? 'pointer' : 'not-allowed', transition: 'all 0.3s ease', 
-                opacity: nextPage ? 1 : 0.5, minWidth: '160px'
-              }}
-              disabled={!nextPage}
-              onMouseEnter={(e) => { if(nextPage) e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; }}
-              onMouseLeave={(e) => { if(nextPage) e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; }}
-            >
-              Sonraki
-            </button>
-          </div>
+          <button 
+            onClick={() => {
+              const index = pendingTransitionIndex;
+              const item = effectiveSequence[index];
+              let newMainAreaId = null;
+              let newChildId = null;
+              if (item.type === 'main') {
+                newMainAreaId = item.id;
+              } else {
+                const c = childAreas.find(child => child.id === item.id);
+                if (c) {
+                  newMainAreaId = c.mainAreaId;
+                  newChildId = c.id;
+                }
+              }
+              setPendingTransitionIndex(null);
+              executeTransition(index, newMainAreaId, newChildId);
+            }}
+            style={{ 
+              background: 'none', border: 'none', 
+              color: '#777', cursor: 'pointer', 
+              fontSize: '15px', transition: 'color 0.3s ease',
+              marginBottom: '40px', letterSpacing: '0.5px'
+            }}
+            onMouseEnter={(e) => e.target.style.color = '#bbb'}
+            onMouseLeave={(e) => e.target.style.color = '#777'}
+          >
+            Haşiyeden devam et
+          </button>
           
           <button 
             onClick={() => setPendingTransitionIndex(null)}
             style={{ 
-              marginTop: '50px', background: 'none', border: 'none', 
-              color: 'rgba(255, 255, 255, 0.4)', cursor: 'pointer', 
-              fontSize: '14px', transition: 'color 0.3s ease' 
+              background: 'none', border: 'none', 
+              color: '#333', cursor: 'pointer', 
+              fontSize: '13px', transition: 'color 0.3s ease',
+              textDecoration: 'none'
             }}
-            onMouseEnter={(e) => e.target.style.color = '#fff'}
-            onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.4)'}
+            onMouseEnter={(e) => e.target.style.color = '#666'}
+            onMouseLeave={(e) => e.target.style.color = '#333'}
           >
             Kapat
           </button>
