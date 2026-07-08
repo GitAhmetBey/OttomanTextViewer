@@ -603,9 +603,9 @@ export default function OverviewMode() {
               const pointsStr = pts.map(p => `${p.x},${p.y}`).join(' ');
               
               // Renk Vurguları
-              const frameColor = isA1 ? "#c7a15b" : "#00ffff"; // A1 Altın Sarısı, Haşiye Camgöbeği
-              const fillColor = isA1 ? "rgba(199, 161, 91, 0.25)" : "rgba(0, 255, 255, 0.15)";
-              const hoverFillColor = isA1 ? "rgba(199, 161, 91, 0.1)" : "rgba(0, 255, 255, 0.05)";
+              const frameColor = isA1 ? "#c7a15b" : "#8892b0"; // A1 Altın Sarısı, Haşiye Daha Sakin Gümüş/Mavi
+              const fillColor = isA1 ? "rgba(199, 161, 91, 0.25)" : "rgba(136, 146, 176, 0.15)";
+              const hoverFillColor = isA1 ? "rgba(199, 161, 91, 0.1)" : "rgba(136, 146, 176, 0.05)";
               
               return (
                 <polygon 
@@ -638,9 +638,13 @@ export default function OverviewMode() {
 
 
           {/* Yavru Alan Noktaları */}
-          {currentChildren.map((child) => (
-            <div key={`cpoint-${child.id}`} style={{ position: 'absolute', top: `${child.mainPoint.top}%`, right: `${child.mainPoint.right}%`, width: '8px', height: '8px', backgroundColor: '#00ffff', borderRadius: '50%', transform: 'translate(50%, -50%)', zIndex: 30, pointerEvents: 'none' }} />
-          ))}
+          {currentChildren.map((child) => {
+            const targetMainArea = mainAreas.find(m => m.id === selectedMainAreaId);
+            const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
+            return (
+              <div key={`cpoint-${child.id}`} style={{ position: 'absolute', top: `${child.mainPoint.top}%`, right: `${child.mainPoint.right}%`, width: '8px', height: '8px', backgroundColor: isA1 ? '#c7a15b' : '#8892b0', borderRadius: '50%', transform: 'translate(50%, -50%)', zIndex: 30, pointerEvents: 'none' }} />
+            );
+          })}
 
           {/* YAVRU KELİME POP-OUT EFEKTİ SİLİNDİ (ANA ALAN BÜYÜTÜLÜYOR) */}
         </div>
@@ -735,8 +739,8 @@ export default function OverviewMode() {
         {selectedChildId && childAreas.filter(c => c.id === selectedChildId).map(child => {
             const targetMainArea = mainAreas.find(m => m.id === selectedMainAreaId);
             const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
-            const cardBgColor = isA1 ? 'rgba(20, 20, 20, 0.95)' : 'rgba(15, 25, 35, 0.95)';
-            const cardBorderColor = isA1 ? '#c7a15b' : '#00ffff';
+            const cardBgColor = isA1 ? 'rgba(20, 20, 20, 0.95)' : 'rgba(15, 20, 25, 0.95)';
+            const cardBorderColor = isA1 ? '#c7a15b' : '#8892b0';
             
             return (
               <div key={`bottom-card-${child.id}`} style={{
@@ -764,7 +768,7 @@ export default function OverviewMode() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{
                     display: 'flex', alignItems: 'center', gap: '6px',
-                    backgroundColor: isA1 ? 'rgba(199, 161, 91, 0.15)' : 'rgba(0, 255, 255, 0.15)',
+                    backgroundColor: isA1 ? 'rgba(199, 161, 91, 0.15)' : 'rgba(136, 146, 176, 0.15)',
                     color: cardBorderColor,
                     padding: '4px 8px',
                     borderRadius: '4px',
