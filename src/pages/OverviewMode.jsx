@@ -160,7 +160,7 @@ export default function OverviewMode() {
       const cIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
       const pPage = cIndex > 0 ? groupPages[cIndex - 1] : null;
       if (pPage) {
-        navigate(`/overview/${pPage.id}`, { state: { autoStartFromEnd: true } });
+        navigate(`/overview/${pPage.id}`, { state: { autoStartSequence: true } });
       }
       return;
     }
