@@ -761,9 +761,28 @@ export default function OverviewMode() {
               </style>
               
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', maxWidth: '800px', marginBottom: '15px', alignItems: 'center' }}>
-                <span style={{ color: cardBorderColor, fontWeight: 'bold', fontSize: '14px' }}>
-                  {(child.description || "SEÇİLİ KELİME").toLocaleUpperCase('tr-TR')}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: '6px',
+                    backgroundColor: isA1 ? 'rgba(199, 161, 91, 0.15)' : 'rgba(0, 255, 255, 0.15)',
+                    color: cardBorderColor,
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    fontSize: '11px',
+                    fontWeight: 'bold',
+                    letterSpacing: '1px'
+                  }}>
+                    {isA1 ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    )}
+                    <span>{isA1 ? 'ANA METİN' : 'HAŞİYE'}</span>
+                  </div>
+                  <span style={{ color: cardBorderColor, fontWeight: 'bold', fontSize: '14px' }}>
+                    {(child.description || "SEÇİLİ KELİME").toLocaleUpperCase('tr-TR')}
+                  </span>
+                </div>
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                   <button 
                     onClick={() => handleZoom(-0.25)}
