@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { api } from '../api';
 
 export default function OverviewMode() {
   const { pageId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const activePageId = Number(pageId || 1);
 
   const [page, setPage] = useState(null);
@@ -282,11 +283,9 @@ export default function OverviewMode() {
       setChildAreas(children);
     });
 
-    // Mobil görünüm için ekran boyutunu dinle
     const handleResize = () => setIsMobile(window.innerWidth <= 1024);
     window.addEventListener('resize', handleResize);
 
-    // Bileşen ekrandan kalkınca dinleyicileri durdur (bellek sızıntısı önlenir)
     return () => {
       unsubMain();
       unsubChildren();
@@ -294,16 +293,21 @@ export default function OverviewMode() {
     };
   }, [activePageId]);
 
+  useEffect(() => {
+    if (!loading && page && effectiveSequence.length > 0 && location.state?.autoStartSequence) {
+      goToSequenceIndex(0);
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [loading, page, effectiveSequence, location.state, location.pathname, navigate, goToSequenceIndex]);
+
   const handleBackgroundClick = (e) => {
     if (e.target.tagName.toLowerCase() === 'img') {
-      // Arka plana (resme) tıklandığında hem yavru (Latince) kutuyu hem de ana alan zoom'unu kapat
       setSelectedChildId(null);
       setSelectedMainAreaId(null);
       setPreviousZoomLevel(null);
     }
   };
 
-  // useMemo: selectedMainAreaId değişmediği sürece filtreyi yeniden hesaplama
   const currentChildren = useMemo(
     () => childAreas.filter(c => c.mainAreaId === selectedMainAreaId),
     [childAreas, selectedMainAreaId]
@@ -323,16 +327,20 @@ export default function OverviewMode() {
   const prevPage = currentIndex > 0 ? groupPages[currentIndex - 1] : null;
   const nextPage = currentIndex !== -1 && currentIndex < groupPages.length - 1 ? groupPages[currentIndex + 1] : null;
 
-  // MOBİL VE MASAÜSTÜ ORTAK YAPI (KIRMIZI ELMA)
-  // Sadece sağ taraftaki detay paneli mobilde gizlenir.
   return (
-    <div style={styles.mainLayout}>
-      
-      {/* GEÇİŞ EKRANI (Ana Alan Bittiğinde Seçenek Sunan Minimalist Tasarım) */}
+    <>
+      <style>{`
+        @keyframes pageTurnFade {
+          0% { opacity: 0; filter: blur(5px); transform: scale(0.99); }
+          100% { opacity: 1; filter: blur(0px); transform: scale(1); }
+        }
+      `}</style>
+      <div key={`page-${activePageId}`} style={{ ...styles.mainLayout, animation: 'pageTurnFade 0.6s ease-out forwards' }}>
+        
       {pendingTransitionIndex !== null && (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: '#121212', // Solid dark color for eye comfort
+          backgroundColor: '#121212',
           zIndex: 999999, display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center'
         }}>
@@ -340,7 +348,9 @@ export default function OverviewMode() {
           <button 
             onClick={() => {
               setPendingTransitionIndex(null);
-              if (nextPage) navigate(`/overview/${nextPage.id}`);
+              if (nextPage) {
+                navigate(`/overview/${nextPage.id}`, { state: { autoStartSequence: true } });
+              }
             }}
             style={{ 
               padding: '16px 50px', fontSize: '18px', fontWeight: '400',
@@ -402,16 +412,13 @@ export default function OverviewMode() {
         </div>
       )}
 
-      {/* SOL: DEVASA RESİM ALANI (Mobilde Tam Ekran) */}
       <div style={{ flex: 1, position: 'relative', height: '100%', overflow: 'hidden', backgroundColor: '#111', display: 'flex', flexDirection: 'column' }}>
         
-        {/* ZOOM KONTROLLERİ */}
         <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 10px', borderRadius: '8px', border: '1px solid #444', gap: '10px', boxShadow: '0 5px 15px rgba(0,0,0,0.5)' }}>
           <button onClick={() => handleZoom(-0.03)} style={styles.zoomBtn}>-</button>
           <span style={{ color: '#00ffff', fontSize: '14px', fontWeight: 'bold', width: '45px', textAlign: 'center' }}>{Math.round(zoomLevel * 100)}%</span>
           <button onClick={() => handleZoom(0.03)} style={styles.zoomBtn}>+</button>
           
-          {/* SIFIRLA BUTONU */}
           <button onClick={() => {
             setZoomLevel(isMobile ? 0.7 : 1);
             setSelectedMainAreaId(null);
@@ -422,7 +429,6 @@ export default function OverviewMode() {
           </button>
         </div>
 
-        {/* MOBİL SAYFA GEÇİŞ KONTROLLERİ (Sadece mobilde resmin üzerinde yüzer) */}
         {isMobile && !selectedChildId && (
           <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 15px', borderRadius: '8px', border: '1px solid #c7a15b', gap: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)' }}>
         {(() => {
