@@ -427,7 +427,7 @@ export default function OverviewMode() {
         </div>
 
         {isMobile && !selectedChildId && (
-          <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 15px', borderRadius: '8px', border: '1px solid #c7a15b', gap: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)' }}>
+          <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 15px', borderRadius: '8px', border: '1px solid #FFD700', gap: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)' }}>
         {(() => {
           return (
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
@@ -459,7 +459,7 @@ export default function OverviewMode() {
              onClick={() => goToSequenceIndex(0)}
              style={{ 
                position: 'absolute', bottom: '20px', right: '20px', zIndex: 9999, 
-               backgroundColor: '#c7a15b', color: '#000', width: '50px', height: '50px', 
+               backgroundColor: '#FFD700', color: '#000', width: '50px', height: '50px', 
                borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', 
                fontSize: '20px', boxShadow: '0 5px 15px rgba(0,0,0,0.8)', cursor: 'pointer',
                border: '2px solid #fff'
@@ -533,7 +533,7 @@ export default function OverviewMode() {
                   <polygon 
                     points={area.points.map(p => `${100 - parseFloat(p.right)},${parseFloat(p.top)}`).join(' ')}
                     fill="transparent"
-                    stroke="#c7a15b"
+                    stroke="#FFD700"
                     strokeWidth="2"
                     vectorEffect="non-scaling-stroke"
                   />
@@ -542,11 +542,11 @@ export default function OverviewMode() {
                     const isChildSelected = selectedChildId === child.id;
                     const isHovered = hoveredChildId === child.id;
                     const isA1 = mainAreas.length > 0 && area.id === mainAreas[0].id;
-                    const colorHex = isA1 ? "#c7a15b" : "#8892b0";
-                    const colorRgba = isA1 ? "rgba(199, 161, 91, 0.25)" : "rgba(136, 146, 176, 0.25)";
-                    const hoverColorRgba = isA1 ? "rgba(199, 161, 91, 0.2)" : "rgba(136, 146, 176, 0.2)";
-                    const strokeHoverColor = isA1 ? "rgba(199, 161, 91, 0.5)" : "rgba(136, 146, 176, 0.5)";
-                    const filterShadow = isA1 ? "rgba(199, 161, 91, 0.6)" : "rgba(136, 146, 176, 0.6)";
+                    const colorHex = isA1 ? "#FFD700" : "#8FBC8F";
+                    const colorRgba = isA1 ? "rgba(255, 215, 0, 0.25)" : "rgba(143, 188, 143, 0.25)";
+                    const hoverColorRgba = isA1 ? "rgba(255, 215, 0, 0.2)" : "rgba(143, 188, 143, 0.2)";
+                    const strokeHoverColor = isA1 ? "rgba(255, 215, 0, 0.5)" : "rgba(143, 188, 143, 0.5)";
+                    const filterShadow = isA1 ? "rgba(255, 215, 0, 0.6)" : "rgba(143, 188, 143, 0.6)";
 
                     return (
                     <React.Fragment key={`popout-child-group-${child.id}`}>
@@ -617,9 +617,9 @@ export default function OverviewMode() {
               const pointsStr = pts.map(p => `${p.x},${p.y}`).join(' ');
               
               // Renk Vurguları
-              const frameColor = isA1 ? "#c7a15b" : "#8892b0"; // A1 Altın Sarısı, Haşiye Daha Sakin Gümüş/Mavi
-              const fillColor = isA1 ? "rgba(199, 161, 91, 0.25)" : "rgba(136, 146, 176, 0.15)";
-              const hoverFillColor = isA1 ? "rgba(199, 161, 91, 0.1)" : "rgba(136, 146, 176, 0.05)";
+              const frameColor = isA1 ? "#FFD700" : "#8FBC8F"; // A1 Altın Sarısı, Haşiye Daha Sakin Gümüş/Mavi
+              const fillColor = isA1 ? "rgba(255, 215, 0, 0.25)" : "rgba(143, 188, 143, 0.15)";
+              const hoverFillColor = isA1 ? "rgba(255, 215, 0, 0.1)" : "rgba(143, 188, 143, 0.05)";
               
               return (
                 <polygon 
@@ -656,7 +656,7 @@ export default function OverviewMode() {
             const targetMainArea = mainAreas.find(m => m.id === selectedMainAreaId);
             const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
             return (
-              <div key={`cpoint-${child.id}`} style={{ position: 'absolute', top: `${child.mainPoint.top}%`, right: `${child.mainPoint.right}%`, width: '8px', height: '8px', backgroundColor: isA1 ? '#c7a15b' : '#8892b0', borderRadius: '50%', transform: 'translate(50%, -50%)', zIndex: 30, pointerEvents: 'none' }} />
+              <div key={`cpoint-${child.id}`} style={{ position: 'absolute', top: `${child.mainPoint.top}%`, right: `${child.mainPoint.right}%`, width: '8px', height: '8px', backgroundColor: isA1 ? '#FFD700' : '#8FBC8F', borderRadius: '50%', transform: 'translate(50%, -50%)', zIndex: 30, pointerEvents: 'none' }} />
             );
           })}
 
@@ -708,12 +708,12 @@ export default function OverviewMode() {
               alignItems: 'center',
               gap: '10px',
               backgroundColor: 'rgba(15, 15, 15, 0.95)',
-              border: '1px solid #c7a15b',
+              border: '1px solid #FFD700',
               borderRadius: '30px',
               padding: isMobile ? '10px 18px' : '12px 24px',
-              color: '#c7a15b',
+              color: '#FFD700',
               cursor: 'pointer',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(199, 161, 91, 0.2)',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(255, 215, 0, 0.2)',
               backdropFilter: 'blur(10px)',
               transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
               fontWeight: 'bold',
@@ -723,14 +723,14 @@ export default function OverviewMode() {
             }}
             onMouseEnter={(e) => {
               if (isMobile) return;
-              e.currentTarget.style.backgroundColor = '#c7a15b';
+              e.currentTarget.style.backgroundColor = '#FFD700';
               e.currentTarget.style.color = '#000';
               e.currentTarget.style.transform = 'translateX(-50%) scale(1.05)';
             }}
             onMouseLeave={(e) => {
               if (isMobile) return;
               e.currentTarget.style.backgroundColor = 'rgba(15, 15, 15, 0.95)';
-              e.currentTarget.style.color = '#c7a15b';
+              e.currentTarget.style.color = '#FFD700';
               e.currentTarget.style.transform = 'translateX(-50%) scale(1)';
             }}
             onClick={(e) => {
@@ -754,7 +754,7 @@ export default function OverviewMode() {
             const targetMainArea = mainAreas.find(m => m.id === selectedMainAreaId);
             const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
             const cardBgColor = isA1 ? 'rgba(10, 10, 10, 0.95)' : 'rgba(30, 39, 49, 0.95)';
-            const cardBorderColor = isA1 ? '#c7a15b' : '#8892b0';
+            const cardBorderColor = isA1 ? '#FFD700' : '#8FBC8F';
             
             return (
               <div key={`bottom-card-${child.id}`} style={{
@@ -782,7 +782,7 @@ export default function OverviewMode() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{
                     display: 'flex', alignItems: 'center', gap: '6px',
-                    backgroundColor: isA1 ? 'rgba(199, 161, 91, 0.15)' : 'rgba(136, 146, 176, 0.15)',
+                    backgroundColor: isA1 ? 'rgba(255, 215, 0, 0.15)' : 'rgba(143, 188, 143, 0.15)',
                     color: cardBorderColor,
                     padding: '4px 8px',
                     borderRadius: '4px',
@@ -818,7 +818,7 @@ export default function OverviewMode() {
                   </button>
                   <button 
                     onClick={() => setFullScreenChildId(child.id)}
-                    style={{ background: 'none', border: 'none', color: '#c7a15b', fontSize: '20px', cursor: 'pointer', padding: '0 5px' }}
+                    style={{ background: 'none', border: 'none', color: '#FFD700', fontSize: '20px', cursor: 'pointer', padding: '0 5px' }}
                     title="Arapçasını Tam Ekran Gör"
                   >
                     🔍
@@ -887,7 +887,7 @@ export default function OverviewMode() {
           {effectiveSequence.length > 0 && !selectedMainAreaId && (
             <button 
                onClick={() => goToSequenceIndex(0)}
-               style={{ width: '100%', padding: '15px', backgroundColor: '#c7a15b', color: '#000', fontWeight: 'bold', fontSize: '16px', border: 'none', borderRadius: '8px', cursor: 'pointer', marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', transition: 'transform 0.2s' }}
+               style={{ width: '100%', padding: '15px', backgroundColor: '#FFD700', color: '#000', fontWeight: 'bold', fontSize: '16px', border: 'none', borderRadius: '8px', cursor: 'pointer', marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', transition: 'transform 0.2s' }}
                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
             >
@@ -899,7 +899,7 @@ export default function OverviewMode() {
             const selectedArea = mainAreas.find(a => a.id === selectedMainAreaId);
             return (
               <div style={styles.detailsCard}>
-                <h2 style={{ color: '#c7a15b', marginTop: 0, borderBottom: '1px solid #333', paddingBottom: '15px', fontSize: '16px' }}>
+                <h2 style={{ color: '#FFD700', marginTop: 0, borderBottom: '1px solid #333', paddingBottom: '15px', fontSize: '16px' }}>
                   ✍️ {selectedArea?.name}
                 </h2>
 
@@ -923,7 +923,7 @@ export default function OverviewMode() {
                       width: '100%', boxSizing: 'border-box',
                       minHeight: '160px', padding: '12px',
                       borderRadius: '8px',
-                      border: '1px solid #c7a15b44',
+                      border: '1px solid #FFD70044',
                       backgroundColor: '#111',
                       color: '#e6e6e6',
                       fontSize: '14px', lineHeight: '1.8',
@@ -931,8 +931,8 @@ export default function OverviewMode() {
                       outline: 'none',
                       transition: 'border-color 0.2s'
                     }}
-                    onFocus={e => e.target.style.borderColor = '#c7a15b'}
-                    onBlurCapture={e => e.target.style.borderColor = '#c7a15b44'}
+                    onFocus={e => e.target.style.borderColor = '#FFD700'}
+                    onBlurCapture={e => e.target.style.borderColor = '#FFD70044'}
                   />
                   <div style={{ fontSize: '11px', color: '#555', marginTop: '5px' }}>
                     💾 Kutunun dışına tıklayınca otomatik kaydedilir
@@ -947,7 +947,7 @@ export default function OverviewMode() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     {currentChildren.map((c, i) => {
                       const isA1 = mainAreas.length > 0 && selectedMainAreaId === mainAreas[0].id;
-                      const colorHex = isA1 ? '#c7a15b' : '#8892b0';
+                      const colorHex = isA1 ? '#FFD700' : '#8FBC8F';
                       return (
                         <div key={c.id}
                           style={{ padding: '8px 10px', backgroundColor: '#1e1e1e', borderRadius: '6px', fontSize: '13px', color: colorHex, cursor: 'pointer', borderLeft: '2px solid transparent', transition: 'all 0.2s' }}
@@ -985,7 +985,7 @@ export default function OverviewMode() {
           zIndex: 9999, display: 'flex', justifyContent: 'center', alignItems: 'center'
         }} onClick={() => setFullTextModalAreaId(null)}>
           <div style={{
-            backgroundColor: '#1a1a1a', border: '1px solid #c7a15b',
+            backgroundColor: '#1a1a1a', border: '1px solid #FFD700',
             borderRadius: '12px', padding: '40px', maxWidth: '700px', width: '90%',
             maxHeight: '80vh', overflowY: 'auto', position: 'relative',
             boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
@@ -1001,7 +1001,7 @@ export default function OverviewMode() {
               onMouseLeave={e => e.currentTarget.style.color = '#888'}
               onClick={() => setFullTextModalAreaId(null)}
             >✕</button>
-            <h2 style={{ color: '#c7a15b', marginTop: 0, marginBottom: '25px', borderBottom: '1px solid #333', paddingBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h2 style={{ color: '#FFD700', marginTop: 0, marginBottom: '25px', borderBottom: '1px solid #333', paddingBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -1033,8 +1033,8 @@ export default function OverviewMode() {
       {fullScreenChildId && childAreas.filter(c => c.id === fullScreenChildId).map(child => {
         const targetMainArea = mainAreas.find(m => m.id === child.mainAreaId);
         const isA1 = targetMainArea && mainAreas.length > 0 && targetMainArea.id === mainAreas[0].id;
-        const colorHex = isA1 ? '#c7a15b' : '#8892b0';
-        const colorRgba = isA1 ? 'rgba(199, 161, 91, 0.4)' : 'rgba(136, 146, 176, 0.4)';
+        const colorHex = isA1 ? '#FFD700' : '#8FBC8F';
+        const colorRgba = isA1 ? 'rgba(255, 215, 0, 0.4)' : 'rgba(143, 188, 143, 0.4)';
 
         const xs = child.points.map(p => 100 - parseFloat(p.right));
         const ys = child.points.map(p => parseFloat(p.top));
