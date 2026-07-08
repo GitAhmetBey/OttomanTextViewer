@@ -49,15 +49,30 @@ export default function OverviewMode() {
       if (s.type === 'child') return childAreas.find(c => c.id === s.id);
       return false;
     });
+
+    // Kullanıcı isteği: Slayt sadece ilk ana alan (A1) ve onun yavruları üzerinde ilerlesin.
+    // Diğer ana alanlar (A2, vb.) slaytta gösterilmesin.
+    if (mainAreas.length > 0) {
+      const firstMainId = mainAreas[0].id;
+      currentSeq = currentSeq.filter(s => {
+        if (s.type === 'main') return s.id === firstMainId;
+        if (s.type === 'child') {
+           const c = childAreas.find(child => child.id === s.id);
+           return c && c.mainAreaId === firstMainId;
+        }
+        return false;
+      });
+    }
     
     if (!page.readingSequence || page.readingSequence.length === 0) {
       const defaultSeq = [];
-      mainAreas.forEach(m => {
+      if (mainAreas.length > 0) {
+        const m = mainAreas[0];
         defaultSeq.push({ id: m.id, type: 'main' });
         childAreas.filter(c => c.mainAreaId === m.id).forEach(c => {
           defaultSeq.push({ id: c.id, type: 'child' });
         });
-      });
+      }
       return defaultSeq;
     }
     
