@@ -23,7 +23,6 @@ export default function OverviewMode() {
   const [zoomLevel, setZoomLevel] = useState(window.innerWidth <= 1024 ? 0.7 : 1);
   const [transitioningSequenceIndex, setTransitioningSequenceIndex] = useState(null);
   const [transitioningTargetMainAreaId, setTransitioningTargetMainAreaId] = useState(null);
-  const [pendingTransitionIndex, setPendingTransitionIndex] = useState(null);
   const scrollContainerRef = useRef(null);
 
   const effectiveSequence = useMemo(() => {
@@ -142,7 +141,17 @@ export default function OverviewMode() {
   }, [focusOnTarget]);
 
   const goToSequenceIndex = useCallback((index) => {
-    if (index < 0 || index >= effectiveSequence.length) return;
+    if (index >= effectiveSequence.length) {
+        const isDraft = activePageId.toString().startsWith('taslak');
+        const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
+        const cIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
+        const nPage = cIndex !== -1 && cIndex < groupPages.length - 1 ? groupPages[cIndex + 1] : null;
+        if (nPage) {
+           navigate(`/overview/${nPage.id}`, { state: { autoStartSequence: true } });
+        }
+        return;
+    }
+    if (index < 0) return;
     const item = effectiveSequence[index];
     
     let newMainAreaId = null;
@@ -160,8 +169,15 @@ export default function OverviewMode() {
 
     if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
       if (index > currentSequenceIndex) {
-        // İleriye doğru gidiyorsak ve alan değişiyorsa menü göster
-        setPendingTransitionIndex(index);
+        // İleriye doğru gidiyorsak ve alan değişiyorsa direkt sonraki sayfanın A1'ine geç
+        const isDraft = activePageId.toString().startsWith('taslak');
+        const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
+        const cIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
+        const nPage = cIndex !== -1 && cIndex < groupPages.length - 1 ? groupPages[cIndex + 1] : null;
+        
+        if (nPage) {
+           navigate(`/overview/${nPage.id}`, { state: { autoStartSequence: true } });
+        }
         return;
       } else {
         // Geriye gidiyorsak direkt geç
@@ -173,7 +189,7 @@ export default function OverviewMode() {
     // Aynı ana alan içindeysek veya genel görünümden geliyorsak direkt git
     setSelectedMainAreaId(newMainAreaId);
     setSelectedChildId(newChildId);
-  }, [effectiveSequence, childAreas, selectedMainAreaId, currentSequenceIndex, executeTransition]);
+  }, [effectiveSequence, childAreas, selectedMainAreaId, currentSequenceIndex, executeTransition, allPages, activePageId, navigate]);
 
 
   useEffect(() => {
@@ -337,81 +353,6 @@ export default function OverviewMode() {
       `}</style>
       <div key={`page-${activePageId}`} style={{ ...styles.mainLayout, animation: 'pageTurnFade 0.6s ease-out forwards' }}>
         
-      {pendingTransitionIndex !== null && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: '#121212',
-          zIndex: 999999, display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center'
-        }}>
-          
-          <button 
-            onClick={() => {
-              setPendingTransitionIndex(null);
-              if (nextPage) {
-                navigate(`/overview/${nextPage.id}`, { state: { autoStartSequence: true } });
-              }
-            }}
-            style={{ 
-              padding: '16px 50px', fontSize: '18px', fontWeight: '400',
-              backgroundColor: 'transparent', color: '#fff', 
-              border: '1px solid #444', borderRadius: '40px',
-              cursor: nextPage ? 'pointer' : 'not-allowed', transition: 'all 0.3s ease', 
-              opacity: nextPage ? 1 : 0.5, marginBottom: '25px', letterSpacing: '1px'
-            }}
-            disabled={!nextPage}
-            onMouseEnter={(e) => { if(nextPage) { e.target.style.backgroundColor = '#fff'; e.target.style.color = '#000'; } }}
-            onMouseLeave={(e) => { if(nextPage) { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#fff'; } }}
-          >
-            Sonraki Sayfa
-          </button>
-
-          <button 
-            onClick={() => {
-              const index = pendingTransitionIndex;
-              const item = effectiveSequence[index];
-              let newMainAreaId = null;
-              let newChildId = null;
-              if (item.type === 'main') {
-                newMainAreaId = item.id;
-              } else {
-                const c = childAreas.find(child => child.id === item.id);
-                if (c) {
-                  newMainAreaId = c.mainAreaId;
-                  newChildId = c.id;
-                }
-              }
-              setPendingTransitionIndex(null);
-              executeTransition(index, newMainAreaId, newChildId);
-            }}
-            style={{ 
-              background: 'none', border: 'none', 
-              color: '#777', cursor: 'pointer', 
-              fontSize: '15px', transition: 'color 0.3s ease',
-              marginBottom: '40px', letterSpacing: '0.5px'
-            }}
-            onMouseEnter={(e) => e.target.style.color = '#bbb'}
-            onMouseLeave={(e) => e.target.style.color = '#777'}
-          >
-            Haşiyeden devam et
-          </button>
-          
-          <button 
-            onClick={() => setPendingTransitionIndex(null)}
-            style={{ 
-              background: 'none', border: 'none', 
-              color: '#333', cursor: 'pointer', 
-              fontSize: '13px', transition: 'color 0.3s ease',
-              textDecoration: 'none'
-            }}
-            onMouseEnter={(e) => e.target.style.color = '#666'}
-            onMouseLeave={(e) => e.target.style.color = '#333'}
-          >
-            Kapat
-          </button>
-        </div>
-      )}
-
       <div style={{ flex: 1, position: 'relative', height: '100%', overflow: 'hidden', backgroundColor: '#111', display: 'flex', flexDirection: 'column' }}>
         
         <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 9999, display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.85)', padding: '5px 10px', borderRadius: '8px', border: '1px solid #444', gap: '10px', boxShadow: '0 5px 15px rgba(0,0,0,0.5)' }}>
@@ -645,7 +586,7 @@ export default function OverviewMode() {
         </div>
 
         {/* Slayt Modu İçin Ana Ekranda Gezinme Butonları (Sağ-Sol) */}
-        {displaySequenceIndex > 0 && pendingTransitionIndex === null && (
+        {displaySequenceIndex > 0 && (
           <button 
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
@@ -660,7 +601,7 @@ export default function OverviewMode() {
           >❮</button>
         )}
         
-        {displaySequenceIndex !== -1 && displaySequenceIndex < effectiveSequence.length - 1 && pendingTransitionIndex === null && (
+        {displaySequenceIndex !== -1 && (displaySequenceIndex < effectiveSequence.length - 1 || nextPage) && (
           <button 
             onPointerDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
