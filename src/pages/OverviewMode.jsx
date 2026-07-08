@@ -535,18 +535,26 @@ export default function OverviewMode() {
                   {/* Seçiliyse İçindeki Yavru Alanların Çerçevesi */}
                   {isSelected && currentChildren.map((child) => {
                     const isChildSelected = selectedChildId === child.id;
+                    const isA1 = mainAreas.length > 0 && area.id === mainAreas[0].id;
+                    const colorHex = isA1 ? "#c7a15b" : "#8892b0";
+                    const colorRgba = isA1 ? "rgba(199, 161, 91, 0.25)" : "rgba(136, 146, 176, 0.25)";
+                    const hoverColorRgba = isA1 ? "rgba(199, 161, 91, 0.2)" : "rgba(136, 146, 176, 0.2)";
+                    const strokeHoverColor = isA1 ? "rgba(199, 161, 91, 0.5)" : "rgba(136, 146, 176, 0.5)";
+                    const filterShadow = isA1 ? "rgba(199, 161, 91, 0.6)" : "rgba(136, 146, 176, 0.6)";
+
                     return (
                     <React.Fragment key={`popout-child-group-${child.id}`}>
                       <polygon 
                         key={`popout-child-${child.id}`}
                         points={child.points.map(p => `${100 - parseFloat(p.right)},${parseFloat(p.top)}`).join(' ')}
                         fill={
-                          isChildSelected ? "rgba(0, 255, 255, 0.25)" : 
-                          "transparent"
+                          isChildSelected ? "rgba(0,0,0,0)" : 
+                          isHovered ? hoverColorRgba : "rgba(0,0,0,0)"
                         } 
                         stroke={
-                          isChildSelected ? "#00ffff" : 
-                          "rgba(199, 161, 91, 0.6)"
+                          isChildSelected ? colorHex : 
+                          isHovered ? strokeHoverColor : 
+                          "transparent"
                         }
                         strokeWidth={
                           isChildSelected ? "3.5" : 
@@ -557,7 +565,7 @@ export default function OverviewMode() {
                           pointerEvents: 'auto', 
                           cursor: 'pointer', 
                           transition: 'all 0.3s ease',
-                          filter: isChildSelected ? 'drop-shadow(0px 0px 8px rgba(0,255,255,0.6))' : 'none',
+                          filter: isChildSelected ? `drop-shadow(0px 0px 8px ${filterShadow})` : 'none',
                           zIndex: isChildSelected ? 10 : 1
                         }}
                         onMouseEnter={() => !isMobile && setHoveredChildId(child.id)}
@@ -823,6 +831,7 @@ export default function OverviewMode() {
                 fontSize: isMobile ? '18px' : '20px',
                 lineHeight: '1.6',
                 textAlign: 'center',
+                fontWeight: isA1 ? 'bold' : 'normal',
                 maxWidth: '800px',
                 width: '100%',
                 maxHeight: '30vh',
@@ -930,15 +939,19 @@ export default function OverviewMode() {
                     Yavru Kelimeler ({currentChildren.length})
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    {currentChildren.map((c, i) => (
-                      <div key={c.id}
-                        style={{ padding: '8px 10px', backgroundColor: '#1e1e1e', borderRadius: '6px', fontSize: '13px', color: '#00ffff', cursor: 'pointer', borderLeft: '2px solid transparent', transition: 'all 0.2s' }}
-                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#2a2a2a'; e.currentTarget.style.borderLeftColor = '#00ffff'; }}
-                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1e1e1e'; e.currentTarget.style.borderLeftColor = 'transparent'; }}
-                        onClick={() => setSelectedChildId(c.id)}>
-                        {i + 1}. {c.latinText ? c.latinText.substring(0, 20) + (c.latinText.length > 20 ? '…' : '') : <span style={{color:'#555', fontStyle:'italic'}}>boş</span>}
-                      </div>
-                    ))}
+                    {currentChildren.map((c, i) => {
+                      const isA1 = mainAreas.length > 0 && selectedMainAreaId === mainAreas[0].id;
+                      const colorHex = isA1 ? '#c7a15b' : '#8892b0';
+                      return (
+                        <div key={c.id}
+                          style={{ padding: '8px 10px', backgroundColor: '#1e1e1e', borderRadius: '6px', fontSize: '13px', color: colorHex, cursor: 'pointer', borderLeft: '2px solid transparent', transition: 'all 0.2s' }}
+                          onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#2a2a2a'; e.currentTarget.style.borderLeftColor = colorHex; }}
+                          onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1e1e1e'; e.currentTarget.style.borderLeftColor = 'transparent'; }}
+                          onClick={() => setSelectedChildId(c.id)}>
+                          {i + 1}. {c.latinText ? c.latinText.substring(0, 20) + (c.latinText.length > 20 ? '…' : '') : <span style={{color:'#555', fontStyle:'italic'}}>boş</span>}
+                        </div>
+                      );
+                    })}
                     {currentChildren.length === 0 && (
                       <span style={{ color: '#444', fontSize: '13px' }}>Bu alana henüz yavru eklenmemiş.</span>
                     )}
@@ -1076,7 +1089,7 @@ export default function OverviewMode() {
             }}>
                <div style={{ 
                  color: '#fff', fontSize: isMobile ? '18px' : '22px', 
-                 textAlign: 'center', fontWeight: 'bold', lineHeight: '1.6', maxWidth: '800px',
+                 textAlign: 'center', fontWeight: isA1 ? 'bold' : 'normal', lineHeight: '1.6', maxWidth: '800px',
                  whiteSpace: 'pre-wrap',
                  fontStyle: isA1 ? 'normal' : 'italic'
                }}>
