@@ -281,6 +281,9 @@ export default function OverviewMode() {
     setZoomLevel(isMobile ? 0.7 : 1);
     setFullScreenChildId(null);
     setFullTextModalAreaId(null);
+    // Eski sayfanın alanlarını temizle - bu olmadan autoStart yanlış koordinatlarla ateşlenir
+    setMainAreas([]);
+    setChildAreas([]);
 
     // Sayfa verisi (tek seferlik - sayfa resmi değişmediği için yeterli)
     setLoading(true);
