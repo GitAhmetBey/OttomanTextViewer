@@ -1055,8 +1055,9 @@ export default function OverviewMode() {
         );
       })}
     </div>
+    </>
   );
-};
+}
 
 const styles = {
   mainLayout: {
