@@ -181,15 +181,8 @@ export default function OverviewMode() {
 
     if (newMainAreaId !== selectedMainAreaId && selectedMainAreaId !== null) {
       if (index > currentSequenceIndex) {
-        // İleriye doğru gidiyorsak ve alan değişiyorsa direkt sonraki sayfanın A1'ine geç
-        const isDraft = activePageId.toString().startsWith('taslak');
-        const groupPages = allPages.filter(p => p.id.toString().startsWith('taslak') === isDraft);
-        const cIndex = groupPages.findIndex(p => p.id.toString() === activePageId.toString());
-        const nPage = cIndex !== -1 && cIndex < groupPages.length - 1 ? groupPages[cIndex + 1] : null;
-        
-        if (nPage) {
-           navigate(`/overview/${nPage.id}`, { state: { autoStartSequence: true } });
-        }
+        // İleriye doğru ve alan değişiyorsa: aynı sayfa içinde geçiş yap (executeTransition)
+        executeTransition(index, newMainAreaId, newChildId);
         return;
       } else {
         // Geriye gidiyorsak direkt geç
