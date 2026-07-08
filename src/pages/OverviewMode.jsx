@@ -535,6 +535,7 @@ export default function OverviewMode() {
                   {/* Seçiliyse İçindeki Yavru Alanların Çerçevesi */}
                   {isSelected && currentChildren.map((child) => {
                     const isChildSelected = selectedChildId === child.id;
+                    const isHovered = hoveredChildId === child.id;
                     const isA1 = mainAreas.length > 0 && area.id === mainAreas[0].id;
                     const colorHex = isA1 ? "#c7a15b" : "#8892b0";
                     const colorRgba = isA1 ? "rgba(199, 161, 91, 0.25)" : "rgba(136, 146, 176, 0.25)";
